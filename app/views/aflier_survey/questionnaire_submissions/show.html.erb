@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @questionnaire_submission.user_id %>
+</p>
+
+<p>
+  <strong>Questionnaire:</strong>
+  <%= @questionnaire_submission.questionnaire_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @questionnaire_submission.status %>
+</p>
+
+<%= link_to 'Edit', edit_questionnaire_submission_path(@questionnaire_submission) %> |
+<%= link_to 'Back', questionnaire_submissions_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Questionnaire:</strong>
+  <%= @belonging_section.questionnaire_id %>
+</p>
+
+<p>
+  <strong>Question section:</strong>
+  <%= @belonging_section.question_section_id %>
+</p>
+
+<%= link_to 'Edit', edit_belonging_section_path(@belonging_section) %> |
+<%= link_to 'Back', belonging_sections_path %>

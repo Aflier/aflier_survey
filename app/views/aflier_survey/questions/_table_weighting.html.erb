@@ -1,0 +1,31 @@
+<div id="weightings">
+  <h2>Results Table</h2>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th></th>
+      <th><%= @question.question.name if @question.question %></th>
+      <th colspan="<%= @question.get_bounds_x.size %>"></th>
+    </tr>
+    <tr>
+      <th>!!!</th>
+      <% @question.get_bounds_x.each do |limit_one| %>
+        <th>> <%= limit_one %></th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+      <% @question.bounds_y.split(",").each do |category| %>
+        <tr>
+          <th><%= category %></th>
+          <% @question.get_bounds_x.each do |limit_one| %>
+            <td>
+              <%= render 'result_table_button', question: @question, limit_one: limit_one, category: category %>
+            </td>
+          <% end %>
+        </tr>
+      <% end unless @question.bounds_y.blank? %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Belonging Sections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Questionnaire</th>
+      <th>Question section</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @belonging_sections.each do |belonging_section| %>
+      <tr>
+        <td><%= belonging_section.questionnaire_id %></td>
+        <td><%= belonging_section.question_section_id %></td>
+        <td><%= link_to 'Show', belonging_section %></td>
+        <td><%= link_to 'Edit', edit_belonging_section_path(belonging_section) %></td>
+        <td><%= link_to 'Destroy', belonging_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Belonging Section', new_belonging_section_path %>

@@ -1,0 +1,38 @@
+<div id="question-<%= question.id %>">
+  <%= render 'aflier_survey/questions/answer_form', questionnaire: questionnaire, question: question, answer: question.make_answer(unique_ident), locked: questionnaire.is_locked?(unique_ident, admin)  %>
+</div>
+
+<script>
+    <% unless questionnaire.is_locked?(@user, admin) %>
+
+    $("#question-<%= question.id %> .autosave input").blur(function() {
+        // alert('----1----');
+        $("#question-<%= question.id %> .autosave form").submit();
+        // alert('----2----');
+    });
+
+    $("#question-<%= question.id %> .autosave select").blur(function() {
+        $("#question-<%= question.id %> .autosave form").submit();
+    });
+
+    $("#question-<%= question.id %> .autosave textarea").blur(function() {
+        $("#question-<%= question.id %> .autosave form").submit();
+    });
+
+    $("#question-<%= question.id %> .autosave input").focus(function() {
+        $("#question-<%= question.id %> .save-state").fadeOut(0);
+        $("#question-<%= question.id %> .unsave-state").fadeIn(500);
+    });
+
+    $("#question-<%= question.id %> .autosave select").focus(function() {
+        $("#question-<%= question.id %> .save-state").fadeOut(0);
+        $("#question-<%= question.id %> .unsave-state").fadeIn(500);
+    });
+
+    $("#question-<%= question.id %> .autosave textarea").focus(function() {
+        $("#question-<%= question.id %> .save-state").fadeOut(0);
+        $("#question-<%= question.id %> .unsave-state").fadeIn(500);
+    });
+    <% end %>
+</script>
+

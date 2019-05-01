@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  question_type: MyString
+  help: MyText
+  aflier_survey_question_section: one
+  position: 1
+  allow_not_sure: false
+  text_on_other: false
+  following_section_id: 1
+  required: false
+  text_hint: MyText
+  aflier_survey_calc: one
+
+two:
+  name: MyString
+  question_type: MyString
+  help: MyText
+  aflier_survey_question_section: two
+  position: 1
+  allow_not_sure: false
+  text_on_other: false
+  following_section_id: 1
+  required: false
+  text_hint: MyText
+  aflier_survey_calc: two

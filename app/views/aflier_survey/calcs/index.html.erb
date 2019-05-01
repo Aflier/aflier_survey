@@ -1,0 +1,80 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Calcs</h1>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-9">
+		<table class="table">
+		  <thead>
+		    <tr>
+          <th>Name</th>
+          <th>First variable</th>
+          <th>Second variable</th>
+          <th>Operation</th>
+          <th></th>
+		    </tr>
+		  </thead>
+		
+		  <tbody>
+		    <% @calcs.each do |calc| %>
+		      <tr>
+            <td><%= link_to calc.name, calc %></td>
+            <td>
+              <%= calc.question_first&.name %>
+              <%= raw ('<i class="fas fa-calculator"></i> ' + calc.calc_first.name) if calc.calc_first %>
+              <%= 'see calculation' if calc.operation == AflierSurvey::Calc::ADD %>
+            </td>
+            <td>
+              <%= calc.question_second&.name %>
+              <%= raw ('<i class="fas fa-calculator"></i> ' + calc.calc_second.name) if calc.calc_second %>
+              <%= calc.a_decimal if calc.operation == AflierSurvey::Calc::CONSTANT %>
+              <%= 'see calculation' if calc.operation == AflierSurvey::Calc::ADD %>
+            </td>
+            <td><%= calc.operation %></td>
+            <td>
+		        	<div class="float-right btn-group">
+			        	<%= link_to 'Destroy', calc, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+							</div>
+		        </td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
+	<div class="col-md-3">
+    <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#newcalc">New Calc</button>
+
+    <div class="modal fade" id="newcalc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <%= simple_form_for(@calc, :html => { :class => 'form-horizontal' },
+                          wrapper: :horizontal_form,
+                          wrapper_mappings: {
+                              check_boxes: :horizontal_radio_and_checkboxes,
+                              radio_buttons: :horizontal_radio_and_checkboxes,
+                              file: :horizontal_file_input,
+                              boolean: :horizontal_boolean
+                          }) do |f| %>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New Calc</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= f.input :name %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <%= f.button :submit %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+	</div>
+</div>

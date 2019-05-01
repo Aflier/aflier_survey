@@ -1,0 +1,16 @@
+<% if @show_required %>
+  $('#main-panel').replaceWith('<%= j render 'questionnaires/questionnaire', questionnaire: @questionnaire, user: @user %>');
+  $('#answer-required').modal('show');
+<% else %>
+  $('#submissions-bar').replaceWith('<%= j render '/questionnaires/submission_bar', questionnaire: @questionnaire, user: @user %>');
+<% end %>
+
+<% if @scroll_to_top %>
+$('html, body').animate({
+    scrollTop: 0
+}, 800);
+<% end %>
+
+setTimeout(function(){
+    $('#waiting').modal('hide');
+}, 1000);

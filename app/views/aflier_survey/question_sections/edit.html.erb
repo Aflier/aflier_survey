@@ -1,0 +1,75 @@
+<h1>Editing <%= @question_section.name %></h1>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'All Sections', question_sections_path %></li>
+  <li class="breadcrumb-item active"><%= @question_section.name %></li>
+</ol>
+
+<div class="row">
+  <div class="col-md-9">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Question type</th>
+        <th>Question section</th>
+        <th>Required</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @questions.order(:position).each do |question| %>
+          <tr>
+            <td><%= question.position %></td>
+            <td><%= question.name %></td>
+            <td><%= question.question_type %></td>
+            <td><%= question.question_section.name %></td>
+            <td><%= tick question.required %></td>
+            <td class="text-right">
+              <div class="btn-group">
+                <%= link_to raw('<i class="fas fa-arrow-up"></i>'), up_question_path(question), class: "btn btn-outline-secondary btn-sm" unless question.position == 0 %>
+                <%= link_to raw('<i class="fas fa-arrow-down"></i>'), down_question_path(question), class: "btn btn-outline-secondary btn-sm" unless question.position == @questions.size - 1 %>
+                <%= link_to 'Edit', edit_question_path(question), class: "btn btn-outline-secondary btn-sm" %>
+                <%= link_to raw('<i class="far fa-trash-alt"></i>'), question, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><%= render '/aflier_survey/questions/form' %></th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h4>Description</h4>
+          <%= raw @question_section.description %>
+        </li>
+        <li class="list-group-item">
+          <h4>Default Open </h4>
+          <%= raw @question_section.default_open %>
+        </li>
+        <li class="list-group-item">
+          <b>Repeat Section: </b><%= tick @question_section.many %><br>
+          <b>Repeat has date: </b><%= tick @question_section.repeat_has_date %><br>
+          <b>Restricted Controls: </b><%= tick @question_section.restrict_controls %>
+        </li>
+      </ul>
+
+      <div class="card-footer">
+        <%= render 'edit_form', question_section: @question_section %>
+      </div>
+    </div>
+  </div>
+</div>
+

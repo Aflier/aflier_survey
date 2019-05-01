@@ -1,0 +1,23 @@
+<div id='repeat-section-<%= repeat_section.id %>' class='repeat-section-panel' style="border: 1px solid black; margin-bottom: 5px; padding: 10px">
+  <% repeat_section.question_section.questions.each do |question| %>
+      <div id="question-<%= repeat_section.id %>-<%= question.id %>">
+        <%= question.name %>
+        <%= simple_form_for question.make_answer(@user, repeat_section), remote: true do |f| %>
+            <% if question.question_type == Question::DATE %>
+                <%= f.input :a_date, start_year: Date.today.year - 110 %>
+            <% elsif question.question_type == Question::TEXT %>
+                <%= f.input :some_text, label: false %>
+            <% else %>
+                <%= f.input :a_string, label: false %>
+            <% end %>
+            <%= f.button :submit if false %>
+        <% end %>
+        <script>
+            $("input").blur(function() {
+                $("#question-<%= repeat_section.id %>-<%= question.id %> form").submit();
+            });
+        </script>
+      </div>
+  <% end %>
+  <%= link_to 'Remove', repeat_section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm", remote: true %>
+</div>

@@ -1,0 +1,52 @@
+<div class="row text-center" style="margin-top: 30px; margin-bottom: 30px">
+  <div class="col-md-12">
+    <h1><%= link_to @question.question_section.name, @question.question_section %></h1>
+  </div>
+</div>
+
+<div class="row text-center" style="margin-top: 30px; margin-bottom: 30px">
+  <div class="col-md-2">
+    <% if @previous_question %>
+        <%= link_to @previous_question do %>
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        <% end %>
+    <% else %>
+        <i class="fa fa-chevron-left" aria-hidden="true" style="opacity:0.4;"></i>
+    <% end %>
+  </div>
+	<div class="col-md-8">
+    <h3><%= @question.name %></h3>
+	</div>
+  <div class="col-md-2">
+    <% if @next_question %>
+        <%= link_to @next_question do %>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        <% end %>
+    <% else %>
+        <i class="fa fa-chevron-right disable" aria-hidden="true" style="opacity:0.4;"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <p>Probably something related to progress through the section.</p>
+  </div>
+	<div class="col-md-6">
+    <%= render 'answer_form' %>
+	</div>
+	<div class="col-md-3">
+
+    <div class="card">
+      <div class="card-block" style="padding: 1em;">
+        <%= image_tag '/man-and-dog.jpg', style: 'width: 50px; margin-right: 1em; margin-bottom: 1em;', class: 'rounded-circle float-left' %>
+        <%= raw @question.help %>
+      </div>
+    </div>
+
+    <br>
+
+		<%= link_to 'Edit', edit_question_path(@question), class: "btn btn-secondary btn-block" %>
+
+  </div>
+</div>

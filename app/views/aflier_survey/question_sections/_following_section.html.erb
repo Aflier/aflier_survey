@@ -1,0 +1,5 @@
+<div id="following-section-<%= question_section.id %>">
+  <% question_section.questions.where(question_type: [AflierSurvey::Question::SECTION_ON_YES, AflierSurvey::Question::SECTION_ON_NO]).each do |question| %>
+      <%= render question.following_section, questionnaire: questionnaire, user: user if question.answer_wants_section?(user) %>
+  <% end %>
+</div>

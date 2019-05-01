@@ -1,0 +1,5 @@
+$('#collapse<%= @question_section.id %>').collapse('hide');
+
+$('#collapse<%= @question_section.id %>').on('hidden.bs.collapse', function () {
+    $('#question-section-<%= @question_section.id %>').replaceWith('<%= j render @question_section, user: @user %>');
+})

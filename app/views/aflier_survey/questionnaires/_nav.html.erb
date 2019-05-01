@@ -1,0 +1,14 @@
+<ul class="nav flex-column nav-pills">
+  <% @belonging_sections.each do |belonging_section| %>
+      <% question_section = belonging_section.question_section %>
+      <li class="nav-item" id="question-section-nav-<%= question_section.id %>">
+        <% if question_section.is_complete?(@user) %>
+            <%= link_to raw('<i class="far fa-star" aria-hidden="true" style="color: gold;"></i> <i class="fa fa-play-circle float-right" aria-hidden="true"></i>' + question_section.name),
+                        question_section_path(question_section, questionnaire_id: @questionnaire.id), class: "nav-link", remote: true %>
+        <% else %>
+            <%= link_to raw('<i class="fas fa-star" aria-hidden="true"></i> <i class="fa fa-play-circle float-right" aria-hidden="true"></i>' + question_section.name),
+                        question_section_path(question_section, questionnaire_id: @questionnaire.id), class: "nav-link", remote: true %>
+        <% end %>
+      </li>
+  <% end if @belonging_sections%>
+</ul>

@@ -1,0 +1,16 @@
+<h1><%= @question.name %></h1>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to 'All Sections', question_sections_path %></li>
+  <li class="breadcrumb-item"><%= link_to @question.question_section.name, edit_question_section_path(@question.question_section) %></li>
+  <li class="breadcrumb-item active"><%= @question.name %></li>
+</ol>
+
+
+<% if @question.question_type == AflierSurvey::Question::RESULT %>
+  <%= render 'result_edit' %>
+<% else %>
+  <%= render 'default_edit' %>
+<% end %>
+
+

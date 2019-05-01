@@ -1,0 +1,57 @@
+<div id="weightings">
+  <h2>Question Weighting</h2>
+
+  <% ResultGrouping.all.each do |result_grouping| %>
+    <%= link_to result_grouping.name, blank_option_weighting_result_grouping_path(result_grouping, question_id: @question.id), class: "btn btn-outline-secondary btn-block" %>
+
+    <table class="table">
+      <% @question.options.each do |option| %>
+
+        <% unless option.option_mappings.empty? %>
+
+          <% option.option_mappings.where(result_grouping_id: result_grouping).each do |option_mapping| %>
+            <tr class="autosave-<%= option_mapping.id %>">
+              <td><%= option.name %></td>
+              <td><%= 'not set' if option_mapping.weight.nil? %><%= option_mapping.weight %></td>
+              <td><%= option_mapping.linear_assessment %></td>
+              <td>
+                <!-- Button trigger modal -->
+                <div class="float-right">
+                  <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#mapping-<%= option_mapping.id %>">
+                    Edit
+                  </button>
+                </div>
+
+                <!-- Modal -->
+                <%= simple_form_for option_mapping, :html => {:class => "form-horizontal autosave-#{option_mapping.id}" }, remote: true do |f| %>
+                  <div class="modal fade" id="mapping-<%= option_mapping.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Edit Weighting</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <%= option.name %>
+                          <%= f.input :weight, label: false %>
+                          <%= f.input :linear_assessment, label: false, collection: ['Green', 'Amber', 'Red'], include_blank: false %>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                          <%= f.button :submit, class: "btn-outline-primary" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+        <% end %>
+      <% end %>
+    </table>
+  <% end %>
+</div>

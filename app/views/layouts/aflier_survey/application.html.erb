@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aflier survey</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    "aflier_survey/application", media: "all" %>
+  <%= javascript_include_tag "aflier_survey/application" %>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" style="background-color: #172751; color: white; height: 100vh">
+      <nav class="nav flex-column nav-pills">
+        <%= link_to 'Questionnaires', questionnaires_path, class: 'nav-link' %>
+        <%= link_to 'Question Sections', question_sections_path, class: 'nav-link' %>
+        <%= link_to 'Calculations', calcs_path, class: 'nav-link' %>
+      </nav>
+    </div>
+    <div class="col-md-10">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

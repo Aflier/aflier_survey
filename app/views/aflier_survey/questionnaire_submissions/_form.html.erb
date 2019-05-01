@@ -1,0 +1,32 @@
+<%= form_with(model: questionnaire_submission, local: true) do |form| %>
+  <% if questionnaire_submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(questionnaire_submission.errors.count, "error") %> prohibited this questionnaire_submission from being saved:</h2>
+
+      <ul>
+      <% questionnaire_submission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :questionnaire_id %>
+    <%= form.number_field :questionnaire_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

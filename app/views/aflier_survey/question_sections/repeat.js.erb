@@ -1,0 +1,8 @@
+<% @old_repeats.each_with_index do |repeat_section, index| %>
+
+ $('#repeat-section-<%= repeat_section.id %>').collapse('hide');
+ $('#repeat-number-<%= repeat_section.id %>').replaceWith('<span id="repeat-number"><%= index + 1 %></span>');
+
+<% end %>
+
+$('#repeat-question-section-<%= @repeat_section.question_section.id %>').append('<%= j render 'repeat_sections/repeat_section', questionnaire: @questionnaire, repeat_section: @repeat_section, repeat_section_counter: @old_repeats.size - 1, last_count: @old_repeats.size - 1 %>');

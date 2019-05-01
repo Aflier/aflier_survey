@@ -1,0 +1,5 @@
+<h2>Operator</h2>
+
+<% AflierSurvey::Calc::OPERATORS.each do |operator| %>
+  <%= link_to operator.capitalize, operator_calc_path(@calc, operator: operator), class: "btn #{ operator == @calc.operation ? 'btn-primary' : 'btn-outline-secondary'} btn-block" %>
+<% end %>

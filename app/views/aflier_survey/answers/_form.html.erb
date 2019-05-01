@@ -1,0 +1,82 @@
+<%= form_with(model: answer, local: true) do |form| %>
+  <% if answer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+
+      <ul>
+      <% answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :question_id %>
+    <%= form.number_field :question_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :a_string %>
+    <%= form.text_field :a_string %>
+  </div>
+
+  <div class="field">
+    <%= form.label :a_decimal %>
+    <%= form.text_field :a_decimal %>
+  </div>
+
+  <div class="field">
+    <%= form.label :an_integer %>
+    <%= form.number_field :an_integer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :a_date %>
+    <%= form.date_select :a_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :a_time %>
+    <%= form.time_select :a_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :repeat_section_id %>
+    <%= form.number_field :repeat_section_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :a_boolean %>
+    <%= form.check_box :a_boolean %>
+  </div>
+
+  <div class="field">
+    <%= form.label :not_sure %>
+    <%= form.check_box :not_sure %>
+  </div>
+
+  <div class="field">
+    <%= form.label :file %>
+    <%= form.text_field :file %>
+  </div>
+
+  <div class="field">
+    <%= form.label :other %>
+    <%= form.check_box :other %>
+  </div>
+
+  <div class="field">
+    <%= form.label :complete %>
+    <%= form.check_box :complete %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

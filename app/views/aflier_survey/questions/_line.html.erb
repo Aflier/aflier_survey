@@ -1,0 +1,61 @@
+<canvas id="myChart" style="max-width:500px; margin: 0 auto;"></canvas>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myRadarChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [
+                <% question.get_repeat_answers(user).each do |answer| %>
+                '<%= answer.repeat_section.get_data_date %>',
+                <% end %>
+            ],
+            datasets: [{
+                data: [
+                    <% question.get_repeat_answers(user).each do |answer| %>
+                    '<%= answer.get_value %>',
+                    <% end %>
+                ],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(255, 159, 64, 0.2)",
+                    "rgba(255, 205, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(201, 203, 207, 0.2)"],
+                borderColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(255, 159, 64)",
+                    "rgb(255, 205, 86)",
+                    "rgb(75, 192, 192)",
+                    "rgb(54, 162, 235)",
+                    "rgb(153, 102, 255)",
+                    "rgb(201, 203, 207)"],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return tooltipItem.yLabel;
+                    }
+                }
+            },
+            color: [
+                'red'
+            ],
+            scales: {
+                axes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>

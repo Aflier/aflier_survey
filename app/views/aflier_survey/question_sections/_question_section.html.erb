@@ -1,0 +1,39 @@
+<div class="card" id="question-section-<%= question_section.id %>">
+  <div class="card-header" role="tab" id="headingOne">
+    <h5 class="mb-0">
+      <a data-toggle="collapse" href="#collapse<%= question_section.id %>" aria-expanded="true" aria-controls="collapseOne">
+        <% if question_section.is_complete?(unique_ident) %><i id="complete-<%= question_section.id %>" class="fas fa-star float-right" aria-hidden="true" style="color: gold;"></i><% end %>
+        <% if question_section.is_required?(unique_ident) %>
+          <i id="complete-<%= question_section.id %>" class="fas fa-exclamation-triangle float-right" aria-hidden="true" style="color: darkred;"></i>
+
+          <% if current_user.admin %>
+            <% questionnaire.incomplete_answers(unique_ident).each do |answer| %>
+              <p>answer.id <%= answer.id %> for "<%= answer.question.name %>" repeated_section "<%= answer.repeat_section_id %>"</p>
+            <% end %>
+          <% end %>
+
+        <% end %>
+        <%= question_section.name %>
+      </a>
+    </h5>
+  </div>
+
+  <div id="collapse<%= question_section.id %>" class="collapse <%= question_section.open_section?(unique_ident) ? 'show' : '' %>" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body">
+      <% if question_section.many %>
+          <div id="repeat-question-section-<%= question_section.id %>">
+            <%= render question_section.repeated_sections(unique_ident), questionnaire: questionnaire, last_count: question_section.repeated_sections(unique_ident).size - 1 %>
+          </div>
+
+          <%= link_to "Add", repeat_question_section_path(question_section, questionnaire_id: questionnaire.id, unique_ident: unique_ident), remote: true, class: "btn btn-outline-primary btn-block" if question_section.can_control_repeated_section? %>
+      <% else %>
+          <% question_section.questions.includes(:question_y).order(:position).each do |question| %>
+              <%= render question, questionnaire: questionnaire, unique_ident: unique_ident, admin: admin %>
+          <% end %>
+      <% end %>
+    </div>
+    <%= render 'aflier_survey/question_sections/card_footer', question_section: question_section, user: user if false %>
+  </div>
+</div>
+
+<%= render 'aflier_survey//question_sections/following_section', questionnaire: questionnaire, question_section: question_section, unique_ident: unique_ident %>

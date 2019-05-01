@@ -1,0 +1,182 @@
+<div class="<%= 'card border-danger mb-3' if @required_warning or (@show_required and question.is_required?(answer.user)) %>">
+  <div class="<%= 'card-body text-danger' if @required_warning or (@show_required and question.is_required?(answer.user)) %>">
+
+  <p>
+    <i class="far fa-save float-right mt-3 save-state" style="color: #4db197f7"></i>
+    <i class="far fa-save float-right mt-3 unsave-state" style="color: #F04124; display: none"></i>
+    <b><%= '*' if question.required %> <%= question.name %></b>
+    <% unless question.help.blank? %>
+      <a id="help-text" data-toggle="collapse" href="#question-help-<%= question.id %>" aria-expanded="false" aria-controls="collapseExample">
+        <i class="far fa-question-circle" aria-hidden="true" style="font-size: 20px; margin-top:2px"></i>
+      </a>
+    <% end %>
+  </p>
+
+  <% unless question.help.blank? %>
+      <div class="collapse" id="question-help-<%= question.id %>">
+        <div class="card card-body border-secondary" style="margin-bottom: 0.5rem;">
+          <%= raw question.help %>
+        </div>
+      </div>
+  <% end %>
+
+  <% if question.question_type == AflierSurvey::Question::DATE %>
+      <div class="autosave">
+        <%= simple_form_for answer, remote: true do |f| %>
+            <%= f.input :a_date, start_year: Date.today.year - 110, label: false, :order => [:day, :month, :year] %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+        <% end %>
+      </div>
+  <% elsif question.question_type == AflierSurvey::Question::TEXT %>
+      <div class="autosave">
+        <%= simple_form_for answer, remote: true do |f| %>
+            <%= f.input :some_text, label: false %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+
+      <% end %>
+      </div>
+  <% elsif question.question_type == AflierSurvey::Question::DECIMAL %>
+      <div class="autosave">
+        <%= simple_form_for answer, url: aflier_survey.answer_path, remote: true do |f| %>
+          <%= f.input :a_decimal, label: false %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+        <% end %>
+      </div>
+    <% elsif question.question_type == AflierSurvey::Question::WHOLE_NUMBER %>
+      <div class="autosave">
+        <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
+          <%= f.input :an_integer, label: false %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+        <% end %>
+      </div>
+  <% elsif question.question_type == AflierSurvey::Question::YES_OR_NO %>
+      <%= link_to 'Yes', choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'No', choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+      <br><br>
+  <% elsif question.question_type == AflierSurvey::Question::SECTION_ON_YES or question.question_type == AflierSurvey::Question::SECTION_ON_NO %>
+      <%= link_to 'Yes', choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'No', choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+      <br><br>
+  <% elsif question.question_type == AflierSurvey::Question::TEXT_ON_YES %>
+      <%= link_to 'Yes', choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'No', choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+
+      <div class="autosave">
+        <div class="more-info" style="margin-top:10px; margin-bottom: 10px">
+          <%= simple_form_for answer, remote: true do |f| %>
+              <%= f.input :some_text, label: question.comment_text_hint %>
+            <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+
+        <% end if answer.a_boolean? %>
+        </div>
+      </div>
+  <% elsif question.question_type == AflierSurvey::Question::SELECT_ONE %>
+      <% question.options.order(:position).each do |option| %>
+        <p>
+          <% if answer.user_chose(option, answer) %>
+              <%= link_to raw('<i class="far fa-dot-circle"></i>'), option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+          <% else %>
+              <%= link_to raw('<i class="far fa-circle"></i>'), option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), id: "option-#{option.id}", remote: true %> <%= option.name %>
+          <% end %>
+        </p>
+      <% end %>
+      <% if question.text_on_other %>
+          <% if answer.other %>
+              <%= link_to raw('<i class="far fa-dot-circle"></i>'), other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
+          <% else %>
+              <%= link_to raw('<i class="far fa-circle"></i>'), other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
+          <% end %>
+      <% end %>
+
+      <div class="autosave">
+        <div class="more-info" style="margin-top:10px; margin-bottom: 10px">
+          <%= simple_form_for answer, remote: true do |f| %>
+              <%= f.input :some_text, label: question.comment_text_hint %>
+            <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+
+        <% end if answer.other? and answer.question.text_on_other? %>
+        </div>
+      </div>
+
+  <% elsif question.question_type == AflierSurvey::Question::SELECT_MANY %>
+      <% question.options.order(:position).each do |option| %>
+          <p>
+            <% if answer.user_chose(option, answer) %>
+                <%= link_to raw('<i class="far fa-check-square"></i>'), option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+            <% else %>
+                <%= link_to raw('<i class="far fa-square"></i>'), option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+            <% end %>
+          </p>
+      <% end %>
+  <% elsif question.question_type == AflierSurvey::Question::OUT_OF_TEN %>
+      <% (1 .. 10).each do |choice| %>
+          <%= link_to choice.to_s, choice_answer_path(answer, choice: choice, questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.score_given?(choice) ? 'success' : 'outline-primary').to_s, remote: true %>
+      <% end %>
+      <br><br>
+    <% elsif question.question_type == AflierSurvey::Question::FILE_UPLOAD %>
+      <% if answer.file&.file&.exists? %>
+        <p><%= link_to 'Download existing document', answer.file_url, target: :_blank %></p>
+        <%= simple_form_for answer, html: {multipart: true} do |f| %>
+          <%= f.input :file, label: false %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+          <%= f.button :submit, "Replace Document", class: 'btn-outline-primary' %>
+        <% end %>
+      <% else %>
+        <%= simple_form_for answer, html: {multipart: true} do |f| %>
+          <%= f.input :file, label: false %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+          <%= f.button :submit, "upload Document", class: 'btn-outline-primary' %>
+        <% end %>
+      <% end %>
+    <% elsif question.question_type == AflierSurvey::Question::RESULT %>
+      <%= render 'questions/show_result', question: question, answer: answer, repeat_section: answer.repeat_section %>
+    <% elsif question.question_type == AflierSurvey::Question::CALCULATION %>
+      <div class="form-group">
+        <div class="form-control" id="exampleInputPassword1"><%= question.get_calculation(@user, answer.repeat_section) %></div>
+      </div>
+    <% elsif question.question_type == AflierSurvey::Question::CALCULATION_LONG %>
+      <% if question.calc.operation == AflierSurvey::Calc::LOWEST %>
+        <% lowest_question = question.calc.get_lowest(@user, answer.repeat_section) %>
+
+        <div class="row">
+          <% question.calc.questions.each do |question| %>
+            <div class="col">
+              <div class="<%= 'lowest-percentage' if question.is_lowest?(lowest_question) %> text-center" >
+                <span style="font-size:60px"><%= question.percentage(@user, answer.repeat_section) %>%</span><br>
+                <h4><%= question.name %></h4>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="lowest-percentage-description"><%= raw lowest_question.get_description(@user) unless lowest_question.is_a? String %></div>
+      <% elsif question.calc.operation == AflierSurvey::Calc::AVERAGE %>
+        <div class="form-group">
+          <div style="text-align: center; font-size:60px"><%= question.percentage(@user, answer.repeat_section) %>%</div>
+          <p><%= raw question.get_description(@user, answer.repeat_section) %></p>
+        </div>
+      <% else %>
+        <div class="form-group">
+          <div style="text-align: center; font-size:60px"><%= question.percentage(@user, answer.repeat_section) %>%</div>
+          <p><%= raw question.get_description(@user, answer.repeat_section) %></p>
+        </div>
+      <% end %>
+  <% else %>
+      <div class="autosave">
+        <%= simple_form_for answer, remote: true do |f| %>
+          <%= f.input :a_string, label: false, validate: { presence: true } %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+        <% end %>
+      </div>
+  <% end %>
+
+  <% if question.allow_not_sure? %>
+      <%= link_to 'Not sure', choice_answer_path(answer, choice: AflierSurvey::Answer::NOT_SURE, questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.not_sure? ? 'warning' : 'outline-primary').to_s, remote: true %>
+      <br><br>
+  <% end %>
+
+    <% if @required_warning %>
+      <p>Field cannot be blank</p>
+    <% end %>
+
+  </div>
+</div>

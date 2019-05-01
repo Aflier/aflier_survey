@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  first_question_id: 1
+  second_question_id: 1
+  first_calc_id: 1
+  second_calc_id: 1
+  operation: MyString
+  a_decimal: 9.99
+
+two:
+  name: MyString
+  first_question_id: 1
+  second_question_id: 1
+  first_calc_id: 1
+  second_calc_id: 1
+  operation: MyString
+  a_decimal: 9.99

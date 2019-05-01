@@ -1,0 +1,27 @@
+<%= form_with(model: belonging_section, local: true) do |form| %>
+  <% if belonging_section.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(belonging_section.errors.count, "error") %> prohibited this belonging_section from being saved:</h2>
+
+      <ul>
+      <% belonging_section.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :questionnaire_id %>
+    <%= form.number_field :questionnaire_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :question_section_id %>
+    <%= form.number_field :question_section_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

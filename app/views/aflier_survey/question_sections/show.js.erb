@@ -1,0 +1,7 @@
+$('#question-section').replaceWith('<%= j render 'question_sections/question_section' %>');
+
+<% @questionnaire.question_sections.each do |question_section| %>
+    $('#question-section-nav-<%= question_section.id %>>a').removeClass( "active" );
+<% end %>
+
+$('#question-section-nav-<%= @question_section.id %>>a').addClass( "active" );

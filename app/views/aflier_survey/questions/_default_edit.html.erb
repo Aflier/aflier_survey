@@ -1,0 +1,203 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="btn-group-vertical btn-block">
+      <%= render 'questions_list' %>
+    </div>
+
+  </div>
+  <div class="col-md-7">
+    <% if @question.question_type == AflierSurvey::Question::CALCULATION or @question.question_type == AflierSurvey::Question::CALCULATION_LONG or @question.question_type == AflierSurvey::Question::RESULT %>
+      <div class="row">
+        <div class="col-md-6">
+          <% if @question.question_type == AflierSurvey::Question::RESULT %>
+            <% AflierSurvey::Question::RESULT_TYPES.each do |result_type| %>
+              <%= link_to result_type.capitalize, result_question_path(@question, result_type: result_type), class: "btn btn-#{@question.result_type == result_type ? '' : 'outline-'}primary btn-block" %>
+            <% end %>
+          <% end %>
+
+          <h2>Calculations</h2>
+
+          <% AflierSurvey::Calc.all.order(:name).each do |calc| %>
+            <%= link_to raw('<i class="fas fa-chevron-circle-right"></i>'), calc %>
+            <% if @question.calc_id == calc.id %>
+              <%= link_to raw('<i class="fas fa-toggle-on"></i> ' + calc.name), calc_question_path(@question, calc_id: calc.id) %><br>
+            <% else %>
+              <%= link_to raw('<i class="fas fa-toggle-off"></i> ' + calc.name), calc_question_path(@question, calc_id: calc.id) %><br>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <h3>Values from Answers</h3>
+
+          <% AflierSurvey::QuestionSection.all.order(:name).each do |question_section| %>
+            <div class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#section-<%= question_section.id %>" aria-expanded="false" aria-controls="collapseExample">
+              <%= question_section.name %>
+            </div>
+
+            <div id="section-<%= question_section.id %>" class="collapse <%= 'show' if question_section.questions.find_by(id: @question.question_id) or question_section.questions.find_by(id: @question.question_y_id) %>">
+              <div id="" class="card">
+                <% unless question_section.questions.where(question_type: AflierSurvey::Question::CALCULATION_TYPE).empty? %>
+                  <ul class="list-group list-group-flush">
+                    <% question_section.questions.where(question_type: AflierSurvey::Question::CALCULATION_TYPE).order(:position).each do |question| %>
+                      <li class="list-group-item">
+                        <%= link_to question.name, feed_question_path(@question, question_id: question.id), class: "btn #{ (@question.question_id == question.id or @question.question_y_id == question.id) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %>
+                      </li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <% if @question.result_type == AflierSurvey::Question::TABLE %>
+        <%= render 'table_weighting' %>
+      <% else %>
+        <%= render 'question_weighting' if false %>
+      <% end %>
+
+    <% elsif @question.links_to_section? %>
+      <h2><%= @question.question_section.name %></h2>
+
+      <% QuestionSection.all.order(:name).each do |question_section| %>
+        <%= link_to question_section.name, following_question_path(@question, question_section_id: question_section.id), class: "btn btn#{@question.following_section_id == question_section.id ? '' : '-outline'}-primary btn-block" %>
+      <% end %>
+
+      <br>
+      <%= render 'question_weighting' %>
+
+    <% elsif @question.weighting_on_value_given and false %>
+      <%= render 'question_weighting' %>
+
+    <% elsif @question.question_type == AflierSurvey::Question::SELECT_ONE or @question.question_type == AflierSurvey::Question::SELECT_MANY %>
+      <h2>Question options</h2>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Option</th>
+          <th>value</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @options.each do |option| %>
+          <tr>
+            <td><%= option.name %></td>
+            <td><%= option.a_decimal %></td>
+            <td>
+              <div class="float-right btn-group">
+                <%= link_to raw('<i class="fa fa-arrow-up" aria-hidden="true"></i>'), up_option_path(option), class: "btn btn-outline-secondary btn-sm" unless option.position == 0 %>
+                <%= link_to 'Edit', edit_option_path(option), class: "btn btn-outline-secondary btn-sm" %>
+                <%= link_to 'Destroy', option, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <% if @question.text_on_other %>
+            <td>Other</td>
+            <td>
+              <div class="float-right">
+                <%= link_to 'Remove "Other"', toggle_other_question_path(@question), class: "btn btn-outline-warning btn-sm" if @question.text_on_other %>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="2"></td>
+          <td>
+            <div class="float-right">
+              <%= link_to 'Add "Other"', toggle_other_question_path(@question), class: "btn btn-outline-primary btn-sm" unless @question.text_on_other %>
+              <%= render '/options/form' %>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <%= render 'option_weighting' %>
+    <% end %>
+  </div>
+
+  <div class="col-md-3">
+
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <% if @question.question_type == AflierSurvey::Question::CALCULATION_LONG %>
+          <li class="list-group-item">
+            <h4>Value when true:</h4>
+            !!!<%= @question.result_grouping&.name %>
+          </li>
+        <% end %>
+        <% if @question.question_type == AflierSurvey::Question::YES_OR_NO %>
+          <li class="list-group-item">
+            <h4>Value when true:</h4>
+            <%= @question.value_true %>
+          </li>
+          <li class="list-group-item">
+            <h4>Value when false:</h4>
+            <%= @question.value_false %>
+          </li>
+        <% end %>
+        <% if @question.result_type == AflierSurvey::Question::TABLE %>
+          <li class="list-group-item">
+            <h4>Bounds (x):</h4>
+            <%= @question.bounds_x %>
+          </li>
+          <li class="list-group-item">
+            <h4>Bounds (y):</h4>
+            <%= @question.bounds_y %>
+          </li>
+        <% end %>
+      </ul>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#editQuestion">
+        Edit Question
+      </button>
+      <% if @question.question_type == AflierSurvey::Question::SELECT_ONE or @question.question_type == AflierSurvey::Question::SELECT_MANY %>
+        <%= link_to "Clone", clone_question_path(@question), class: "btn btn-outline-secondary" %>
+      <% end %>
+    </div>
+
+    <!-- Modal -->
+    <%= simple_form_for(@question) do |f| %>
+      <div class="modal fade" id="editQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Question</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= f.input :name %>
+              <%= f.input :text_hint, hint: "Extra hint text to be placed before a comment box in 'Text on Yes'" %>
+              <%= f.input :allow_not_sure %>
+              <%= f.input :help, as: :summernote %>
+              <%= f.input :required %>
+
+              <% if @question.question_type == AflierSurvey::Question::YES_OR_NO %>
+                <%= f.input :value_true %>
+                <%= f.input :value_false %>
+              <% end %>
+
+              <% if @question.result_type == AflierSurvey::Question::TABLE %>
+                <%= f.input :bounds_x %>
+                <%= f.input :bounds_y %>
+              <% end %>
+
+              <%= f.association :question_section, include_blank: false %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <%= f.button :submit, class: "btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

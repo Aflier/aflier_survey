@@ -1,0 +1,12 @@
+<h1><%= @question_section.name %></h1>
+
+<% @question_section.questions.each do |question| %>
+    <div class="row" style="margin-bottom: 2px">
+      <div class="col-md-4">
+        <%= question.name %>
+      </div>
+      <div class="col-md-8" style="background-color: #eee">
+        <%= question.get_answer(@user) %>
+      </div>
+    </div>
+<% end %>

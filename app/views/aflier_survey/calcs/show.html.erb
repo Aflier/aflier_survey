@@ -1,0 +1,184 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1><%= @calc.name %></h1>
+		</div>
+		
+		<ol class="breadcrumb">
+		  <li class="breadcrumb-item"><%= link_to "All", calcs_path %></li>
+		  <li class="breadcrumb-item active"><%= @calc.name %></li>
+		</ol>
+
+    <div class="alert alert-success text-center" role="alert">
+      <%= raw @calc.in_words %>
+    </div>
+
+	</div>
+
+</div>
+
+<div class="row">
+  <% if @calc.operation.nil? %>
+    <div class="col-md-3">
+      <%= render 'operator' %>
+    </div>
+    <div class="col-md-6">
+    </div>
+  <% elsif @calc.operation == AflierSurvey::Calc::COLLECTION %>
+    <div class="col-md-3">
+      <%= render 'operator' %>
+    </div>
+    <div class="col-md-6">
+      <h2>Result Groupings</h2>
+
+      <% ResultGrouping.all.order(:name).each do |result_grouping| %>
+        <p><%= link_to result_grouping.name, grouping_calc_path(@calc, result_grouping_id: result_grouping.id), class: " btn #{ @calc.is_grouping?(result_grouping) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %> </p>
+      <% end %>
+    </div>
+  <% elsif @calc.operation == AflierSurvey::Calc::CHOICE %>
+    <div class="col-md-3">
+      <%= render 'operator' %>
+    </div>
+    <div class="col-md-3">
+      <h2>Variables</h2>
+
+      <p>What calculation would you like to make a choice between</p>
+
+      <h3>Previous calculation</h3>
+
+      <% Calc.all.order(:name).each do |calc| %>
+        <% unless calc.id == @calc.id %>
+          <p><%= link_to calc.name, calc_one_calc_path(@calc, calc_id: calc.id), class: " btn #{ @calc.is_first_calc?(calc) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %> </p>
+        <% end %>
+      <% end %>
+
+      <h3>Questions</h3>
+
+      <%= render 'values_from_answers' %>
+    </div>
+    <div class="col-md-3">
+      <h2>Selector</h2>
+      <p>Choose the question that will decide the value used.</p>
+
+      <% AflierSurvey::QuestionSection.all.order(:name).each do |question_section| %>
+        <h4><%= question_section.name %></h4>
+
+        <% question_section.questions.where(question_type: AflierSurvey::Question::OPTION_TYPE).order(:name).each do |question| %>
+          <p><%= link_to question.name, var_two_calc_path(@calc, question_id: question.id), class: " btn #{ @calc.is_second_question?(question) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %></p>
+          <% if @calc.is_second_question?(question) %>
+
+            <% question.options.each do |option| %>
+              <table class="table">
+                <tr>
+                  <th><%= option.name %></th>
+                  <th></th>
+                </tr>
+
+                <% @calc.the_calcs.each do |calc| %>
+                  <tr>
+                    <td><%= calc.name %></td>
+                    <td>
+                      <div class="float-right">
+                        <%= link_to raw("#{ @calc.this_option?(calc, option) ? '<i class="far fa-check-square"></i>' : '<i class="far fa-square"></i>'}"), choice_calc_path(@calc, calc_result_id: calc.id, option_id: option.id) %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+
+                <% @calc.questions.each do |question| %>
+                  <tr>
+                    <td><%= question.name %></td>
+                    <td>
+                      <div class="float-right">
+                        <%= link_to raw("#{ @calc.this_question?(question, option) ? '<i class="far fa-check-square"></i>' : '<i class="far fa-square"></i>'}"), question_choice_calc_path(@calc, question_id: question.id, option_id: option.id) %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+
+
+              </table>
+
+            <% end %>
+
+          <% end %>
+        <% end %>
+      <% end %>
+
+      </div>
+
+  <% elsif @calc.operation == AflierSurvey::Calc::ADD or @calc.operation == AflierSurvey::Calc::LOWEST %>
+    <div class="col-md-3">
+      <%= render 'operator' %>
+    </div>
+    <div class="col-md-6">
+      <h2>Variables</h2>
+
+      <% if @calc.operation == AflierSurvey::Calc::ADD %>
+        <h3>Previous calculation</h3>
+
+        <% AflierSurvey::Calc.all.order(:name).each do |calc| %>
+          <% unless calc.id == @calc.id %>
+            <p><%= link_to calc.name, calc_one_calc_path(@calc, calc_id: calc.id), class: " btn #{ @calc.is_first_calc?(calc) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %> </p>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= render 'values_from_answers' %>
+    </div>
+  <% else %>
+    <div class="col-md-3">
+      <% if @calc.operation == AflierSurvey::Calc::ADD %>
+
+      <% elsif not(@calc.operation == AflierSurvey::Calc::CONSTANT) %>
+        <h2>First Variable</h2>
+
+        <h3>Previous calculation</h3>
+
+        <% Calc.all.order(:name).each do |calc| %>
+          <p><%= link_to calc.name, calc_one_calc_path(@calc, calc_id: calc.id), class: " btn #{ @calc.is_first_calc?(calc) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %> </p>
+        <% end %>
+
+        <%= render 'values_from_answers' %>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%= render 'operator' %>
+    </div>
+    <div class="col-md-3">
+      <% if @calc.operation == AflierSurvey::Calc::CONSTANT %>
+        <h2>Value</h2>
+        <%= simple_form_for(@calc) do |f| %>
+          <%= f.input :a_decimal, label: false %>
+          <%= f.button :submit, class: "btn-block" %>
+        <% end %>
+      <% elsif @calc.operation == AflierSurvey::Calc::ADD %>
+        <div class="alert alert-info">
+          Two or more previous calculation can be added together.
+        </div>
+      <% else %>
+        <h2>Second Variable</h2>
+
+        <h3>Previous calculation</h3>
+
+        <% AflierSurvey::Calc.all.order(:name).each do |calc| %>
+          <p><%= link_to calc.name, calc_two_calc_path(@calc, calc_id: calc.id), class: " btn #{ @calc.is_second_calc?(calc) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %> </p>
+        <% end %>
+
+        <h3>Values</h3>
+
+        <% AflierSurvey::QuestionSection.all.order(:name).each do |question_section| %>
+          <h4><%= question_section.name %></h4>
+
+          <% question_section.questions.where(question_type: AflierSurvey::Question::CALCULATION_TYPE).order(:name).each do |question| %>
+            <p><%= link_to question.name, var_two_calc_path(@calc, question_id: question.id), class: " btn #{ @calc.is_second_question?(question) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %></p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="col-md-3">
+		<%= link_to 'Edit', edit_calc_path(@calc), class: "btn btn-secondary btn-block" %>
+  </div>
+</div>

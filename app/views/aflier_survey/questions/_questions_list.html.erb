@@ -1,0 +1,3 @@
+<% AflierSurvey::Question::QUESTION_TYPES.each do |question_type| %>
+  <%= link_to question_type, type_question_path(@question, question_type: question_type), class: "btn btn-#{@question.question_type == question_type ? '' : 'outline-'}primary btn-block" %>
+<% end %>

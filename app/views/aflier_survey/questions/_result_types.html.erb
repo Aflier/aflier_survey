@@ -1,0 +1,3 @@
+<% AflierSurvey::Question::RESULT_TYPES.each do |result_type| %>
+  <%= link_to result_type.capitalize, result_question_path(@question, result_type: result_type), class: "btn btn-#{@question.result_type == result_type ? '' : 'outline-'}primary btn-block" %>
+<% end %>

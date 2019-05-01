@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Calc:</strong>
+  <%= @question_input.calc_id %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @question_input.question_id %>
+</p>
+
+<%= link_to 'Edit', edit_question_input_path(@question_input) %> |
+<%= link_to 'Back', question_inputs_path %>

@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question_id: 1
+  user_id: 1
+  a_string: MyString
+  a_decimal: 9.99
+  an_integer: 1
+  a_date: 2019-03-29
+  a_time: 2019-03-29 17:20:56
+  repeat_section_id: 1
+  a_boolean: false
+  not_sure: false
+  file: MyString
+  other: false
+  complete: false
+
+two:
+  question_id: 1
+  user_id: 1
+  a_string: MyString
+  a_decimal: 9.99
+  an_integer: 1
+  a_date: 2019-03-29
+  a_time: 2019-03-29 17:20:56
+  repeat_section_id: 1
+  a_boolean: false
+  not_sure: false
+  file: MyString
+  other: false
+  complete: false

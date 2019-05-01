@@ -1,0 +1,49 @@
+<% if question.is_a? String %>
+  <div class="form-group">
+    <div class="form-control" id="exampleInputPassword1"><%= question %></div>
+  </div>
+<% elsif question.result_type == Question::RADAR %>
+  <%= render '/questions/radar', question: question, answer: answer %>
+<% elsif question.result_type == Question::BAR %>
+  <%= render '/questions/bar', question: question, answer: answer %>
+<% elsif question.result_type == Question::LINE %>
+  User ID: <%= @user.id %>
+
+  <%= render '/questions/line', question: question, answer: answer, user: @user %>
+<% elsif question.result_type == Question::POLAR %>
+  <%= render '/questions/polar', question: question, answer: answer %>
+<% elsif question.result_type == Question::MATCH %>
+  <div class="result-<%= question.get_linear(@user, answer.repeat_section).downcase %>">
+    <%= question.get_calculation(@user, answer.repeat_section) %>
+    <%= raw question.get_category(@user, answer.repeat_section) %>
+  </div>
+
+  <p><%= raw question.get_description(@user, answer.repeat_section) %></p>
+<% elsif question.result_type == Question::TABLE %>
+  <div class="result-<%= question.matching_table_mapping_linear(@user, answer.repeat_section) %>">
+    <%= question.get_table_inputs(@user, answer.repeat_section) %>
+    <%= question.matching_table_mapping_category(@user, answer.repeat_section) %>
+  </div>
+  <p><%= raw question.matching_table_mapping_description(@user, answer.repeat_section) %></p>
+
+<% elsif question.result_type == Question::GROUPING %>
+  <div class="result-info mb-3">
+    <% if question.details %>
+      <% if question.result_grouping %>
+        <%= render question.result_grouping %>
+      <% else %>
+        <div class="result-info mb-3">Result Grouping missing</div>
+      <% end %>
+    <% else %>
+      <%= question.result_grouping.total_scored(@user) %>
+    <% end %>
+  </div>
+<% elsif question.result_type == Question::AS_AGE %>
+  <div class="form-group">
+    <div class="result-info mb-3"><%= question.result(@user, repeat_section) %></div>
+  </div>
+<% else %>
+  <% if question.calc and question.calc.operation == Calc::CHOICE %>
+    <%= render 'questions/show_result', question: question.calc.chosen_question(@user), answer: answer %>
+  <% end %>
+<% end %>

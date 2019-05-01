@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @answer.question_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @answer.user_id %>
+</p>
+
+<p>
+  <strong>A string:</strong>
+  <%= @answer.a_string %>
+</p>
+
+<p>
+  <strong>A decimal:</strong>
+  <%= @answer.a_decimal %>
+</p>
+
+<p>
+  <strong>An integer:</strong>
+  <%= @answer.an_integer %>
+</p>
+
+<p>
+  <strong>A date:</strong>
+  <%= @answer.a_date %>
+</p>
+
+<p>
+  <strong>A time:</strong>
+  <%= @answer.a_time %>
+</p>
+
+<p>
+  <strong>Repeat section:</strong>
+  <%= @answer.repeat_section_id %>
+</p>
+
+<p>
+  <strong>A boolean:</strong>
+  <%= @answer.a_boolean %>
+</p>
+
+<p>
+  <strong>Not sure:</strong>
+  <%= @answer.not_sure %>
+</p>
+
+<p>
+  <strong>File:</strong>
+  <%= @answer.file %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @answer.other %>
+</p>
+
+<p>
+  <strong>Complete:</strong>
+  <%= @answer.complete %>
+</p>
+
+<%= link_to 'Edit', edit_answer_path(@answer) %> |
+<%= link_to 'Back', answers_path %>

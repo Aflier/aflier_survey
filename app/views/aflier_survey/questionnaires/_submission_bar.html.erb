@@ -1,0 +1,22 @@
+<div class="text-center" id="submissions-bar">
+
+  <% if questionnaire.is_submitted?(unique_ident) %>
+    <div class="btn btn-outline-primary btn-lg disabled" style="margin-bottom: 2em;">
+      Submitted!
+    </div>
+    <%= raw questionnaire.thank_you %>
+  <% elsif questionnaire.is_saved?(unique_ident) %>
+    <span class="btn btn-outline-primary btn-lg disabled">Saved!</span>
+    <%= link_to "Save and Submit", aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident), id: "save-and-submit", class: "btn btn-primary btn-lg", remote: true %>
+  <% else %>
+    <%= link_to "Save", aflier_survey.save_questionnaire_path(questionnaire, unique_ident: unique_ident), class: "btn btn-primary btn-lg", remote: true %>
+    <%= link_to "Save and Submit", aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident), id: "save-and-submit", class: "btn btn-primary btn-lg", remote: true %>
+  <% end %>
+
+  <script>
+      $( "#save-and-submit" ).click(function() {
+          $('#waiting').modal('show');
+      });
+  </script>
+
+</div>
