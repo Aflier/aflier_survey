@@ -1,0 +1,26 @@
+// Place all the styles related to the positions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#side-nav {
+  background-color: #172751;
+  color: white;
+  height: 100%;
+  padding-top: 10px;
+}
+
+#main-area {
+  height: 100%;
+  padding-top: 10px;
+  overflow-y: scroll;
+
+}
+
+.inner-scroll {
+  max-height: 100%;
+
+}
+
+.inner-fixed {
+  height: 100%;
+}
