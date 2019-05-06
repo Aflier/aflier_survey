@@ -1,4 +1,4 @@
 AflierSurvey.configure do |config|
   # Add the calculations features
-  # cofing.option = 'calculations'
+  config.calculations = false
 end

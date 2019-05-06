@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cead67f-cda6-427e-a2d4-55a31c07fd27" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/generators/templates/aflier_survey_initializer.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/aflier_survey.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/aflier_survey.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/generators/templates/aflier_survey_initializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/generators/templates/aflier_survey_initializer.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/aflier_survey.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="270">
+              <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -45,6 +45,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
               <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/generators/aflier_survey/install_generators.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -64,8 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test/dummy/db/schema.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/aflier_survey/questions_controller.rb" />
         <option value="$PROJECT_DIR$/test/dummy/config/routes.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20190329135131_create_aflier_survey_belonging_sections.rb" />
         <option value="$PROJECT_DIR$/app/models/aflier_survey/belonging_section.rb" />
@@ -108,18 +115,19 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/controllers/aflier_survey/application_controller.rb" />
         <option value="$PROJECT_DIR$/test/dummy/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/lib/aflier_survey/version.rb" />
         <option value="$PROJECT_DIR$/test/dummy/app/views/layouts/_survey_nav.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/aflier_survey/application.scss" />
         <option value="$PROJECT_DIR$/app/views/layouts/aflier_survey/application.html.erb" />
         <option value="$PROJECT_DIR$/test/dummy/config/initializers/aflier_survey.rb" />
         <option value="$PROJECT_DIR$/lib/generators/termplates/aflier_survey_initializer.rb" />
+        <option value="$PROJECT_DIR$/lib/generators/aflier_survey/install_generators.rb" />
+        <option value="$PROJECT_DIR$/lib/aflier_survey/version.rb" />
+        <option value="$PROJECT_DIR$/lib/generators/templates/aflier_survey_initializer.rb" />
         <option value="$PROJECT_DIR$/lib/aflier_survey.rb" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="1920" />
+  <component name="ProjectFrameBounds" extendedState="5">
     <option name="width" value="1920" />
     <option name="height" value="2160" />
   </component>
@@ -206,29 +214,7 @@
             <path>
               <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
               <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-              <item name="migrate" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
@@ -253,95 +239,6 @@
               <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="dummy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="initializers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -495,15 +392,15 @@
       <workItem from="1556712359011" duration="442000" />
       <workItem from="1556714403340" duration="3701000" />
       <workItem from="1557070254415" duration="2191000" />
-      <workItem from="1557155396147" duration="1351000" />
+      <workItem from="1557155396147" duration="3025000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42168000" />
+    <option name="totallyTimeSpent" value="43842000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="0" width="1920" height="2160" extended-state="4" />
+    <frame x="0" y="0" width="1920" height="2160" extended-state="4" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23319103" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -534,9 +431,6 @@
     <SUITE FILE_PATH="coverage/aflier_survey@Development__aflier_survey.rcov" NAME="Development: aflier_survey Coverage Results" MODIFIED="1557071318331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="aflier_survey" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/dummy/config/initializers/wrap_parameters.rb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/aflier_survey/questionnaire_submission.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -723,9 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/dummy/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -773,20 +664,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/aflier_survey/layout.scss">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aflier_survey.gemspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/aflier_survey/version.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/aflier_survey/application.scss">
       <provider selected="true" editor-type-id="text-editor">
@@ -843,10 +720,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/generators/aflier_survey/install_generators.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/aflier_survey.gemspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="40" lean-forward="true" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/aflier_survey/version.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/aflier_survey.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="270">
+          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
         </state>
       </provider>
     </entry>

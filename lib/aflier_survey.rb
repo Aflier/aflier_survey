@@ -11,7 +11,7 @@ module AflierSurvey
   end
 
   class Configuration
-    attr_accessor :option
+    attr_accessor :calculations
 
     def initialize
       @option = 'default_option'
