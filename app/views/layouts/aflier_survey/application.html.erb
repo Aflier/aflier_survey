@@ -19,7 +19,7 @@
       <nav class="nav flex-column nav-pills">
         <%= link_to 'Questionnaires', questionnaires_path, class: "nav-link #{'active' if controller_name == 'questionnaires'}" %>
         <%= link_to 'Question Sections', question_sections_path, class: "nav-link #{'active' if controller_name == 'question_sections'}" %>
-        <%= link_to 'Calculations', calcs_path, class: "nav-link #{'active' if controller_name == 'calcs'}" %>
+        <%= link_to 'Calculations', calcs_path, class: "nav-link #{'active' if controller_name == 'calcs'}" if AflierSurvey.configuration.calculations %>
       </nav>
     </div>
     <div id="main-area" class="col-md-10">
