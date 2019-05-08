@@ -1,4 +1,4 @@
-<% if user.questionnaire.complete_on_sections %>
+<% if questionnaire.complete_on_sections %>
 
   <div class="card-footer text-right" id="card-footer-<%= question_section.id %>">
     <% if question_section.is_complete?(user) %>

@@ -54,6 +54,8 @@ module AflierSurvey
 
       respond_to do |format|
         # format.html { redirect_to question_section_path(@answer.question.question_section, unique_ident: unique_ident), notice: 'Option was successfully updated.' }
+
+#        format.html { render 'update.js.erb'}
         format.js
       end
     end

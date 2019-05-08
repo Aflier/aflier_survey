@@ -6,9 +6,9 @@
     <% unless questionnaire.is_locked?(@user, admin) %>
 
     $("#question-<%= question.id %> .autosave input").blur(function() {
-        // alert('----1----');
+        alert('----1----');
         $("#question-<%= question.id %> .autosave form").submit();
-        // alert('----2----');
+        alert('----2----');
     });
 
     $("#question-<%= question.id %> .autosave select").blur(function() {

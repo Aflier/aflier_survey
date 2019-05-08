@@ -1,0 +1,9 @@
+<% if @repeat_section %>
+  $('#question-<%= @repeat_section.id %>-<%= @question.id %>').replaceWith('<%= j render 'repeat_sections/question', repeat_section: @repeat_section, question: @question, answer: @answer %>');
+<% else %>
+  $('#question-<%= @question.id %>').replaceWith('<%= j render 'questions/question', questionnaire: @questionnaire, question: @question, answer: @answer %>');
+<% end %>
+
+$('#submissions-bar').replaceWith('<%= j render '/questionnaires/submission_bar', questionnaire: @questionnaire, user: @user %>');
+$('#complete-<%= @question_section.id %>').fadeOut('500');
+$('#card-footer-<%= @question_section.id %>').replaceWith('<%= j render '/question_sections/card_footer', question_section: @question_section, user: @user %>');
