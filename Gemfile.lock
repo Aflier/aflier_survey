@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    aflier_survey (0.1.9)
+    aflier_survey (0.1.10)
       rails (~> 5.2.2)
 
 GEM

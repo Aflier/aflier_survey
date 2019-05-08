@@ -1,12 +1,12 @@
-alert('doing it!');
+// alert('doing it!');
 
 <% if @repeat_section %>
   $('#question-<%= @repeat_section.id %>-<%= @question.id %>').replaceWith('<%= j render 'repeat_sections/question', questionnaire: @questionnaire, repeat_section: @repeat_section, question: @question, answer: @answer %>');
 <% else %>
     <% if @question %>
-      alert('redraw_question');
+      // alert('redraw_question');
       $('#question-<%= @question.id %>').replaceWith('<%= j render 'aflier_survey/questions/question', questionnaire: @questionnaire, question: @question, unique_ident: @unique_ident, admin: false %>');
-      alert('redrawn question');
+      // alert('redrawn question');
     <% end %>
 <% end %>
 
@@ -14,4 +14,4 @@ $('#submissions-bar').replaceWith('<%= j render 'aflier_survey/questionnaires/su
 $('#complete-<%= @question_section.id %>').fadeOut('500');
 $('#card-footer-<%= @question_section.id %>').replaceWith('<%= j render 'aflier_survey/question_sections/card_footer', question_section: @question_section, user: @user, questionnaire: @questionnaire %>');
 
-alert('done it!');
+// alert('done it!');

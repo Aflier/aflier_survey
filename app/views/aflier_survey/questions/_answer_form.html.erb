@@ -132,7 +132,7 @@
       <%= render 'questions/show_result', question: question, answer: answer, repeat_section: answer.repeat_section %>
     <% elsif question.question_type == AflierSurvey::Question::CALCULATION %>
       <div class="form-group">
-        <div class="form-control" id="exampleInputPassword1"><%= question.get_calculation(@user, answer.repeat_section) %></div>
+        <div class="form-control" id="exampleInputPassword1"><%= question.get_calculation(unique_ident, answer.repeat_section) %></div>
       </div>
     <% elsif question.question_type == AflierSurvey::Question::CALCULATION_LONG %>
       <% if question.calc.operation == AflierSurvey::Calc::LOWEST %>

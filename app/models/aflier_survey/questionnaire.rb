@@ -13,10 +13,10 @@ module AflierSurvey
       false
     end
 
-    def is_locked?(user, admin)
+    def is_locked?(unique_ident, admin)
       return true if self.is_result
       return false if admin
-      is_submitted?(user)
+      is_submitted?(unique_ident)
     end
 
     def is_saved?(unique_ident)
