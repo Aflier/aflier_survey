@@ -43,14 +43,14 @@ module AflierSurvey
     def update
       @questionnaire = Questionnaire.find(params[:answer][:questionnaire_id])
 
-      unique_ident = @answer.unique_ident
+      @unique_ident = @answer.unique_ident
       @answer.update!(answer_params)
       @question = @answer.question
       @repeat_section = @answer.repeat_section
       @question_section = @answer.question.question_section
       @many = @question_section.many
 
-      @required_warning = @question.is_required?(unique_ident)
+      @required_warning = @question.is_required?(@unique_ident)
 
       respond_to do |format|
         # format.html { redirect_to question_section_path(@answer.question.question_section, unique_ident: unique_ident), notice: 'Option was successfully updated.' }

@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cead67f-cda6-427e-a2d4-55a31c07fd27" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/_answer.json.jbuilder" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/choice.js.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/index.json.jbuilder" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/option_choice.js.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/other.js.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/show.json.jbuilder" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/aflier_survey/answers/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/_form.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/aflier_survey/answers/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/aflier_survey/answers/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/aflier_survey/answers/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/aflier_survey/question_sections/_card_footer.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/aflier_survey/question_sections/_card_footer.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/aflier_survey/questions/_question.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/aflier_survey/questions/_question.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dummy/app/controllers/users_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/dummy/app/controllers/users_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dummy/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/test/dummy/app/views/layouts/application.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/dummy/app/views/users/_form.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/test/dummy/app/views/users/_form.html.erb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,28 +48,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/questions/_answer_form.html.erb">
+        <entry file="file://$PROJECT_DIR$/aflier_survey.gemspec">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="120">
+              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/question_sections/show.html.erb">
+        <entry file="file://$PROJECT_DIR$/lib/aflier_survey/version.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/dummy/app/assets/javascripts/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="165">
+              <caret line="11" selection-start-line="11" selection-end-line="12" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -110,44 +93,48 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/question_sections/_card_footer.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="6" selection-start-column="6" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="119" selection-start-line="10" selection-start-column="119" selection-end-line="10" selection-end-column="119" />
+            <state relative-caret-position="105">
+              <caret line="7" column="181" selection-start-line="7" selection-start-column="181" selection-end-line="7" selection-end-column="181" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/answers/_answer.json.jbuilder">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://fe3f2256-cf11-432d-9310-7ed5ad4ff076/schema/main/table/aflier_survey_answers">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true">
-                <filter text="" />
-              </filtering>
+        <entry file="file://$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="477">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/questions/_question.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+            <state relative-caret-position="600">
+              <caret line="40" column="9" lean-forward="true" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/questions/_answer_form.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="41" column="74" selection-start-line="41" selection-start-column="74" selection-end-line="41" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/aflier_survey/application.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,7 +183,6 @@
         <option value="$PROJECT_DIR$/app/views/aflier_survey/answers/index.html.erb" />
         <option value="$PROJECT_DIR$/app/models/aflier_survey/answer.rb" />
         <option value="$PROJECT_DIR$/app/controllers/aflier_survey/question_sections_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/aflier_survey/questions/_answer_form.html.erb" />
         <option value="$PROJECT_DIR$/aflier_survey.gemspec" />
         <option value="$PROJECT_DIR$/app/models/aflier_survey/question.rb" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -210,14 +196,15 @@
         <option value="$PROJECT_DIR$/lib/aflier_survey.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/aflier_survey/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/aflier_survey/questionnaires/_form.html.erb" />
-        <option value="$PROJECT_DIR$/lib/aflier_survey/version.rb" />
         <option value="$PROJECT_DIR$/test/dummy/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/aflier_survey/questions/_question.html.erb" />
         <option value="$PROJECT_DIR$/app/views/aflier_survey/question_sections/_card_footer.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb" />
         <option value="$PROJECT_DIR$/test/dummy/app/views/users/_form.html.erb" />
         <option value="$PROJECT_DIR$/test/dummy/app/controllers/users_controller.rb" />
+        <option value="$PROJECT_DIR$/lib/aflier_survey/version.rb" />
+        <option value="$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/aflier_survey/questions/_answer_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/aflier_survey/questions/_question.html.erb" />
       </list>
     </option>
   </component>
@@ -277,6 +264,21 @@
               <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
+              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
@@ -366,6 +368,23 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="dummy" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="dummy" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aflier_survey" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="dummy" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="aflier_survey" type="b2602c69:ProjectViewProjectNode" />
@@ -578,31 +597,32 @@
       <workItem from="1557070254415" duration="2191000" />
       <workItem from="1557155396147" duration="3899000" />
       <workItem from="1557159595829" duration="860000" />
-      <workItem from="1557329113997" duration="2952000" />
+      <workItem from="1557329113997" duration="4293000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48528000" />
+    <option name="totallyTimeSpent" value="49869000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="2160" extended-state="4" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23745997" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23745997" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Console" weight="0.32954547" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.59081936" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39970356" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39970356" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32922015" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32971373" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32954547" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32971373" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -613,22 +633,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb</url>
-          <line>58</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb</url>
-          <line>57</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/aflier_survey@Development__aflier_survey.rcov" NAME="Development: aflier_survey Coverage Results" MODIFIED="1557329121924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="aflier_survey" />
@@ -662,15 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/aflier_survey/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/aflier_survey/question_sections_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -685,13 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/dummy/app/assets/javascripts/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="12" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -785,20 +773,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/initializers/aflier_survey.rb" />
-    <entry file="file://$PROJECT_DIR$/aflier_survey.gemspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/aflier_survey/version.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/initializers/simple_form.rb">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -893,34 +867,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/questions/_answer_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/answers/_answer.json.jbuilder">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="119" selection-start-line="10" selection-start-column="119" selection-end-line="10" selection-end-column="119" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/question_sections/_card_footer.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="6" selection-start-column="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/dummy/app/views/users/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -931,17 +881,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/questions/_question.html.erb">
+    <entry file="file://$PROJECT_DIR$/lib/aflier_survey/version.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/aflier_survey.gemspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/dummy/app/views/users/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/answers/_answer.json.jbuilder">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/dummy/app/assets/javascripts/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="12" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/answers/update.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="181" selection-start-line="7" selection-start-column="181" selection-end-line="7" selection-end-column="181" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/aflier_survey/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/aflier_survey/answers_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
+        <state relative-caret-position="477">
           <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/questions/_answer_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="41" column="74" selection-start-line="41" selection-start-column="74" selection-end-line="41" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/aflier_survey/questions/_question.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="9" lean-forward="true" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
         </state>
       </provider>
     </entry>
