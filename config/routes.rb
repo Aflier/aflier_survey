@@ -25,7 +25,12 @@ AflierSurvey::Engine.routes.draw do
     end
   end
 
-  resources :options
+  resources :options do
+    member do
+      get :up
+    end
+  end
+
 
   resources :questions do
     resources :options
