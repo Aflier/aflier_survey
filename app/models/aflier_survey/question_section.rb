@@ -19,10 +19,10 @@ module AflierSurvey
       section_progresses.find_or_create_by!(user_id: user.id).update_attribute(:status, SectionProgress::COMPLETE)
     end
 
-    def tag_as_updated(user)
-      section_progresses.find_or_create_by!(user_id: user.id).update_attribute(:status, SectionProgress::UPDATED)
+    def tag_as_updated(unique_ident)
+      section_progresses.find_or_create_by!(unique_ident: unique_ident).update_attribute(:status, SectionProgress::UPDATED)
       questionnaires.each do |questionnaire|
-        questionnaire.updated_questionnaire(user)
+        questionnaire.updated_questionnaire(unique_ident)
       end
     end
 

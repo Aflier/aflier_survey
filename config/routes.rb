@@ -1,4 +1,8 @@
 AflierSurvey::Engine.routes.draw do
+
+  resources :option_answers
+
+
   resources :questionnaire_submissions
 
   resources :answers do

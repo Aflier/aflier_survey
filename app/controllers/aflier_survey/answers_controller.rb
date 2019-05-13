@@ -87,6 +87,8 @@ module AflierSurvey
     end
 
     def option_choice
+      @admin = false # TODO - Will be taken from call
+
       @questionnaire  = Questionnaire.find(params[:questionnaire_id])
       @unique_ident   = @answer.unique_ident
       @repeat_section = @answer.repeat_section if @answer.question.question_section.many?
@@ -98,7 +100,7 @@ module AflierSurvey
       else
         @option_answers = @answer.option_answers.where(option_id: params[:option_id])
         if @option_answers.empty?
-          @answer.option_answers.create!(option_id: params[:option_id], user_id: @unique_ident)
+          @answer.option_answers.create!(option_id: params[:option_id], unique_ident: @unique_ident)
         else
           @option_answers.destroy_all
         end
@@ -107,15 +109,15 @@ module AflierSurvey
       @question = @answer.question
       @answer.update_attributes(not_sure: false)
 
-      @required_warning = @question.is_required?(@user)
-      @questionnaire.updated_questionnaire(@user)
+      @required_warning = @question.is_required?(@unique_ident)
+      @questionnaire.updated_questionnaire(@unique_ident)
     end
 
     def other
-      @questionnaire = Questionnaire.find(params[:questionnaire_id])
-      @user = @answer.user
-      @question = @answer.question
-      @repeat_section = @answer.repeat_section
+      @questionnaire    = Questionnaire.find(params[:questionnaire_id])
+      @unique_ident     = @answer.unique_ident
+      @question         = @answer.question
+      @repeat_section   = @answer.repeat_section
       @question_section = @question.question_section
 
       if @answer.question.question_type == Question::SELECT_ONE
@@ -125,7 +127,7 @@ module AflierSurvey
         @answer.update_attributes(other: !@answer.option)
       end
 
-      @questionnaire.updated_questionnaire(@user)
+      @questionnaire.updated_questionnaire(@unique_ident)
     end
 
     private

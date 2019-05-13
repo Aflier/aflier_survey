@@ -102,9 +102,9 @@
       <% question.options.order(:position).each do |option| %>
           <p>
             <% if answer.user_chose(option, answer) %>
-                <%= link_to raw('<i class="far fa-check-square"></i>'), option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+                <%= link_to raw('<i class="far fa-check-square"></i>'), aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
             <% else %>
-                <%= link_to raw('<i class="far fa-square"></i>'), option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+                <%= link_to raw('<i class="far fa-square"></i>'), aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
             <% end %>
           </p>
       <% end %>

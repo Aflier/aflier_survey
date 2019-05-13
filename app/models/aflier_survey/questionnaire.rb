@@ -39,17 +39,17 @@ module AflierSurvey
       end
     end
 
-    def submitted_questionnaire(user)
-      submission = self.questionnaire_submissions.find_or_create_by!(user_id: user.id)
+    def submitted_questionnaire(unique_ident)
+      submission = self.questionnaire_submissions.find_or_create_by!(unique_ident: unique_ident)
       submission.update_attribute(:status, QuestionnaireSubmission::SUBMITTED)
     end
 
-    def updated_questionnaire(user)
-      submission = self.questionnaire_submissions.find_or_create_by!(user_id: user.id)
+    def updated_questionnaire(unique_ident)
+      submission = self.questionnaire_submissions.find_or_create_by!(unique_ident: unique_ident)
       submission.update_attribute(:status, QuestionnaireSubmission::UPDATED)
     end
 
-    def is_complete?(user)
+    def is_complete?(unique_ident)
       answers = user.answers.joins(question: { question_section: :belonging_sections })
                     .where(complete: [nil, false], questions: { required: true })
                     .where(belonging_sections: { questionnaire_id: self.id })
@@ -57,7 +57,7 @@ module AflierSurvey
       return true if answers.empty?
 
       answers.each do |answer|
-        answer.question.question_section.tag_as_required(user)
+        answer.question.question_section.tag_as_required(unique_ident)
       end
 
       false

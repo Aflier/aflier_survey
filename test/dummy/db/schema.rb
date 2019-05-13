@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_175144) do
+ActiveRecord::Schema.define(version: 2019_05_13_161550) do
 
   create_table "aflier_survey_answers", force: :cascade do |t|
     t.integer "question_id"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 2019_03_29_175144) do
     t.integer "second_calc_id"
     t.string "operation"
     t.decimal "a_decimal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "aflier_survey_option_answers", force: :cascade do |t|
+    t.integer "answer_id"
+    t.integer "option_id"
+    t.integer "unique_ident"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
