@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 2019_03_29_175144) do
     t.decimal "a_decimal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_aflier_survey_options_on_question_id"
   end
 
   create_table "aflier_survey_question_inputs", force: :cascade do |t|

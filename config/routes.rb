@@ -10,9 +10,22 @@ AflierSurvey::Engine.routes.draw do
   end
 
   resources :section_progresses
-  resources :question_inputs
+
+  resources :question_inputs do
+    member do
+      get :toggle_subtract
+    end
+  end
+
   resources :calc_inputs
-  resources :belonging_sections
+
+  resources :belonging_sections do
+    member do
+      get :up
+    end
+  end
+
+  resources :options
 
   resources :questions do
     resources :options
