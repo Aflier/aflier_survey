@@ -71,32 +71,34 @@ module AflierSurvey
     end
 
     def choice
-      @questionnaire = Questionnaire.find(params[:questionnaire_id])
-      @question = @answer.question
-      @user = @answer.user
-      @repeat_section = @answer.repeat_section
+      @admin = false # TODO - Will be taken from call
+
+      @questionnaire    = Questionnaire.find(params[:questionnaire_id])
+      @question         = @answer.question
+      @unique_ident     = @answer.unique_ident
+      @repeat_section   = @answer.repeat_section
       @question_section = @question.question_section
 
       new_answer = params[:choice]
 
       @answer.update_on_button_press(new_answer)
 
-      @required_warning = @question.is_required?(@user)
+      @required_warning = @question.is_required?(@unique_ident)
     end
 
     def option_choice
-      @questionnaire = Questionnaire.find(params[:questionnaire_id])
-      @user = @answer.user
+      @questionnaire  = Questionnaire.find(params[:questionnaire_id])
+      @unique_ident   = @answer.unique_ident
       @repeat_section = @answer.repeat_section if @answer.question.question_section.many?
 
       if @answer.question.question_type == Question::SELECT_ONE
         @answer.option_answers.destroy_all
-        @answer.option_answers.find_or_create_by!(option_id: params[:option_id], user_id: @user.id)
+        @answer.option_answers.find_or_create_by!(option_id: params[:option_id], user_id: @unique_ident)
         @answer.update_attribute(:other, false)
       else
         @option_answers = @answer.option_answers.where(option_id: params[:option_id])
         if @option_answers.empty?
-          @answer.option_answers.create!(option_id: params[:option_id], user_id: @user.id)
+          @answer.option_answers.create!(option_id: params[:option_id], user_id: @unique_ident)
         else
           @option_answers.destroy_all
         end

@@ -9,8 +9,8 @@ module AflierSurvey
     has_many :answers, dependent: :destroy
     has_many :options, dependent: :destroy
 
-    has_many :mappings, dependent: :destroy
-    has_many :table_mappings, dependent: :destroy
+    # has_many :mappings, dependent: :destroy TODO - needs adding back in
+    # has_many :table_mappings, dependent: :destroy TODO - needs adding back in
 
     belongs_to :question_y, class_name: "Question", foreign_key: 'question_y_id', optional: true
 

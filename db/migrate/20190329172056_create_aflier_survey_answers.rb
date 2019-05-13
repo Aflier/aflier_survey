@@ -14,6 +14,7 @@ class CreateAflierSurveyAnswers < ActiveRecord::Migration[5.2]
       t.string :file
       t.boolean :other
       t.boolean :complete
+      t.text :some_text
 
       t.timestamps
     end

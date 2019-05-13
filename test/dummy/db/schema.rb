@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_175144) do
     t.string "file"
     t.boolean "other"
     t.boolean "complete"
+    t.text "some_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

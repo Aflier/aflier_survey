@@ -22,14 +22,14 @@
 
   <% if question.question_type == AflierSurvey::Question::DATE %>
       <div class="autosave">
-        <%= simple_form_for answer, remote: true do |f| %>
+        <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
             <%= f.input :a_date, start_year: Date.today.year - 110, label: false, :order => [:day, :month, :year] %>
           <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
         <% end %>
       </div>
   <% elsif question.question_type == AflierSurvey::Question::TEXT %>
       <div class="autosave">
-        <%= simple_form_for answer, remote: true do |f| %>
+        <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
             <%= f.input :some_text, label: false %>
           <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
 
@@ -50,20 +50,20 @@
         <% end %>
       </div>
   <% elsif question.question_type == AflierSurvey::Question::YES_OR_NO %>
-      <%= link_to 'Yes', choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-      <%= link_to 'No', choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
       <br><br>
   <% elsif question.question_type == AflierSurvey::Question::SECTION_ON_YES or question.question_type == AflierSurvey::Question::SECTION_ON_NO %>
-      <%= link_to 'Yes', choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-      <%= link_to 'No', choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
       <br><br>
   <% elsif question.question_type == AflierSurvey::Question::TEXT_ON_YES %>
-      <%= link_to 'Yes', choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-      <%= link_to 'No', choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+      <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
 
       <div class="autosave">
         <div class="more-info" style="margin-top:10px; margin-bottom: 10px">
-          <%= simple_form_for answer, remote: true do |f| %>
+          <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
               <%= f.input :some_text, label: question.comment_text_hint %>
             <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
 
@@ -90,7 +90,7 @@
 
       <div class="autosave">
         <div class="more-info" style="margin-top:10px; margin-bottom: 10px">
-          <%= simple_form_for answer, remote: true do |f| %>
+          <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
               <%= f.input :some_text, label: question.comment_text_hint %>
             <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
 
@@ -116,13 +116,13 @@
     <% elsif question.question_type == AflierSurvey::Question::FILE_UPLOAD %>
       <% if answer.file&.file&.exists? %>
         <p><%= link_to 'Download existing document', answer.file_url, target: :_blank %></p>
-        <%= simple_form_for answer, html: {multipart: true} do |f| %>
+        <%= simple_form_for [aflier_survey, answer], html: {multipart: true} do |f| %>
           <%= f.input :file, label: false %>
           <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
           <%= f.button :submit, "Replace Document", class: 'btn-outline-primary' %>
         <% end %>
       <% else %>
-        <%= simple_form_for answer, html: {multipart: true} do |f| %>
+        <%= simple_form_for [aflier_survey, answer], html: {multipart: true} do |f| %>
           <%= f.input :file, label: false %>
           <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
           <%= f.button :submit, "upload Document", class: 'btn-outline-primary' %>
@@ -162,7 +162,7 @@
       <% end %>
   <% else %>
       <div class="autosave">
-        <%= simple_form_for answer, remote: true do |f| %>
+        <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
           <%= f.input :a_string, label: false, validate: { presence: true } %>
           <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
         <% end %>
