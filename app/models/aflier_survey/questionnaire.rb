@@ -50,9 +50,10 @@ module AflierSurvey
     end
 
     def is_complete?(unique_ident)
-      answers = user.answers.joins(question: { question_section: :belonging_sections })
-                    .where(complete: [nil, false], questions: { required: true })
-                    .where(belonging_sections: { questionnaire_id: self.id })
+      answers = Answer.joins(question: { question_section: :belonging_sections })
+                    .where(complete: [nil, false], aflier_survey_questions: { required: true })
+                    .where(aflier_survey_belonging_sections: { questionnaire_id: self.id })
+                    .where(unique_ident: unique_ident)
 
       return true if answers.empty?
 
@@ -63,5 +64,10 @@ module AflierSurvey
       false
     end
 
+    def incomplete_answers(unique_ident)
+      Answer.where(unique_ident: unique_ident).joins(question: {question_section: :belonging_sections})
+          .where(complete: [nil, false], questions: {required: true})
+          .where(belonging_sections: {questionnaire_id: self.id})
+    end
   end
 end

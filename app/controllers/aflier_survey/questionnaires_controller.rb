@@ -75,14 +75,14 @@ module AflierSurvey
     end
 
     def submit
-      @user = User.find(params[:user_id])
-      @questionnaire_submission = @questionnaire.questionnaire_submissions.find_or_create_by!(user_id: @user.id)
+      @unique_ident             = params[:unique_ident]
+      @questionnaire_submission = @questionnaire.questionnaire_submissions.find_or_create_by!(unique_ident: @unique_ident)
 
-      if @questionnaire.is_complete?(@user)
+      if @questionnaire.is_complete?(@unique_ident)
         @questionnaire_submission.update_attribute(:status, QuestionnaireSubmission::SUBMITTED)
-        User.where(notify_submission: true).each do |user|
-          QuestionnaireMailer.submission(user, @user).deliver_now
-        end
+#        User.where(notify_submission: true).each do |user|
+#          QuestionnaireMailer.submission(user, @unique_ident).deliver_now
+#        end
       else
         @show_required = true
         @scroll_to_top = true
@@ -90,8 +90,8 @@ module AflierSurvey
     end
 
     def save
-      @user = User.find(params[:user_id])
-      @questionnaire_submission = @questionnaire.questionnaire_submissions.find_or_create_by!(user_id: @user.id)
+      @unique_ident             = params[:unique_ident]
+      @questionnaire_submission = @questionnaire.questionnaire_submissions.find_or_create_by!(unique_ident: @unique_ident)
       @questionnaire_submission.update_attribute(:status, QuestionnaireSubmission::SAVED)
     end
 
