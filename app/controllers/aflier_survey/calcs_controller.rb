@@ -177,7 +177,8 @@ module AflierSurvey
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def calc_params
-      params.require(:calc).permit(:name, :first_question_id, :second_question_id, :operation, :a_decimal)
+      params.require(:calc).permit(:name, :first_question_id, :second_question_id, :operation, :a_decimal,
+                                   :treat_repeat)
     end
   end
 end

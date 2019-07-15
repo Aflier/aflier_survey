@@ -7,6 +7,7 @@ class CreateAflierSurveyCalcs < ActiveRecord::Migration[5.2]
       t.integer :first_calc_id
       t.integer :second_calc_id
       t.string :operation
+      t.string :treat_repeat
       t.decimal :a_decimal
 
       t.timestamps

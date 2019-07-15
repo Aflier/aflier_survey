@@ -1,7 +1,7 @@
 // alert('doing it!');
 
 <% if @repeat_section %>
-  $('#question-<%= @repeat_section.id %>-<%= @question.id %>').replaceWith('<%= j render 'repeat_sections/question', questionnaire: @questionnaire, repeat_section: @repeat_section, question: @question, answer: @answer %>');
+  $('#question-<%= @repeat_section.id %>-<%= @question.id %>').replaceWith('<%= j render 'repeat_sections/question', questionnaire: @questionnaire, unique_ident: @unique_ident, repeat_section: @repeat_section, question: @question, answer: @answer, admin: current_user.admin %>');
 <% else %>
     <% if @question %>
       // alert('redraw_question');

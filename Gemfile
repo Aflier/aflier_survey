@@ -15,3 +15,4 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 gem 'sass-rails', '~> 5.0'
+# gem 'sqlite3'

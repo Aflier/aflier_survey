@@ -26,6 +26,9 @@ module AflierSurvey
     AVERAGE    = 'average'
     COLLECTION = 'collection'
 
+    # How we treat 'many'
+    SUM_REPEAT = 'sum'
+
     OPERATORS = [ADD, DIVIDE, MULTIPLY, CONSTANT, CHOICE, LOWEST, AVERAGE, COLLECTION].freeze
 
     def is_first_question?(question)
@@ -151,6 +154,25 @@ module AflierSurvey
         return lowest_question.result(user, repeat_section)
 
       elsif operation == COLLECTION
+      elsif operation == LOOKUP
+        answer = question_first.get_answer(unique_ident, repeat_section)
+
+        lookups.order(lower_limit: :desc).each do |lookup|
+          return answer if answer.is_a? String
+          return Questionnaire::NO_METRIC if answer.nil?
+          return lookup.result if answer >= lookup.lower_limit
+        end
+      elsif operation == MULTIPLY and treat_repeat == SUM_REPEAT
+        sum = 0.0
+
+        question_first.question_section.repeat_sections.where(user_id: unique_ident).each do |repeat_section|
+          first  = question_first.get_answer(unique_ident, repeat_section)
+          second = question_second.get_answer(unique_ident, repeat_section)
+
+          sum += do_calculation(first, second)
+        end
+
+        return sum
       else
         if question_first
           first = question_first.answers.find_by(user_id: user.id)&.a_decimal if question_first.question_type == Question::DECIMAL
@@ -179,11 +201,7 @@ module AflierSurvey
         return "#{question_first.name} required" if first.nil?
         return "#{question_second.name} required" if second.nil?
 
-        if operation == DIVIDE
-          return first / second
-        end
-
-        return first * second if operation == MULTIPLY
+        return do_calculation(first, second)
       end
     end
 
@@ -329,7 +347,18 @@ module AflierSurvey
       end
       return lowest_question.question
     end
+  end
 
+  private
+
+  def do_calculation(first, second)
+    if operation == DIVIDE
+      return first / second
+    end
+
+    if operation == MULTIPLY
+      return first * second
+    end
   end
 
 end

@@ -168,17 +168,46 @@
         <h3>Values</h3>
 
         <% AflierSurvey::QuestionSection.all.order(:name).each do |question_section| %>
-          <h4><%= question_section.name %></h4>
-
-          <% question_section.questions.where(question_type: AflierSurvey::Question::CALCULATION_TYPE).order(:name).each do |question| %>
-            <p><%= link_to question.name, var_two_calc_path(@calc, question_id: question.id), class: " btn #{ @calc.is_second_question?(question) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %></p>
-          <% end %>
+          <div class="card">
+            <div class="card-header" data-toggle="collapse" data-target="#section-second-<%= question_section.id %>" aria-expanded="false" aria-controls="collapseExample">
+              <%= question_section.name %>
+            </div>
+            <div id="section-second-<%= question_section.id %>" class="collapse card-body">
+              <% question_section.questions.where(question_type: Question::CALCULATION_TYPE).order(:name).each do |question| %>
+                <%= link_to raw('<i class="fas fa-chevron-circle-right"></i>'), question %>
+                <% if @calc.is_second_question?(question) %>
+                  <%= link_to raw('<i class="far fa-dot-circle"></i> ' + question.name), var_two_calc_path(@calc, question_id: question.id) %><br>
+                <% else %>
+                  <%= link_to raw('<i class="far fa-circle"></i> ' + question.name), var_two_calc_path(@calc, question_id: question.id) %><br>
+                <% end %>
+                <% if @calc.is_second_question?(question) %>
+                  <script>
+                      $('#section-second-<%= question_section.id %>').collapse('show');
+                  </script>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </div>
   <% end %>
 
   <div class="col-md-3">
-		<%= link_to 'Edit', edit_calc_path(@calc), class: "btn btn-secondary btn-block" %>
+    <div class="card">
+      <div class="card-header">Behaviour</div>
+      <div class="card-body">
+        <p><b>Treat Repeat:</b> <%= @calc.treat_repeat %></p>
+      </div>
+      <div class="card-footer">
+        <%= link_to 'Edit', edit_calc_path(@calc), class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+
+    <div class="alert alert-info mt-1">
+      <p><b>Note:</b> Setting "Treat Repeat" can be used when the calculation is a '/' or 'x' where the values being used are from the same question section
+        that is 'many'. Setting it to "Sum" will mean the calculation is done on each repeated section and then they are all summed together.</p>
+      <p>Left blank the last values will be used.</p>
+    </div>
   </div>
 </div>

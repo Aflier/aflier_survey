@@ -1,26 +1,41 @@
 <h3>Values from Answers</h3>
 
-<% AflierSurvey::QuestionSection.all.order(:name).each do |question_section| %>
-  <div class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#section-<%= question_section.id %>" aria-expanded="false" aria-controls="collapseExample">
-    <%= question_section.name %>
-  </div>
+<% QuestionSection.all.order(:name).each do |question_section| %>
+  <div class="card">
 
-  <div id="section-<%= question_section.id %>" class="collapse">
-    <div id="" class="card">
-      <% unless question_section.questions.where(question_type: AflierSurvey::Question::CALCULATION_TYPE).empty? %>
-        <ul class="list-group list-group-flush">
-          <% question_section.questions.where(question_type: AflierSurvey::Question::CALCULATION_TYPE).order(:position).each do |question| %>
-            <li class="list-group-item">
-              <%= link_to question.name, var_one_calc_path(@calc, question_id: question.id), class: " btn #{ @calc.is_first_question?(question) ? 'btn-primary' : 'btn-outline-secondary' } btn-block" %>
+    <div class="card-header" data-toggle="collapse" data-target="#section-<%= question_section.id %>" aria-expanded="false" aria-controls="collapseExample">
+      <%= question_section.name %>
+    </div>
+
+    <div id="section-<%= question_section.id %>" class="collapse card-body">
+      <% unless question_section.questions.where(question_type: Question::CALCULATION_TYPE).empty? %>
+        <% question_section.questions.where(question_type: Question::CALCULATION_TYPE).order(:position).each do |question| %>
+          <div class="row">
+            <div class="col-md-9">
+              <%= link_to raw('<i class="fas fa-chevron-circle-right"></i>'), question %>
+              <% if @calc.is_first_question?(question) %>
+                <%= link_to raw('<i class="far fa-dot-circle"></i> ' + question.name), var_one_calc_path(@calc, question_id: question.id) %><br>
+              <% else %>
+                <%= link_to raw('<i class="far fa-circle"></i> ' + question.name), var_one_calc_path(@calc, question_id: question.id) %><br>
+              <% end %>
 
               <% if @calc.is_first_question?(question) %>
                 <script>
-                  $('#section-<%= question_section.id %>').collapse('show');
+                    $('#section-<%= question_section.id %>').collapse('show');
                 </script>
               <% end %>
-            </li>
-          <% end %>
-        </ul>
+            </div>
+            <div class="col-md-3">
+              <% if question_input = @calc.get_question_input(question) %>
+                <% if question_input.subtract %>
+                  <%= link_to 'Subtract', toggle_subtract_question_input_path(question_input), class: 'btn btn-block btn-outline-warning' %>
+                <% else %>
+                  <%= link_to 'Add', toggle_subtract_question_input_path(question_input), class: 'btn btn-block btn-outline-primary' %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

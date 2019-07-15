@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_161550) do
     t.integer "first_calc_id"
     t.integer "second_calc_id"
     t.string "operation"
+    t.string "treat_repeat"
     t.decimal "a_decimal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

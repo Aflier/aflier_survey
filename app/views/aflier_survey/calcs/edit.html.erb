@@ -3,11 +3,13 @@
 <div class="row justify-content-md-center">
   <div class="col-md-6">
     <%= simple_form_for(@calc) do |f| %>
-              <%= f.input :name %>
-              <%= f.input :first_question_id %>
-              <%= f.input :second_question_id %>
-              <%= f.input :operation %>
-          <%= f.button :submit, class: "btn-block" %>
+      <%= f.input :name %>
+      <%= f.input :first_question_id %>
+      <%= f.input :second_question_id %>
+      <%= f.input :operation %>
+      <%= f.input :treat_repeat, collection: ['sum'] %>
+
+      <%= f.button :submit, class: "btn-block" %>
     <% end %>
   </div>
 </div>
