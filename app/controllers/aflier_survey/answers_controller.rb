@@ -95,7 +95,7 @@ module AflierSurvey
 
       if @answer.question.question_type == Question::SELECT_ONE
         @answer.option_answers.destroy_all
-        @answer.option_answers.find_or_create_by!(option_id: params[:option_id], user_id: @unique_ident)
+        @answer.option_answers.find_or_create_by!(option_id: params[:option_id], unique_ident: @unique_ident)
         @answer.update_attribute(:other, false)
       else
         @option_answers = @answer.option_answers.where(option_id: params[:option_id])
