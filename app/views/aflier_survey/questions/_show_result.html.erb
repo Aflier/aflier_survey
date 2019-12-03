@@ -44,6 +44,6 @@
   </div>
 <% else %>
   <% if question.calc and question.calc.operation == Calc::CHOICE %>
-    <%= render 'questions/show_result', question: question.calc.chosen_question(@user), answer: answer %>
+    <%= render 'aflier_survey/questions/show_result', question: question.calc.chosen_question(@user), answer: answer %>
   <% end %>
 <% end %>
