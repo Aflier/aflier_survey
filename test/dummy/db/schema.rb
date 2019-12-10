@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_161550) do
+ActiveRecord::Schema.define(version: 2019_12_03_192649) do
 
   create_table "aflier_survey_answers", force: :cascade do |t|
     t.integer "question_id"
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(version: 2019_05_13_161550) do
     t.integer "question_section_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "value_true"
+    t.decimal "value_false"
   end
 
   create_table "aflier_survey_section_progresses", force: :cascade do |t|
