@@ -1,5 +1,7 @@
 AflierSurvey::Engine.routes.draw do
 
+  devise_for :users, class_name: "User"
+
   resources :option_answers
 
 

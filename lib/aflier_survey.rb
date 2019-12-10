@@ -1,4 +1,5 @@
 require "aflier_survey/engine"
+require 'devise'
 
 module AflierSurvey
   class << self
