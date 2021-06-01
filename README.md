@@ -21,6 +21,20 @@ Or install it yourself as:
 $ gem install aflier_survey
 ```
 
+## Confinguration
+
+Add the following to your routes.rb file
+
+```bash
+mount AflierSurvey::Engine => "/aflier_survey", as: :aflier_survey
+```
+
+Copy migrations
+
+```bash
+rake aflier_survey:install:migrations
+```
+
 ## Contributing
 Contribution directions go here.
 

@@ -33,5 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simple_form', '~> 5.0.1'
   spec.add_development_dependency 'bootstrap', '~> 4.3.1'
   spec.add_development_dependency 'jquery-rails', '~> 4.3.1'
-  spec.add_development_dependency 'summernote-rails', '~> 0.8.10.0'
+  # spec.add_development_dependency 'summernote-rails', '~> 0.8.10.0'
 end
