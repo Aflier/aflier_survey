@@ -15,5 +15,6 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 gem 'sass-rails', '~> 5.0'
+gem 'webpacker', '~> 5.0'
 gem 'devise'
 # gem 'sqlite3'
