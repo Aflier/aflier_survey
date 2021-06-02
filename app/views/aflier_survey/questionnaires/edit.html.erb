@@ -59,8 +59,8 @@
   <div class="col-md-5">
     <%= simple_form_for(@questionnaire, :html => { :class => 'form-vertical' }) do |f| %>
       <%= f.input :name %>
-      <%= f.input :description, as: :summernote %>
-      <%= f.input :thank_you, as: :summernote %>
+      <%= f.input :description %>
+      <%= f.input :thank_you %>
 
       <p>For longer questionnaires you may wish to have a complete button/indicator on each question section.</p>
       <%= f.input :complete_on_sections %>
