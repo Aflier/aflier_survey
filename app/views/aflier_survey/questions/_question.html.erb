@@ -2,43 +2,46 @@
   <%= render 'aflier_survey/questions/answer_form', questionnaire: questionnaire, question: question, answer: question.make_answer(unique_ident), locked: questionnaire.is_locked?(unique_ident, admin), unique_ident: unique_ident %>
 </div>
 
-<script>
-    <% unless questionnaire.is_locked?(@user, admin) %>
+<% if false %>
 
-    $("#question-<%= question.id %> .autosave input").blur(function() {
-        // alert('----1----');
-        nativeFormEl = $("#question-<%= question.id %> .autosave form")[0]; // you need the native DOM element
-        Rails.fire(nativeFormEl, 'submit');
-        // alert('----2----');
-    });
+  <script>
+      <% unless questionnaire.is_locked?(@user, admin) %>
 
-
-    $("#question-<%= question.id %> .autosave select").blur(function() {
-        nativeFormEl = $("#question-<%= question.id %> .autosave form")[0]; // you need the native DOM element
-        Rails.fire(nativeFormEl, 'submit');
-    });
-
-    $("#question-<%= question.id %> .autosave textarea").blur(function() {
-        nativeFormEl = $("#question-<%= question.id %> .autosave form")[0]; // you need the native DOM element
-        Rails.fire(nativeFormEl, 'submit');
-    });
-
-    $("#question-<%= question.id %> .autosave input").focus(function() {
-        $("#question-<%= question.id %> .save-state").fadeOut(0);
-        $("#question-<%= question.id %> .unsave-state").fadeIn(500);
-    });
-
-    $("#question-<%= question.id %> .autosave select").focus(function() {
-        $("#question-<%= question.id %> .save-state").fadeOut(0);
-        $("#question-<%= question.id %> .unsave-state").fadeIn(500);
-    });
-
-    $("#question-<%= question.id %> .autosave textarea").focus(function() {
-        $("#question-<%= question.id %> .save-state").fadeOut(0);
-        $("#question-<%= question.id %> .unsave-state").fadeIn(500);
-    });
+      $("#question-<%= question.id %> .autosave input").blur(function() {
+          // alert('----1----');
+          nativeFormEl = $("#question-<%= question.id %> .autosave form")[0]; // you need the native DOM element
+          Rails.fire(nativeFormEl, 'submit');
+          // alert('----2----');
+      });
 
 
-    <% end %>
-</script>
+      $("#question-<%= question.id %> .autosave select").blur(function() {
+          nativeFormEl = $("#question-<%= question.id %> .autosave form")[0]; // you need the native DOM element
+          Rails.fire(nativeFormEl, 'submit');
+      });
 
+      $("#question-<%= question.id %> .autosave textarea").blur(function() {
+          nativeFormEl = $("#question-<%= question.id %> .autosave form")[0]; // you need the native DOM element
+          Rails.fire(nativeFormEl, 'submit');
+      });
+
+      $("#question-<%= question.id %> .autosave input").focus(function() {
+          $("#question-<%= question.id %> .save-state").fadeOut(0);
+          $("#question-<%= question.id %> .unsave-state").fadeIn(500);
+      });
+
+      $("#question-<%= question.id %> .autosave select").focus(function() {
+          $("#question-<%= question.id %> .save-state").fadeOut(0);
+          $("#question-<%= question.id %> .unsave-state").fadeIn(500);
+      });
+
+      $("#question-<%= question.id %> .autosave textarea").focus(function() {
+          $("#question-<%= question.id %> .save-state").fadeOut(0);
+          $("#question-<%= question.id %> .unsave-state").fadeIn(500);
+      });
+
+
+      <% end %>
+  </script>
+
+<% end %>

@@ -162,10 +162,19 @@
       <% end %>
   <% else %>
       <div class="autosave">
+
         <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
-          <%= f.input :a_string, label: false, validate: { presence: true } %>
-          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+          <%= render 'stimulus/edit_in_place/string_input',
+                     klass: answer,
+                     attribute: :a_string,
+                     options: { url: aflier_survey.answer_path(answer),
+                                value: answer.a_string} %>
         <% end %>
+
+        <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
+          !!!<%= f.input :a_string, label: false, validate: { presence: true } %>
+          <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
+        <% end if false %>
       </div>
   <% end %>
 

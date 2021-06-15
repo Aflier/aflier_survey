@@ -1,0 +1,14 @@
+<!-- ONLY EDIT IN 'STIMULUS-BASE' V0.4.2 -->
+
+<% options = {} if local_assigns[:options].nil? %>
+
+<% if options[:disable] %>
+  <%= raw options[:value] %>
+<% else %>
+  <div data-controller="edit-in-place">
+    <%= f.rich_text_area attribute,
+                         data: { target: "edit-in-place.value",
+                                 action: "blur->edit-in-place#saveChange keyup->edit-in-place#changing" } %>
+    <div class="input-group-text" data-target="edit-in-place.state"><i class="fal fa-save text-success"></i></div>
+  </div>
+<% end %>

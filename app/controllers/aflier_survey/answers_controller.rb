@@ -41,7 +41,7 @@ module AflierSurvey
     # PATCH/PUT /answers/1
     # PATCH/PUT /answers/1.json
     def update
-      @questionnaire = Questionnaire.find(params[:answer][:questionnaire_id])
+      # @questionnaire = Questionnaire.find(params[:answer][:questionnaire_id])
 
       @unique_ident = @answer.unique_ident
       @answer.update!(answer_params)
@@ -57,6 +57,7 @@ module AflierSurvey
 
 #        format.html { render 'update.js.erb'}
         format.js
+        format.json
       end
     end
 

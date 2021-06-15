@@ -1,0 +1,21 @@
+<!-- ONLY EDIT IN 'STIMULUS-BASE' V0.4.2 -->
+
+<% options = {} if local_assigns[:options].nil? %>
+
+<% if options[:hide_edit] %>
+  <% access = options[:hide_edit] %>
+  <%= options[:hide_edit] %>
+<% else %>
+  <div data-controller="edit-in-place"
+       data-edit-in-place-toggle-on-url-value="<%= path_on %>"
+       data-edit-in-place-toggle-off-url-value="<%= path_off %>"
+       class="mb-1">
+
+    <span value="<%= options[:value] %>" data-target="edit-in-place.toggleOff"
+          data-action="click->edit-in-place#toggleOn"
+          <%= 'hidden' if value %>><%= icons__toggle_off %> <%= choice %></span>
+    <span value="<%= options[:value] %>" data-target="edit-in-place.toggleOn"
+          data-action="click->edit-in-place#toggleOff"
+          <%= 'hidden' unless value %>><%= icons__toggle_on %> <%= choice %></span>
+  </div>
+<% end %>
