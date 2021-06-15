@@ -6,6 +6,7 @@ module AflierSurvey
     has_many :questionnaire_submissions
 
     has_rich_text :purpose
+    has_rich_text :on_completion
 
     def is_submitted?(unique_ident)
       questionnaire_submissions = self.questionnaire_submissions.where(unique_ident: unique_ident).order(:updated_at)
