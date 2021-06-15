@@ -25,8 +25,8 @@
               <div class=" btn-group btn-group-sm">
                 <%= link_to raw('<i class="fas fa-arrow-up"></i>'), up_belonging_section_path(belonging_section), class: "btn btn-outline-primary" unless belonging_section.position == 0 %>
                 <%= link_to raw('<i class="fas fa-arrow-down"></i>'), belonging_section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
-                <%= link_to raw('<i class="far fa-hand-point-down"></i>'), exclude_question_section_path(belonging_section.question_section, questionnaire_id: @questionnaire.id), class: "btn btn-outline-success" %>
-                <%= link_to 'Edit', edit_question_section_path(belonging_section.question_section), class: "btn btn-outline-primary" %>
+                <%= link_to icons__thumb_down, exclude_question_section_path(belonging_section.question_section, questionnaire_id: @questionnaire.id), class: "btn btn-outline-success" %>
+                <%= link_to icons__edit, edit_question_section_path(belonging_section.question_section), class: "btn btn-outline-primary" %>
               </div>
             </td>
           </tr>
@@ -45,10 +45,10 @@
       <% @all_sections.order(:name).each do |question_section| %>
         <tr style="<%= 'display: none' unless question_section.in_questionnaire?(@questionnaire) %>">
           <td><%= question_section.name %></td>
-          <td class="text-right">
+          <td class="text-end">
             <div class=" btn-group btn-group-sm">
-              <%= link_to raw('<i class="far fa-hand-point-up"></i>'), include_question_section_path(question_section, questionnaire_id: @questionnaire.id), class: "btn btn-outline-success" %>
-              <%= link_to "Edit", edit_question_section_path(question_section), class: "btn btn-outline-primary" %>
+              <%= link_to icons__thumb_up, include_question_section_path(question_section, questionnaire_id: @questionnaire.id), class: "btn btn-outline-success" %>
+              <%= link_to icons__edit, edit_question_section_path(question_section), class: "btn btn-outline-primary" %>
             </div>
           </td>
         </tr>
@@ -59,13 +59,14 @@
   <div class="col-md-5">
     <%= simple_form_for(@questionnaire, :html => { :class => 'form-vertical' }) do |f| %>
       <%= f.input :name %>
+      <%= f.input :key %>
       <%= f.input :description %>
       <%= f.input :thank_you %>
 
       <p>For longer questionnaires you may wish to have a complete button/indicator on each question section.</p>
       <%= f.input :complete_on_sections %>
 
-      <%= f.button :submit, class: "btn-block" %>
+      <%= f.button :submit, class: "btn-primary" %>
     <% end %>
 
     <br>

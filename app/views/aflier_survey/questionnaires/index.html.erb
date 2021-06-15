@@ -21,8 +21,8 @@
 		      <tr>
             <td><%= link_to questionnaire.name, edit_questionnaire_path(questionnaire) %></td>
             <td>
-		        	<div class="float-right btn-group">
-			        	<%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+		        	<div class="text-end btn-group">
+			        	<%= link_to icons__trash, questionnaire, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
 							</div>
 		        </td>
 		      </tr>
