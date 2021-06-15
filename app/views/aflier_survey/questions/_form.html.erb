@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-primary btn-block btn-sm" data-bs-toggle="modal" data-bs-target="#newquestion">New Question</button>
+<button type="button" class="btn btn-primary btn-block btn-sm float-end" data-bs-toggle="modal" data-bs-target="#newquestion">New Question</button>
 
 <div class="modal fade" id="newquestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <%= simple_form_for([@question_section, @question_section.questions.build]) do |f| %>
@@ -16,7 +16,7 @@
         <%= f.input :help %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn" data-bs-dismiss="modal">Close</button>
         <%= f.button :submit, class: 'btn-outline-primary' %>
       </div>
     </div>

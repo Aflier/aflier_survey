@@ -7,46 +7,51 @@
 
 <div class="row">
   <div class="col-md-9">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Question type</th>
-        <th>Question section</th>
-        <th>Required</th>
-        <th></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @questions.order(:position).each do |question| %>
+    <div class="card shadow mb-3">
+      <div class="card-header">Question</div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
           <tr>
-            <td><%= question.position %></td>
-            <td><%= question.name %></td>
-            <td><%= question.question_type %></td>
-            <td><%= question.question_section.name %></td>
-            <td><%= tick question.required %></td>
-            <td class="text-right">
-              <div class="btn-group">
-                <%= link_to raw('<i class="fas fa-arrow-up"></i>'), up_question_path(question), class: "btn btn-outline-secondary btn-sm" unless question.position == 0 %>
-                <%= link_to raw('<i class="fas fa-arrow-down"></i>'), down_question_path(question), class: "btn btn-outline-secondary btn-sm" unless question.position == @questions.size - 1 %>
-                <%= link_to 'Edit', edit_question_path(question), class: "btn btn-outline-secondary btn-sm" %>
-                <%= link_to icons__trash, question, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
-              </div>
-            </td>
+            <th>#</th>
+            <th>Name</th>
+            <th>Question type</th>
+            <th>Question section</th>
+            <th>Required</th>
+            <th></th>
           </tr>
-      <% end %>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th><%= render '/aflier_survey/questions/form' %></th>
-      </tr>
-      </tbody>
-    </table>
+          </thead>
+
+          <tbody>
+          <% @questions.order(:position).each do |question| %>
+            <tr>
+              <td><%= question.position %></td>
+              <td><%= question.name %></td>
+              <td><%= question.question_type %></td>
+              <td><%= question.question_section.name %></td>
+              <td><%= tick question.required %></td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <%= link_to icons__down, up_question_path(question), class: "btn btn-info btn-sm" unless question.position == 0 %>
+                  <%= link_to icons__up, down_question_path(question), class: "btn btn-info btn-sm" unless question.position == @questions.size - 1 %>
+                  <%= link_to 'Edit', edit_question_path(question), class: "btn btn-primary btn-sm" %>
+                  <%= link_to icons__trash, question, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><%= render '/aflier_survey/questions/form' %></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
   <div class="col-md-3">
     <div class="card">
@@ -65,7 +70,6 @@
           <b>Restricted Controls: </b><%= tick @question_section.restrict_controls %>
         </li>
       </ul>
-
       <div class="card-footer">
         <%= render 'edit_form', question_section: @question_section %>
       </div>

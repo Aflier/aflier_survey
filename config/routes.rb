@@ -2,11 +2,6 @@ AflierSurvey::Engine.routes.draw do
 
   devise_for :users, class_name: "User"
 
-  resources :option_answers
-
-
-  resources :questionnaire_submissions
-
   resources :answers do
     member do
       get :choice
@@ -14,6 +9,14 @@ AflierSurvey::Engine.routes.draw do
       get :other
     end
   end
+
+  resources :choice_answers
+  resources :option_answers
+
+
+  resources :questionnaire_submissions
+
+
 
   resources :section_progresses
 

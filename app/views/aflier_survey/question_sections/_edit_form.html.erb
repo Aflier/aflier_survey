@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#newquestion_section">Edit</button>
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#newquestion_section">Edit</button>
 
 <div class="modal fade" id="newquestion_section" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <%= simple_form_for(@question_section) do |f| %>
@@ -6,9 +6,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edit Question section</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <%= f.input :name %>
@@ -20,7 +18,7 @@
           <%= f.input :repeat_has_date  %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
           <%= f.button :submit, class: 'btn-primary' %>
         </div>
       </div>
