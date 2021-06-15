@@ -22,6 +22,7 @@ module AflierSurvey
 
   class Configuration
     attr_accessor :calculations
+    attr_accessor :use_words
 
     def initialize
       @option = 'default_option'

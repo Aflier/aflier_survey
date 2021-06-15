@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-outline-primary btn-block btn-sm" data-toggle="modal" data-target="#newquestion">New Question</button>
+<button type="button" class="btn btn-outline-primary btn-block btn-sm" data-bs-toggle="modal" data-bs-target="#newquestion">New Question</button>
 
 <div class="modal fade" id="newquestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <%= simple_form_for([@question_section, @question_section.questions.build]) do |f| %>
@@ -6,9 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New Question</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= f.input :name %>

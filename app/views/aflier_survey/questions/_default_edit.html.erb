@@ -177,7 +177,7 @@
               <%= f.input :name %>
               <%= f.input :text_hint, hint: "Extra hint text to be placed before a comment box in 'Text on Yes'" %>
               <%= f.input :allow_not_sure %>
-              <%= f.input :help, as: :summernote %>
+              <%= f.input :help %>
               <%= f.input :required %>
 
               <% if @question.question_type == AflierSurvey::Question::YES_OR_NO %>
