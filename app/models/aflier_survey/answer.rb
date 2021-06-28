@@ -37,13 +37,13 @@ module AflierSurvey
     end
 
     def score_given?(choice)
-      return true if choice == an_integer
+      return true if choice.to_i == an_integer
       false
     end
 
     def update_on_button_press(new_answer)
-      if question.question_type == Question::OUT_OF_TEN
-        update_attribute(:an_integer, new_answer)
+      if question.question_type == Question::OUT_OF
+        update(an_integer: new_answer)
       elsif question.question_type == Question::YES_OR_NO or
           question.question_type == Question::TEXT_ON_YES or
           question.question_type == Question::SECTION_ON_YES or

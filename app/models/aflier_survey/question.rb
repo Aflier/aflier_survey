@@ -21,7 +21,7 @@ module AflierSurvey
     TEXT_ON_NO = 'Text on no'.freeze
     SELECT_ONE = 'Select one'.freeze
     SELECT_MANY = 'Select many'.freeze
-    OUT_OF_TEN = 'Out of ten'.freeze
+    OUT_OF = 'Out of...'.freeze
     DECIMAL = 'Decimal'.freeze
     WHOLE_NUMBER = 'Whole number'.freeze
     DATE = 'Date'.freeze
@@ -51,7 +51,7 @@ module AflierSurvey
 
 
     QUESTION_TYPES = [STRING, TEXT, YES_OR_NO, TEXT_ON_YES, TEXT_ON_NO, SECTION_ON_YES, SECTION_ON_NO, SELECT_ONE, SELECT_MANY,
-                      OUT_OF_TEN, DECIMAL, WHOLE_NUMBER, MONEY, DATE, TIME, FILE_UPLOAD, CALCULATION,
+                      OUT_OF, DECIMAL, WHOLE_NUMBER, MONEY, DATE, TIME, FILE_UPLOAD, CALCULATION,
                       CALCULATION_PERCENTAGE, CALCULATION_LONG, RESULT].freeze
 
     CALCULATION_TYPE = [DECIMAL, WHOLE_NUMBER, SELECT_ONE, YES_OR_NO, CALCULATION, CALCULATION_LONG, DATE, RESULT, STRING].freeze
@@ -61,6 +61,19 @@ module AflierSurvey
 
     # Used for linear assessments of values
     ASSESSMENT = ['Green', 'Amber', 'Red', 'Info'].freeze
+
+    store :general_store, accessors: [ :minimum, :maximum ], coder: JSON
+
+    def minimum
+      return 1 if super.blank?
+      super
+    end
+
+    def maximum
+      return 10 if super.blank?
+      super
+    end
+
 
     def previous
       return nil if self.position == 0

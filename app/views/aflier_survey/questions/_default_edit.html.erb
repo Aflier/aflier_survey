@@ -1,17 +1,19 @@
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-6">
     <div class="btn-group-vertical btn-block">
       <%= render 'questions_list' %>
     </div>
 
   </div>
-  <div class="col-md-7">
+  <div class="col">
     <% if @question.question_type == AflierSurvey::Question::CALCULATION or @question.question_type == AflierSurvey::Question::CALCULATION_LONG or @question.question_type == AflierSurvey::Question::RESULT %>
       <div class="row">
         <div class="col-md-6">
           <% if @question.question_type == AflierSurvey::Question::RESULT %>
             <% AflierSurvey::Question::RESULT_TYPES.each do |result_type| %>
-              <%= link_to result_type.capitalize, result_question_path(@question, result_type: result_type), class: "btn btn-#{@question.result_type == result_type ? '' : 'outline-'}primary btn-block" %>
+              <%= link_to result_question_path(@question, result_type: result_type), class: "btn" do %>
+                <%= icons__radio(@question.result_type == result_type, result_type.capitalize) %>
+              <% end %>
             <% end %>
           <% end %>
 
@@ -59,17 +61,35 @@
 
     <% elsif @question.links_to_section? %>
       <h2><%= @question.question_section.name %></h2>
-
-      <% QuestionSection.all.order(:name).each do |question_section| %>
-        <%= link_to question_section.name, following_question_path(@question, question_section_id: question_section.id), class: "btn btn#{@question.following_section_id == question_section.id ? '' : '-outline'}-primary btn-block" %>
-      <% end %>
-
-      <br>
-      <%= render 'question_weighting' %>
+      <%= render 'question_weighting' if false%>
 
     <% elsif @question.weighting_on_value_given and false %>
       <%= render 'question_weighting' %>
 
+    <% elsif @question.question_type == AflierSurvey::Question::OUT_OF %>
+      <div class="card shadow mb-3">
+        <div class="card-header">Range</div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label>Minimum</label>
+            <%= render 'stimulus/edit_in_place/general_input',
+                       field_type: :integer,
+                       klass: @question,
+                       attribute: :minimum,
+                       options: { url: aflier_survey.question_path(@question),
+                                  value: @question.minimum} %>
+          </div>
+
+          <label>Maximum</label>
+          <%= render 'stimulus/edit_in_place/general_input',
+                     field_type: :integer,
+                     klass: @question,
+                     attribute: :maximum,
+                     options: { url: aflier_survey.question_path(@question),
+                                value: @question.maximum} %>
+
+        </div>
+      </div>
     <% elsif @question.question_type == AflierSurvey::Question::SELECT_ONE or @question.question_type == AflierSurvey::Question::SELECT_MANY %>
       <h2>Question options</h2>
 
@@ -130,7 +150,7 @@
         <% if @question.question_type == AflierSurvey::Question::CALCULATION_LONG %>
           <li class="list-group-item">
             <h4>Value when true:</h4>
-            !!!<%= @question.result_grouping&.name %>
+            <%= @question.result_grouping&.name %>
           </li>
         <% end %>
         <% if @question.question_type == AflierSurvey::Question::YES_OR_NO %>

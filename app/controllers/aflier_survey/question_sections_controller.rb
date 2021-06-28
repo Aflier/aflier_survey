@@ -40,7 +40,9 @@ module AflierSurvey
     def create
       @question_section = QuestionSection.create!(question_section_params)
 
-      redirect_to edit_question_section_path @question_section
+      render json: { html: render_to_string(partial: 'aflier_survey/question_sections/question_section_tr',
+                                            locals: { question_section: @question_section} ),
+                     form: render_to_string(partial: 'aflier_survey/question_sections/form_create') }
     end
 
     # PATCH/PUT /question_sections/1

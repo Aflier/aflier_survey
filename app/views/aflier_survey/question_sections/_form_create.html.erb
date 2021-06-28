@@ -1,0 +1,10 @@
+<%= form_with model: AflierSurvey::QuestionSection.new, local: false,
+              data: { target: "supertable.submit",
+                      action: "submit->supertable#preventSubmit" } do |form| %>
+  <div class="input-group mb-3">
+    <%= form.text_field :name, class: 'form-control' %>
+    <button data-action="click->supertable#submitForm"
+            class="btn btn-primary btn-sm"
+            value="Create Comment">Create</button>
+  </div>
+<% end %>

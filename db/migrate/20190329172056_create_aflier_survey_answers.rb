@@ -2,7 +2,7 @@ class CreateAflierSurveyAnswers < ActiveRecord::Migration[5.2]
   def change
     create_table :aflier_survey_answers do |t|
       t.integer :question_id
-      t.integer :unique_ident
+      t.string :unique_ident
       t.string :a_string
       t.decimal :a_decimal
       t.integer :an_integer

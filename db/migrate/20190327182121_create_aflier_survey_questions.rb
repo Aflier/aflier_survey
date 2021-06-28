@@ -11,6 +11,7 @@ class CreateAflierSurveyQuestions < ActiveRecord::Migration[5.2]
       t.boolean :text_on_other
       t.integer :following_section_id
       t.boolean :required
+      t.text :general_store
       t.text :text_hint
       t.integer :question_y_id
 
@@ -25,6 +26,9 @@ class CreateAflierSurveyQuestions < ActiveRecord::Migration[5.2]
       t.integer :question_id
       t.integer :question_section_id
       # t.index ["question_section_id"], name: "index_aflier_survey_questions_on_question_dection_id"
+
+      t.decimal :value_true
+      t.decimal :value_false
 
       t.timestamps
     end

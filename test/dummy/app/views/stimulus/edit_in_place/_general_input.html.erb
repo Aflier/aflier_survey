@@ -1,0 +1,41 @@
+<!-- ONLY EDIT IN 'STIMULUS-BASE' V0.3.1 -->
+
+<% options = {} if local_assigns[:options].nil? %>
+
+<% if options[:hide_edit] %>
+  <% access = options[:hide_edit] %>
+  <%= options[:hide_edit] %>
+<% else %>
+  <div data-controller="edit-in-place" data-edit-in-place-url-value="<%= options[:url] %>">
+    <div class="input-group">
+      <% if options[:label] %>
+        <div class="input-group-text"><%= options[:label] %></div>
+      <% end %>
+
+      <% if options[:url] %>
+        <% if field_type == :textarea %>
+          <textarea data-target="edit-in-place.value"
+                 name="<%= klass.class.name.to_s.split('::').last.downcase %>[<%= attribute %>]"
+                 data-action="change->edit-in-place#saveChange keyup->edit-in-place#changing"
+                    class="form-control"><%= options[:value] %></textarea>
+        <% elsif field_type == :integer %>
+          <input type="number" value="<%= options[:value] %>" data-target="edit-in-place.value"
+                 name="<%= klass.class.name.to_s.split('::').last.downcase %>[<%= attribute %>]"
+                 data-action="change->edit-in-place#saveChange keyup->edit-in-place#changing"
+                 class="form-control">
+        <% else %>
+          <input value="<%= options[:value] %>" data-target="edit-in-place.value"
+                 name="<%= klass.class.name.to_s.split('::').last.downcase %>[<%= attribute %>]"
+                 data-action="change->edit-in-place#saveChange keyup->edit-in-place#changing"
+                 class="form-control">
+
+        <% end %>
+      <% else %>
+        <%= f.text_field attribute, data: { target: "edit-in-place.value",
+                                            action: "change->edit-in-place#saveChange keyup->edit-in-place#changing" },
+                         class: "form-control #{options[:class]}" %>
+      <% end %>
+      <div class="input-group-text" data-target="edit-in-place.state"><i class="fal fa-save text-success"></i></div>
+    </div>
+  </div>
+<% end %>

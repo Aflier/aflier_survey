@@ -1,5 +1,21 @@
 module AflierSurvey
   module IconsHelper
+
+    def icons__radio(value, label)
+      return raw "#{icons__radio_on} #{label}" if value
+      raw "#{icons__radio_off} #{label}"
+    end
+
+    def icons__radio_on
+      return '-->' if AflierSurvey.configuration.use_words
+      raw '<i class="far fa-dot-circle"></i>'
+    end
+
+    def icons__radio_off
+      return 'O' if AflierSurvey.configuration.use_words
+      raw '<i class="far fa-circle"></i>'
+    end
+
     def icons__trash
       return 'destroy' if AflierSurvey.configuration.use_words
       raw '<i class="fal fa-trash-alt"></i>'

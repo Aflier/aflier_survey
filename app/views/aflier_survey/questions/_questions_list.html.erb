@@ -1,3 +1,12 @@
-<% AflierSurvey::Question::QUESTION_TYPES.each do |question_type| %>
-  <%= link_to question_type, type_question_path(@question, question_type: question_type), class: "btn btn-#{@question.question_type == question_type ? '' : 'outline-'}primary btn-block" %>
-<% end %>
+<div class="card shadow mb-3">
+  <div class="card-header">Type of Question/Result</div>
+  <div class="card-body">
+
+    <% AflierSurvey::Question::QUESTION_TYPES.each do |question_type| %>
+      <%= link_to type_question_path(@question, question_type: question_type), class: "btn" do %>
+        <%= icons__radio(@question.question_type == question_type, question_type.capitalize) %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

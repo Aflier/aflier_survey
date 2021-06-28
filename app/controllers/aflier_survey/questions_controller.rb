@@ -165,7 +165,8 @@ module AflierSurvey
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:name, :question_type, :help, :question_section_id, :allow_not_sure,
-                                       :text_hint, :required, :value_true, :value_false, :bounds_x, :bounds_y, :details)
+                                       :text_hint, :required, :value_true, :value_false, :bounds_x, :bounds_y,
+                                       :details, :minimum, :maximum)
     end
   end
 end

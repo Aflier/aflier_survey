@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to question_section.name, edit_question_section_path(question_section) %></td>
+  <td class="text-end">
+      <%= link_to icons__trash, question_section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+  </td>
+</tr>

@@ -1,36 +1,37 @@
 <div class="row">
-	<div class="col-md-12">
-		<div class="page-header">
-			<h1>Question Sections</h1>
-		</div>
-	</div>
+  <div class="col-md-12">
+    <div class="page-header">
+      <h1>Question Sections</h1>
+    </div>
+  </div>
 </div>
 
 <div class="row">
-	<div class="col-md-9">
-		<table class="table">
-		  <thead>
-		    <tr>
-          <th>Name</th>
-          <th></th>
-		    </tr>
-		  </thead>
-		
-		  <tbody>
-		    <% @question_sections.each do |question_section| %>
-		      <tr>
-            <td><%= link_to question_section.name, edit_question_section_path(question_section) %></td>
-            <td>
-		        	<div class="float-right btn-group">
-			        	<%= link_to 'Destroy', question_section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
-							</div>
-		        </td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
-	</div>
-	<div class="col-md-3">
-		<%= render 'form' %>
-	</div>
+  <div class="col">
+    <div class="card shadow mb-3"
+         data-controller="supertable"
+         data-supertable-create-url="<%= question_sections_path %>"
+         data-supertable-filter-url="<%=  %>">
+      <div class="card-header">Question Sections</div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody data-supertable-target="content">
+          <% @question_sections.each do |question_section| %>
+            <%= render 'question_section_tr', question_section: question_section %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+        <%= render 'form_create' %>
+      </div>
+    </div>
+  </div>
 </div>

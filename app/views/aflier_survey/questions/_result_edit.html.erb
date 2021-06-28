@@ -1,41 +1,15 @@
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-4">
     <div class="btn-group-vertical btn-block">
       <%= render 'questions_list' %>
+      <%= render 'result_types' %>
     </div>
 
   </div>
-  <div class="col-md-7">
-    <% if @question.question_type == AflierSurvey::Question::RESULT and @question.result_type == AflierSurvey::Question::GROUPING %>
-
+  <div class="col-md-5">
+    <% if @question.question_type == AflierSurvey::Question::RESULT %>
       <div class="row">
         <div class="col-md-6">
-          <%= render 'result_types' %>
-        </div>
-        <div class="col-md-6">
-          <% if false %>
-            <h3>Result Groupings</h3>
-
-            <% ResultGrouping.all.order(:name).each do |result_grouping| %>
-              <%= link_to grouping_question_path(@question, result_grouping_id: result_grouping.id) do %>
-                <% if result_grouping == @question.result_grouping %>
-                  <i class="far fa-dot-circle"></i>
-                <% else %>
-                  <i class="far fa-circle"></i>
-                <% end %>
-
-                <%= result_grouping.name %><br>
-              <% end %>
-            <% end %>
-          <% end  %>
-        </div>
-      </div>
-
-    <% elsif @question.question_type == AflierSurvey::Question::RESULT %>
-      <div class="row">
-        <div class="col-md-6">
-          <%= render 'result_types' %>
-
           <h2>Calculations</h2>
 
           <% AflierSurvey::Calc.all.order(:name).each do |calc| %>
