@@ -6,6 +6,8 @@ module AflierSurvey
     has_many :questionnaires, through: :belonging_sections
     has_many :section_progresses, dependent: :destroy
 
+    has_rich_text :section_description
+
     def is_complete?(unique_ident)
       return true if section_progresses.find_or_create_by!(unique_ident: unique_ident).status == SectionProgress::COMPLETE
     end

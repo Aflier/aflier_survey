@@ -20,6 +20,10 @@
 
   <div id="collapse<%= question_section.id %>" class="collapse <%= question_section.open_section?(unique_ident) ? 'show' : '' %>" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="card-body">
+      <%= render 'aflier_survey/alerts/alert__info' do %>
+        <%= question_section.section_description %>
+      <% end unless question_section.section_description.blank? %>
+
       <% if question_section.many %>
           <div id="repeat-question-section-<%= question_section.id %>">
             <%= render question_section.repeated_sections(unique_ident), questionnaire: questionnaire, last_count: question_section.repeated_sections(unique_ident).size - 1 %>

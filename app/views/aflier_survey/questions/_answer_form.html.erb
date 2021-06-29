@@ -4,6 +4,11 @@
     <i class="far fa-save float-right mt-3 save-state" style="color: #4db197f7"></i>
     <i class="far fa-save float-right mt-3 unsave-state" style="color: #F04124; display: none"></i>
     <label><%= '*' if question.required %> <%= question.name %></label>
+
+    <% unless question.text_hint.blank? %>
+      <p><%= question.text_hint %></p>
+    <% end  %>
+
     <% unless question.help.blank? %>
       <a id="help-text" data-toggle="collapse" href="#question-help-<%= question.id %>" aria-expanded="false" aria-controls="collapseExample">
         <i class="far fa-question-circle" aria-hidden="true" style="font-size: 20px; margin-top:2px"></i>

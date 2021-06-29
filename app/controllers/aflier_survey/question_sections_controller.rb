@@ -101,8 +101,8 @@ module AflierSurvey
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_section_params
-      params.require(:question_section).permit(:name, :description, :position, :many, :default_open, :restrict_controls,
-                                               :repeat_has_date)
+      params.require(:question_section).permit(:name, :description, :section_description, :position, :many,
+                                               :default_open, :restrict_controls, :repeat_has_date)
     end
   end
 end

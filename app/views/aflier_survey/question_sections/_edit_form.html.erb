@@ -10,7 +10,10 @@
         </div>
         <div class="modal-body">
           <%= f.input :name %>
-          <%= f.input :description %>
+          <div class="mb-3">
+            <label>Section Description</label>
+            <%= f.rich_text_area :section_description %>
+          </div>
           <%= f.input :restrict_controls %>
           <%= f.input :default_open %>
           <h4>Repeated Section</h4>
