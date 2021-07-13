@@ -16,9 +16,8 @@ module AflierSurvey
       return true if section_progresses.find_or_create_by!(unique_ident: unique_ident).status == SectionProgress::REQUIRED
     end
 
-
-    def tag_as_complete(user)
-      section_progresses.find_or_create_by!(user_id: user.id).update_attribute(:status, SectionProgress::COMPLETE)
+    def tag_as_complete(unique_ident)
+      section_progresses.find_or_create_by!(unique_ident: unique_ident).update_attribute(:status, SectionProgress::COMPLETE)
     end
 
     def tag_as_updated(unique_ident)
@@ -28,17 +27,18 @@ module AflierSurvey
       end
     end
 
-    def tag_as_required(user)
-      section_progresses.find_or_create_by!(user_id: user.id).update_attribute(:status, SectionProgress::REQUIRED)
+    def tag_as_required(unique_ident)
+      section_progresses.find_or_create_by!(unique_ident: unique_ident)
+                        .update_attribute(:status, SectionProgress::REQUIRED)
     end
 
     def total_questions
-      self.questions.size
+      questions.size
     end
 
-    def repeated_sections(user)
-      self.repeat_sections.create(user_id: user.id) if self.repeat_sections.where(user_id: user.id).empty?
-      self.repeat_sections.where(user_id: user.id)
+    def repeated_sections(unique_ident)
+      repeat_sections.create(unique_ident: unique_ident) if repeat_sections.where(unique_ident: unique_ident).empty?
+      repeat_sections.where(unique_ident: unique_ident)
     end
 
     def can_control_repeated_section?
@@ -50,8 +50,8 @@ module AflierSurvey
       belonging_sections.where(questionnaire_id: questionnaire.id).empty?
     end
 
-    def open_section?(user)
-      return false if is_complete?(user)
+    def open_section?(unique_ident)
+      return false if is_complete?(unique_ident)
       return default_open
     end
   end
