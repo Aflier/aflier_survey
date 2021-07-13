@@ -84,9 +84,9 @@ module AflierSurvey
       self.question_section.questions.where(position: self.position + 1).first
     end
 
-    def is_complete?(user)
-      return false if self.answers.where(user: user).empty?
-      self.answers.find_by(user: user).complete?
+    def is_complete?(unique_ident)
+      return false if self.answers.where(unique_ident: unique_ident).empty?
+      self.answers.find_by(unique_ident: unique_ident).complete?
     end
 
     # Ignore repeated section for now.
