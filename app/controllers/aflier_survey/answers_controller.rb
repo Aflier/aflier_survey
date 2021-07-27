@@ -108,7 +108,7 @@ module AflierSurvey
       end
 
       @question = @answer.question
-      @answer.update_attributes(not_sure: false)
+      @answer.update(not_sure: false)
 
       @required_warning = @question.is_required?(@unique_ident)
       @questionnaire.updated_questionnaire(@unique_ident)
@@ -123,9 +123,9 @@ module AflierSurvey
 
       if @answer.question.question_type == Question::SELECT_ONE
         @answer.option_answers.destroy_all
-        @answer.update_attributes(other: true)
+        @answer.update(other: true)
       else
-        @answer.update_attributes(other: !@answer.option)
+        @answer.update(other: !@answer.option)
       end
 
       @questionnaire.updated_questionnaire(@unique_ident)

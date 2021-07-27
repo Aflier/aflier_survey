@@ -79,17 +79,17 @@
         <% question.options.order(:position).each do |option| %>
           <p>
             <% if answer.user_chose(option, answer) %>
-              <%= link_to raw('<i class="far fa-dot-circle"></i>'), aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+              <%= link_to icons__radio_on, aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
             <% else %>
-              <%= link_to raw('<i class="far fa-circle"></i>'), aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), id: "option-#{option.id}", remote: true %> <%= option.name %>
+              <%= link_to icons__radio_off, aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), id: "option-#{option.id}", remote: true %> <%= option.name %>
             <% end %>
           </p>
         <% end %>
         <% if question.text_on_other %>
           <% if answer.other %>
-            <%= link_to raw('<i class="far fa-dot-circle"></i>'), aflier_survey.other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
+            <%= link_to icons__radio_on, aflier_survey.other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
           <% else %>
-            <%= link_to raw('<i class="far fa-circle"></i>'), aflier_survey.other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
+            <%= link_to icons__radio_off, aflier_survey.other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
           <% end %>
         <% end %>
 
