@@ -120,7 +120,7 @@
                       class: "btn btn-" + (answer.score_given?(choice) ? 'success' : 'outline-primary').to_s, remote: true %>
         <% end %>
       <% elsif question.question_type == AflierSurvey::Question::FILE_UPLOAD %>
-        <% if answer.file&.file&.exists? %>
+        <% if false and answer.file&.file&.exists? %>
           <p><%= link_to 'Download existing document', answer.file_url, target: :_blank %></p>
           <%= simple_form_for [aflier_survey, answer], html: {multipart: true} do |f| %>
             <%= f.input :file, label: false %>

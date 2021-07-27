@@ -3,7 +3,7 @@
              questionnaire: questionnaire,
              question: question,
              answer: question.make_answer(unique_ident),
-             locked: questionnaire.is_locked?(unique_ident, admin),
+             locked: questionnaire.is_locked?(unique_ident, false),
              unique_ident: unique_ident %>
 </div>
 
