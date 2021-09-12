@@ -112,7 +112,7 @@ module AflierSurvey
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def questionnaire_params
-      params.require(:questionnaire).permit(:name, :description, :thank_you, :key, :purpose, :on_completion,
+      params.require(:questionnaire).permit(:include_submit, :name, :description, :thank_you, :key, :purpose, :on_completion,
                                             :complete_on_sections, question_section_ids: [])
     end
   end
