@@ -1,7 +1,7 @@
 <div class="text-center mt-5" id="submissions-bar">
 
   <% if questionnaire.is_submitted?(unique_ident) %>
-    <div class="btn btn-outline-primary btn-lg disabled" style="margin-bottom: 2em;">
+    <div class="btn btn-success btn-lg disabled" style="margin-bottom: 2em;">
       Submitted!
     </div>
     <%= raw questionnaire.thank_you %>

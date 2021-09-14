@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_140040) do
+ActiveRecord::Schema.define(version: 2021_09_12_151840) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 2021_09_12_140040) do
   end
 
   create_table "aflier_survey_questionnaire_submissions", force: :cascade do |t|
-    t.integer "unique_ident"
+    t.string "unique_ident"
     t.integer "questionnaire_id"
     t.string "status"
     t.datetime "created_at", null: false
