@@ -1,5 +1,5 @@
 <% if @show_required %>
-  $('#main-panel').replaceWith('<%= j render 'questionnaires/questionnaire', questionnaire: @questionnaire, user: @user %>');
+  $('#main-panel').replaceWith('<%= j render 'aflier_survey/questionnaires/questionnaire', questionnaire: @questionnaire, user: @user %>');
   $('#answer-required').modal('show');
 <% else %>
   $('#submissions-bar').replaceWith('<%= j render 'aflier_survey/questionnaires/submission_bar', questionnaire: @questionnaire, unique_ident: @unique_ident, user: @user %>');

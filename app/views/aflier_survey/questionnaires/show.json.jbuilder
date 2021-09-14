@@ -1,1 +1,1 @@
-json.partial! "questionnaires/questionnaire", questionnaire: @questionnaire
+json.partial! "aflier_survey/questionnaires/questionnaire", questionnaire: @questionnaire
