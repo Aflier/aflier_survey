@@ -20,13 +20,15 @@
       <% @belonging_sections.order(:position).each do |belonging_section| %>
         <tr>
           <td><%= belonging_section.position %></td>
-          <td><%= belonging_section.question_section.name %></td>
-          <td class="text-right">
+          <td>
+            <%= link_to belonging_section.question_section.name, edit_question_section_path(belonging_section.question_section), class: "btn btn-outline-primary" %>
+          </td>
+          <td class="text-end">
             <div class=" btn-group btn-group-sm">
               <%= link_to raw('<i class="fas fa-arrow-up"></i>'), up_belonging_section_path(belonging_section), class: "btn btn-outline-primary" unless belonging_section.position == 0 %>
               <%= link_to raw('<i class="fas fa-arrow-down"></i>'), belonging_section, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
               <%= link_to icons__thumb_down, exclude_question_section_path(belonging_section.question_section, questionnaire_id: @questionnaire.id), class: "btn btn-outline-success" %>
-              <%= link_to icons__edit, edit_question_section_path(belonging_section.question_section), class: "btn btn-outline-primary" %>
+
             </div>
           </td>
         </tr>

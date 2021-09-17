@@ -18,7 +18,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install aflier_survey
+$ gem 'aflier_survey', git: 'https://github.com/Aflier/aflier_survey.git'
 ```
 
 ## Confinguration
