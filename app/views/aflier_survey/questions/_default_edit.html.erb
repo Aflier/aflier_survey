@@ -144,42 +144,54 @@
   </div>
 
   <div class="col-md-3">
+    <div class="card shadow mb-3">
+      <div class="card-header">Details</div>
+      <div class="card-body">
+        <label>Key</label>
+        <%= render 'stimulus/edit_in_place/general_input',
+                   field_type: nil,
+                   klass: @question,
+                   attribute: :unique_key,
+                   options: { url: aflier_survey.question_path(@question),
+                              value: @question.unique_key} %>
 
-    <div class="card">
-      <ul class="list-group list-group-flush">
-        <% if @question.question_type == AflierSurvey::Question::CALCULATION_LONG %>
-          <li class="list-group-item">
-            <h4>Value when true:</h4>
-            <%= @question.result_grouping&.name %>
-          </li>
+        <ul class="list-group list-group-flush">
+          <% if @question.question_type == AflierSurvey::Question::CALCULATION_LONG %>
+            <li class="list-group-item">
+              <h4>Value when true:</h4>
+              <%= @question.result_grouping&.name %>
+            </li>
+          <% end %>
+          <% if @question.question_type == AflierSurvey::Question::YES_OR_NO %>
+            <li class="list-group-item">
+              <h4>Value when true:</h4>
+              <%= @question.value_true %>
+            </li>
+            <li class="list-group-item">
+              <h4>Value when false:</h4>
+              <%= @question.value_false %>
+            </li>
+          <% end %>
+          <% if @question.result_type == AflierSurvey::Question::TABLE %>
+            <li class="list-group-item">
+              <h4>Bounds (x):</h4>
+              <%= @question.bounds_x %>
+            </li>
+            <li class="list-group-item">
+              <h4>Bounds (y):</h4>
+              <%= @question.bounds_y %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editQuestion">
+          Edit Question
+        </button>
+        <% if @question.question_type == AflierSurvey::Question::SELECT_ONE or @question.question_type == AflierSurvey::Question::SELECT_MANY %>
+          <%= link_to "Clone", clone_question_path(@question), class: "btn btn-outline-secondary" %>
         <% end %>
-        <% if @question.question_type == AflierSurvey::Question::YES_OR_NO %>
-          <li class="list-group-item">
-            <h4>Value when true:</h4>
-            <%= @question.value_true %>
-          </li>
-          <li class="list-group-item">
-            <h4>Value when false:</h4>
-            <%= @question.value_false %>
-          </li>
-        <% end %>
-        <% if @question.result_type == AflierSurvey::Question::TABLE %>
-          <li class="list-group-item">
-            <h4>Bounds (x):</h4>
-            <%= @question.bounds_x %>
-          </li>
-          <li class="list-group-item">
-            <h4>Bounds (y):</h4>
-            <%= @question.bounds_y %>
-          </li>
-        <% end %>
-      </ul>
-      <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editQuestion">
-        Edit Question
-      </button>
-      <% if @question.question_type == AflierSurvey::Question::SELECT_ONE or @question.question_type == AflierSurvey::Question::SELECT_MANY %>
-        <%= link_to "Clone", clone_question_path(@question), class: "btn btn-outline-secondary" %>
-      <% end %>
+      </div>
     </div>
 
     <!-- Modal -->

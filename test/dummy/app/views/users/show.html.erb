@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<p>Extracted from Questionnaire: <%= AflierSurvey::Questionnaire.all.first.find_answer_by_key("user-#{@user.id}", 'KEY-ONE') %></p>
+
+
 <p>
   <strong>First name:</strong>
   <%= @user.first_name %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_151840) do
+ActiveRecord::Schema.define(version: 2021_09_18_095949) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 2021_09_12_151840) do
     t.decimal "value_true"
     t.decimal "value_false"
     t.text "general_store"
+    t.string "unique_key"
   end
 
   create_table "aflier_survey_section_progresses", force: :cascade do |t|

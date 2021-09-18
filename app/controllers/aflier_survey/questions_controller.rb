@@ -2,7 +2,8 @@ require_dependency "aflier_survey/application_controller"
 
 module AflierSurvey
   class QuestionsController < ApplicationController
-    before_action :set_question, only: [:show, :edit, :update, :destroy, :up, :down, :toggle_other, :type, :following,
+    before_action :set_question, only: [:show, :edit, :update, :destroy, :up, :down, :toggle_other, :type,
+                                        :following,
                                         :calc, :clone, :feed, :result_type, :result, :grouping]
 
     # GET /questions
@@ -53,7 +54,7 @@ module AflierSurvey
       respond_to do |format|
         if @question.update(question_params)
           format.html { redirect_to edit_question_path(@question), notice: 'Question was successfully updated.' }
-          format.json { render :show, status: :ok, location: @question }
+          format.json
         else
           format.html { render :edit }
           format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -166,7 +167,7 @@ module AflierSurvey
     def question_params
       params.require(:question).permit(:name, :question_type, :help, :question_section_id, :allow_not_sure,
                                        :text_hint, :required, :value_true, :value_false, :bounds_x, :bounds_y,
-                                       :details, :minimum, :maximum)
+                                       :details, :minimum, :maximum, :unique_key)
     end
   end
 end

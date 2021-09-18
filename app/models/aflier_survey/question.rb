@@ -14,6 +14,8 @@ module AflierSurvey
 
     belongs_to :question_y, class_name: "Question", foreign_key: 'question_y_id', optional: true
 
+    validates :unique_key, uniqueness: true, :allow_blank => true, :allow_nil => true
+
     STRING = 'String'.freeze
     YES_OR_NO = 'Yes or no'.freeze
     TEXT = 'Always text'.freeze
@@ -117,7 +119,7 @@ module AflierSurvey
     end
 
     # If this is a question in a repeated section it will give the latest.
-    def get_answer(user, repeat_section)
+    def get_answer(unique_ident, repeat_section)
       if question_type == CALCULATION and repeat_section.nil?
         return "No answer: #{name}" if self.answers.where(user: user).empty?
         return self.answers.joins(:repeat_section).order("repeat_sections.created_at ASC").where(user_id: user.id).last.an_integer if self.question_type == WHOLE_NUMBER
@@ -131,7 +133,7 @@ module AflierSurvey
         return "Please provide answer for: #{self.name}" if option.nil?
         return option.a_decimal
       else
-        latest_answer = relevant_answer(repeat_section, user)
+        latest_answer = relevant_answer(repeat_section, unique_ident)
 
         return "No answer: #{name}" if latest_answer.nil?
         return latest_answer.a_string if self.question_type == STRING
@@ -527,7 +529,7 @@ module AflierSurvey
     private
 
     # Where we have repeated section we use the method to select the appropriate repeated answer or the last.
-    def relevant_answer(repeat_section, user)
+    def relevant_answer(repeat_section, unique_ident)
       if question_section.many?
         if repeat_section
           answer = self.answers.find_by(user_id: user.id, repeat_section_id: repeat_section.id)
@@ -535,7 +537,7 @@ module AflierSurvey
           answer = self.answers.joins(:repeat_section).order("repeat_sections.created_at ASC").where(user_id: user.id).last
         end
       else
-        answer = self.answers.find_by(user_id: user.id)
+        answer = self.answers.find_by(unique_ident: unique_ident)
       end
       answer
     end

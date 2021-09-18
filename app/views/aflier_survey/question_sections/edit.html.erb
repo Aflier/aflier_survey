@@ -26,7 +26,7 @@
           <% @questions.order(:position).each do |question| %>
             <tr>
               <td><%= question.position %></td>
-              <td><%= question.name %></td>
+              <td><%= link_to question.name, edit_question_path(question) %></td>
               <td><%= question.question_type %></td>
               <td><%= question.question_section.name %></td>
               <td><%= tick question.required %></td>
@@ -34,7 +34,6 @@
                 <div class="btn-group">
                   <%= link_to icons__down, up_question_path(question), class: "btn btn-info btn-sm" unless question.position == 0 %>
                   <%= link_to icons__up, down_question_path(question), class: "btn btn-info btn-sm" unless question.position == @questions.size - 1 %>
-                  <%= link_to 'Edit', edit_question_path(question), class: "btn btn-primary btn-sm" %>
                   <%= link_to icons__trash, question, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
                 </div>
               </td>

@@ -8,6 +8,16 @@ module AflierSurvey
     has_rich_text :purpose
     has_rich_text :on_completion
 
+    def find_answer_by_key(unique_ident, key)
+      key_question = Question.find_by(unique_key: key)
+      if key_question
+        return key_question.get_answer(unique_ident, nil)
+      else
+        'KEY NOT FOUND'
+      end
+    end
+
+
     def is_submitted?(unique_ident)
       questionnaire_submissions = self.questionnaire_submissions.where(unique_ident: unique_ident).order(:updated_at)
 
