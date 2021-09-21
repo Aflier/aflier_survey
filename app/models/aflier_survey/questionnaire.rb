@@ -8,6 +8,10 @@ module AflierSurvey
     has_rich_text :purpose
     has_rich_text :on_completion
 
+    def self.all_keys
+      Question.all.where.not(unique_key: nil).select(:unique_key).map { |q| q.unique_key }
+    end
+
     def find_answer_by_key(unique_ident, key)
       key_question = Question.find_by(unique_key: key)
       if key_question
