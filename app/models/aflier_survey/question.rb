@@ -534,7 +534,9 @@ module AflierSurvey
         if repeat_section
           answer = self.answers.find_by(user_id: user.id, repeat_section_id: repeat_section.id)
         else
-          answer = self.answers.joins(:repeat_section).order("repeat_sections.created_at ASC").where(user_id: user.id).last
+          answer = self.answers
+                       .joins(:repeat_section).order("repeat_sections.created_at ASC")
+                       .where(unique_ident: unique_ident).last
         end
       else
         answer = self.answers.find_by(unique_ident: unique_ident)
