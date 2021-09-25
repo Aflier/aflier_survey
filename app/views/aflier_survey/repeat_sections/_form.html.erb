@@ -1,0 +1,31 @@
+<button type="button" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#newrepeat_section">
+  New Repeat section
+</button>
+
+<div class="modal fade" id="newrepeat_section" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <%= simple_form_for(@repeat_section, :html => { :class => 'form-horizontal' },
+        wrapper: :horizontal_form,
+        wrapper_mappings: {
+        check_boxes: :horizontal_radio_and_checkboxes,
+        radio_buttons: :horizontal_radio_and_checkboxes,
+        file: :horizontal_file_input,
+        boolean: :horizontal_boolean
+        }) do |f| %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Repeat section</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <%= f.input :question_section %>
+            <%= f.input :user %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= f.button :submit %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

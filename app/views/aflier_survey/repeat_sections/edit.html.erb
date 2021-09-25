@@ -1,0 +1,11 @@
+<h1>Edit Repeat section</h1>
+
+<div class="row justify-content-md-center">
+  <div class="col-md-6">
+    <%= simple_form_for(@repeat_section) do |f| %>
+              <%= f.input :question_section %>
+              <%= f.input :user %>
+          <%= f.button :submit, class: "btn-block" %>
+    <% end %>
+  </div>
+</div>

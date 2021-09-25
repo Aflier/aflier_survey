@@ -1,0 +1,39 @@
+<div id="question-<%= repeat_section.id %>-<%= question.id %>">
+  <%= render 'questions/answer_form', questionnaire: questionnaire, question: question, answer: question.make_repeat_answer(unique_ident, repeat_section), locked: questionnaire.is_locked?(unique_ident, admin) %>
+</div>
+
+<script>
+  <% unless questionnaire.is_locked?(@user, admin: admin) %>
+
+
+    $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave input").blur(function() {
+        nativeFormEl = $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave form")[0]; // you need the native DOM element
+        Rails.fire(nativeFormEl, 'submit');
+    });
+
+    $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave select").blur(function() {
+        nativeFormEl = $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave form")[0]; // you need the native DOM element
+        Rails.fire(nativeFormEl, 'submit');
+    });
+
+    $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave textarea").blur(function() {
+        nativeFormEl = $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave form")[0]; // you need the native DOM element
+        Rails.fire(nativeFormEl, 'submit');
+    });
+
+    $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave input").focus(function() {
+        $("#question-<%= repeat_section.id %>-<%= question.id %> .save-state").fadeOut(0);
+        $("#question-<%= repeat_section.id %>-<%= question.id %> .unsave-state").fadeIn(500);
+    });
+
+    $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave select").focus(function() {
+        $("#question-<%= repeat_section.id %>-<%= question.id %> .save-state").fadeOut(0);
+        $("#question-<%= repeat_section.id %>-<%= question.id %> .unsave-state").fadeIn(500);
+    });
+
+    $("#question-<%= repeat_section.id %>-<%= question.id %> .autosave textarea").focus(function() {
+        $("#question-<%= repeat_section.id %>-<%= question.id %> .save-state").fadeOut(0);
+        $("#question-<%= repeat_section.id %>-<%= question.id %> .unsave-state").fadeIn(500);
+    });
+  <% end %>
+</script>

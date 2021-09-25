@@ -1,5 +1,6 @@
 AflierSurvey::Engine.routes.draw do
 
+
   devise_for :users, class_name: "User"
 
   resources :answers do
@@ -12,12 +13,8 @@ AflierSurvey::Engine.routes.draw do
 
   resources :choice_answers
   resources :option_answers
-
-
   resources :questionnaire_submissions
-
-
-
+  resources :repeat_sections
   resources :section_progresses
 
   resources :question_inputs do

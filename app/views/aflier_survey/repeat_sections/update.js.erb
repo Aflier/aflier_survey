@@ -1,0 +1,5 @@
+$('#editRepeatSection<%= @repeat_section.id %>').modal('hide');
+
+setTimeout(function(){
+    $('#data-date-<%= @repeat_section.id %>').replaceWith('<%= j render 'repeat_sections/data_date', repeat_section: @repeat_section %>');
+}, 500);

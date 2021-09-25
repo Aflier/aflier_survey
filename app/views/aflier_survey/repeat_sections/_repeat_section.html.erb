@@ -1,0 +1,20 @@
+<div class="card" id="repeat-section-container-<%= repeat_section.id %>">
+  <div class="card-header" data-bs-toggle="collapse" data-bs-target="#repeat-section-<%= repeat_section.id %>">
+    #<span id="repeat-number-<%= repeat_section.id %>"><%= repeat_section_counter + 1 %></span>
+    <span class="float-right"><i class="fa fa-arrows-alt" aria-hidden="true"></i></span>
+
+    <% if repeat_section.question_section.repeat_has_date %>
+      Date of Answers: <%= repeat_section.get_data_date %>
+      <%= repeat_section.screen_type %>
+    <% end %>
+  </div>
+  <div class="collapse card-body <%= 'show' if repeat_section_counter == last_count %>" id="repeat-section-<%= repeat_section.id %>">
+    <%= render 'repeat_sections/data_date', repeat_section: repeat_section %>
+
+    <% repeat_section.question_section.questions.order(:position).each do |question| %>
+      <%= render 'repeat_sections/question', questionnaire: questionnaire, repeat_section: repeat_section, question: question, unique_ident: unique_ident, admin: admin %>
+    <% end %>
+    <br>
+    <div class="text-right"><%= link_to 'Remove', repeat_section, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-outline-danger btn-sm", remote: true if repeat_section.question_section.can_control_repeated_section?(admin) %></div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Repeat Section</h1>
+		</div>
+		
+		<ol class="breadcrumb">
+		  <li class="breadcrumb-item"><a href="#">Home</a></li>
+		  <li class="breadcrumb-item"><a href="#">Parent</a></li>
+		  <li class="active">Repeat Section</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-9">
+
+	</div>
+	<div class="col-md-3">
+		<%= link_to 'Edit', edit_repeat_section_path(@repeat_section), class: "btn btn-secondary btn-block" %>
+
+		        <p>
+          <strong>Question section:</strong>
+          <%= @repeat_section.question_section %>
+        </p>
+		        <p>
+          <strong>User:</strong>
+          <%= @repeat_section.user %>
+        </p>
+			</div>
+</div>

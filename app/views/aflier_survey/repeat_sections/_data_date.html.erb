@@ -1,0 +1,33 @@
+<p id="data-date-<%= repeat_section.id %>">Date of Answers:
+  <% if repeat_section.question_section.repeat_has_date %>
+    <%= repeat_section.get_data_date %>
+  <% end %>
+
+
+  <% if current_user.admin? %>
+    <span data-bs-toggle="modal" data-bs-target="#editRepeatSection<%= repeat_section.id %>"><i class="far fa-edit"></i></span>
+
+    <!-- Modal -->
+
+    <%= simple_form_for repeat_section, remote: true do |f| %>
+      <div class="modal fade" id="editRepeatSection<%= repeat_section.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Date</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= f.input :data_date, label: 'Date data collected' %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <%= f.button :submit %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  </p>
