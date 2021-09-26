@@ -1,7 +1,6 @@
 module AflierSurvey
   class RepeatSection < ApplicationRecord
     belongs_to :question_section
-
     has_many :answers, dependent: :destroy
 
     BASELINE     = 'Baseline'

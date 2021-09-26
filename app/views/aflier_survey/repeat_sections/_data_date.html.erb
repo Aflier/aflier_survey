@@ -4,7 +4,7 @@
   <% end %>
 
 
-  <% if current_user.admin? %>
+  <% if admin %>
     <span data-bs-toggle="modal" data-bs-target="#editRepeatSection<%= repeat_section.id %>"><i class="far fa-edit"></i></span>
 
     <!-- Modal -->

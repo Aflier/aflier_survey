@@ -69,8 +69,8 @@ module AflierSurvey
 
     def repeat
       @questionnaire = Questionnaire.find(params[:questionnaire_id])
-      @old_repeats = @question_section.repeat_sections.where(user_id: params[:user_id])
-      @repeat_section = @question_section.repeat_sections.create(user_id: params[:user_id])
+      @old_repeats = @question_section.repeat_sections.where(unique_ident: params[:unique_ident])
+      @repeat_section = @question_section.repeat_sections.create(unique_ident: params[:unique_ident])
       @user = current_user
     end
 

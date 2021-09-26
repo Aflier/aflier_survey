@@ -164,12 +164,11 @@ ActiveRecord::Schema.define(version: 2021_09_25_123500) do
   end
 
   create_table "aflier_survey_repeat_sections", force: :cascade do |t|
-    t.integer "question_section_id", null: false
+    t.integer "question_section_id"
     t.date "data_date"
     t.string "unique_ident"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["question_section_id"], name: "index_aflier_survey_repeat_sections_on_question_section_id"
   end
 
   create_table "aflier_survey_section_progresses", force: :cascade do |t|
@@ -196,5 +195,4 @@ ActiveRecord::Schema.define(version: 2021_09_25_123500) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "aflier_survey_repeat_sections", "question_sections"
 end

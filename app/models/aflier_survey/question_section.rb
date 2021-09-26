@@ -37,7 +37,9 @@ module AflierSurvey
     end
 
     def repeated_sections(unique_ident)
-      repeat_sections.create!(unique_ident: unique_ident) if repeat_sections.where(unique_ident: unique_ident).empty?
+      if repeat_sections.where(unique_ident: unique_ident).empty?
+        repeat_sections.create!(unique_ident: unique_ident)
+      end
       repeat_sections.where(unique_ident: unique_ident)
     end
 

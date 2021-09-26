@@ -202,15 +202,15 @@ module AflierSurvey
 
 
 
-    def make_repeat_answer(user, repeat_section)
+    def make_repeat_answer(unique_ident, repeat_section)
       # First check we don't have an answer over from before repeat
-      lonely_answer = answers.find_by(user_id: user.id, repeat_section: nil)
+      lonely_answer = answers.find_by(unique_ident: unique_ident, repeat_section: nil)
 
       if lonely_answer
         lonely_answer.update_attribute(:repeat_section_id, repeat_section.id)
         return lonely_answer
       else
-        return answers.find_or_create_by(user_id: user.id,
+        return answers.find_or_create_by(unique_ident: unique_ident,
                                          repeat_section_id: repeat_section.id)
       end
     end

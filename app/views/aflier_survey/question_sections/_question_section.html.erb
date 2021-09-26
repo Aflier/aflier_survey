@@ -26,10 +26,15 @@
 
       <% if question_section.many %>
           <div id="repeat-question-section-<%= question_section.id %>">
-            <%= render question_section.repeated_sections(unique_ident), questionnaire: questionnaire, last_count: question_section.repeated_sections(unique_ident).size - 1 %>
+            <%= render question_section.repeated_sections(unique_ident),
+                       questionnaire: questionnaire,
+                       unique_ident: unique_ident,
+                       last_count: question_section.repeated_sections(unique_ident).size - 1, admin: false %>
           </div>
 
-          <%= link_to "Add", repeat_question_section_path(question_section, questionnaire_id: questionnaire.id, unique_ident: unique_ident), remote: true, class: "btn btn-outline-primary btn-block" if question_section.can_control_repeated_section? %>
+          <%= link_to "Add", aflier_survey.repeat_question_section_path(question_section,
+                                                                        questionnaire_id: questionnaire.id,
+                                                                        unique_ident: unique_ident), remote: true, class: "btn btn-primary" if question_section.can_control_repeated_section? %>
       <% else %>
           <% question_section.questions.includes(:question_y).order(:position).each do |question| %>
               <%= render question, questionnaire: questionnaire, unique_ident: unique_ident, admin: admin %>
