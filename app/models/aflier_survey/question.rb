@@ -112,7 +112,6 @@ module AflierSurvey
 
     def get_repeat_answers(unique_ident)
       answers = self.question.answers.where(unique_ident: unique_ident)
-      puts "Answers size... #{answers.size} ... #{answers.map { |x| x.id }.join(', ')}"
       return answers
     end
 
