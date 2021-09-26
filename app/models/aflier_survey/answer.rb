@@ -169,6 +169,10 @@ module AflierSurvey
         return question.get_calculation(user, nil)
       elsif question.question_type == Question::WHOLE_NUMBER
         an_integer
+      elsif question.question_type == Question::STRING
+        a_string
+      elsif question.question_type == Question::TEXT
+        some_text
       else
         a_decimal
       end
