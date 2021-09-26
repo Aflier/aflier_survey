@@ -110,10 +110,8 @@ module AflierSurvey
       return "Question type as feed not yet supported: #{self.question_type}"
     end
 
-    def get_repeat_answers(user)
-      puts "User... #{user.id}"
-      # answers = self.answers.joins(:repeat_section).order("repeat_sections.created_at ASC").where(user_id: unique_ident.id)
-      answers = self.question.answers.where(user_id: user.id)
+    def get_repeat_answers(unique_ident)
+      answers = self.question.answers.where(unique_ident: unique_ident)
       puts "Answers size... #{answers.size} ... #{answers.map { |x| x.id }.join(', ')}"
       return answers
     end
