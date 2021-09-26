@@ -6,13 +6,13 @@
         type: 'line',
         data: {
             labels: [
-                <% question.get_repeat_answers(user).each do |answer| %>
+                <% question.get_source_repeat_answers(user).each do |answer| %>
                 '<%= answer.repeat_section.get_data_date %>',
                 <% end %>
             ],
             datasets: [{
                 data: [
-                    <% question.get_repeat_answers(user).each do |answer| %>
+                    <% question.get_source_repeat_answers(user).each do |answer| %>
                     '<%= answer.get_value %>',
                     <% end %>
                 ],
