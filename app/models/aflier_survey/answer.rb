@@ -76,6 +76,7 @@ module AflierSurvey
       self.complete = true if self.question.question_type == Question::TEXT and not self.some_text.nil?
       self.complete = true if self.question.question_type == Question::DATE and not self.a_date.nil?
       self.complete = true if self.question.question_type == Question::DECIMAL and not self.a_decimal.nil?
+      self.complete = true if self.question.question_type == Question::OUT_OF and not self.an_integer.nil?
       self.complete = true if self.question.question_type == Question::WHOLE_NUMBER and not self.an_integer.nil?
       self.complete = true if self.question.question_type == Question::SELECT_MANY and not self.option_answers.empty?
       self.complete = true if self.question.question_type == Question::SELECT_ONE and not self.option_answers.empty?
