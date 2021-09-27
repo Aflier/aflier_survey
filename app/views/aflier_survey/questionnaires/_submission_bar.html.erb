@@ -8,24 +8,24 @@
   <% elsif questionnaire.is_saved?(unique_ident) %>
     <span class="btn btn-outline-primary btn-lg disabled">Saved!</span>
     <% if questionnaire.include_submit %>
-      <div data-questionnaire-target="submit" data-action="click->questionnaire#submit">
+      <span data-questionnaire-target="submit" data-action="click->questionnaire#submit">
       <%= link_to "Save and Submit",
                   aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident),
                   id: "save-and-submit",
                   class: "btn btn-primary btn-lg",
                   remote: true %>
-      </div>
+      </span>
     <% end %>
   <% else %>
     <%= link_to "Save", aflier_survey.save_questionnaire_path(questionnaire, unique_ident: unique_ident), class: "btn btn-primary btn-lg", remote: true %>
     <% if questionnaire.include_submit %>
-      <div data-questionnaire-target="submit" data-action="click->questionnaire#submit">
+      <span data-questionnaire-target="submit" data-action="click->questionnaire#submit">
       <%= link_to "Save and Submit",
                   aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident),
                   id: "save-and-submit",
                   class: "btn btn-primary btn-lg",
                   remote: true %>
-      </div>
+      </>
     <% end %>
   <% end %>
 
