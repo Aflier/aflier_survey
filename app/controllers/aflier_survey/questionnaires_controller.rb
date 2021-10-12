@@ -2,7 +2,8 @@ require_dependency "aflier_survey/application_controller"
 
 module AflierSurvey
   class QuestionnairesController < ApplicationController
-    before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :submit, :assign, :save]
+
+    before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :submit, :assign, :save, :toggle_input]
 
     # GET /questionnaires
     # GET /questionnaires.json
@@ -104,6 +105,13 @@ module AflierSurvey
       redirect_to dashboard_manage_user_path(@user)
     end
 
+    def toggle_input
+      value     = params[:value]
+      attribute = params[:attribute].to_s
+
+      @questionnaire.update_attribute(attribute, value)
+    end
+
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_questionnaire
@@ -112,8 +120,9 @@ module AflierSurvey
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def questionnaire_params
-      params.require(:questionnaire).permit(:include_submit, :name, :description, :thank_you, :key, :purpose, :on_completion,
-                                            :complete_on_sections, question_section_ids: [])
+      params.require(:questionnaire).permit(:description, :include_submit, :lock_on_submit, :name, :thank_you,
+                                            :key, :purpose, :on_completion, :complete_on_sections,
+                                            question_section_ids: [])
     end
   end
 end

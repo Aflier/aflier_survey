@@ -81,6 +81,11 @@
 
     <br>
 
+    <%= render 'stimulus/edit_in_place/toggle_input',
+               path_on: toggle_input_questionnaire_path(@questionnaire, attribute: 'lock_on_submit', value: true),
+               path_off: toggle_input_questionnaire_path(@questionnaire, attribute: 'lock_on_submit', value: false),
+               value: @questionnaire.lock_on_submit, choice: 'Lock on Submit' %>
+
     <div class="alert alert-info">
       <p><b>Follow On:</b> Follow-on sections do note need to be included in the "Initial Question Sections" table. Their inclusion
         is specified within the questions that trigger the inclusion of the extra sections.</p>

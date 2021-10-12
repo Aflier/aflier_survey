@@ -117,9 +117,14 @@
         <% end %>
       <% elsif question.question_type == AflierSurvey::Question::OUT_OF %>
         <% (question.minimum .. question.maximum).each do |choice| %>
-          <%= link_to choice.to_s,
-                      aflier_survey.choice_answer_path(answer, choice: choice, questionnaire_id: questionnaire.id),
-                      class: "btn btn-" + (answer.score_given?(choice) ? 'success' : 'outline-primary').to_s, remote: true %>
+
+          <% if questionnaire.lock_on_submit and questionnaire.is_locked?(unique_ident, false) %>
+            <div class="<%= "btn btn-#{(answer.score_given?(choice) ? 'success' : 'outline-primary')}" %>"><%= choice.to_s %></div>
+          <% else %>
+            <%= link_to choice.to_s,
+                        aflier_survey.choice_answer_path(answer, choice: choice, questionnaire_id: questionnaire.id),
+                        class: "btn btn-" + (answer.score_given?(choice) ? 'success' : 'outline-primary').to_s, remote: true %>
+          <% end %>
         <% end %>
       <% elsif question.question_type == AflierSurvey::Question::FILE_UPLOAD %>
         <% if false and answer.file&.file&.exists? %>

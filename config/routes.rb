@@ -85,6 +85,7 @@ AflierSurvey::Engine.routes.draw do
       get :submit
       get :assign
       get :save
+      get :toggle_input
     end
   end
 end

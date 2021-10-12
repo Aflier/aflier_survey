@@ -21,6 +21,14 @@ module AflierSurvey
       raw '<i class="fal fa-trash-alt"></i>'
     end
 
+    def icons__toggle_off
+      '(off)'
+    end
+
+    def icons__toggle_on
+      '(on)'
+    end
+
     def icons__up
       return 'up' if AflierSurvey.configuration.use_words
       raw '<i class="fal fa-arrow-up"></i>'

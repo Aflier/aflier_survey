@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_123500) do
+ActiveRecord::Schema.define(version: 2021_10_12_144841) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 2021_09_25_123500) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "include_submit"
+    t.boolean "lock_on_submit"
   end
 
   create_table "aflier_survey_questions", force: :cascade do |t|

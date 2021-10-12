@@ -16,6 +16,14 @@ module IconsHelper
     raw '<i class="far fa-circle"></i>'
   end
 
+  def icons__toggle_off
+    '(off)'
+  end
+
+  def icons__toggle_on
+    '(on)'
+  end
+
   def icons__trash
     return 'destroy' if AflierSurvey.configuration.use_words
     raw '<i class="fal fa-trash-alt"></i>'
