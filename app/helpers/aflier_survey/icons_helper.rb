@@ -7,12 +7,12 @@ module AflierSurvey
     end
 
     def icons__radio_on
-      return '-->' if AflierSurvey.configuration.use_words
+      return '(0)' if AflierSurvey.configuration.use_words
       raw '<i class="far fa-dot-circle"></i>'
     end
 
     def icons__radio_off
-      return 'O' if AflierSurvey.configuration.use_words
+      return '( )' if AflierSurvey.configuration.use_words
       raw '<i class="far fa-circle"></i>'
     end
 

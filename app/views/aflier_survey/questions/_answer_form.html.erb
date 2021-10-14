@@ -55,8 +55,14 @@
           <% end %>
         </div>
       <% elsif question.question_type == AflierSurvey::Question::YES_OR_NO %>
-        <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-        <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+        <%= link_to (answer.a_boolean == false ? icons__radio_off : icons__radio_on) + ' Yes',
+                    aflier_survey.choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id),
+                    class: "btn",
+                    remote: true %>
+        <%= link_to (answer.a_boolean == false ? icons__radio_on : icons__radio_off) + ' No',
+                    aflier_survey.choice_answer_path(answer, choice: 'no', questionnaire_id: questionnaire.id),
+                    class: "btn",
+                    remote: true %>
         <br><br>
       <% elsif question.question_type == AflierSurvey::Question::SECTION_ON_YES or question.question_type == AflierSurvey::Question::SECTION_ON_NO %>
         <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
