@@ -56,7 +56,7 @@
           <% end %>
         </div>
       <% elsif question.question_type == AflierSurvey::Question::YES_OR_NO %>
-        <%= link_to (answer.a_boolean == false ? icons__radio_off : icons__radio_on) + ' Yes',
+        <%= link_to (answer.a_boolean ? icons__radio_on : icons__radio_off ) + ' Yes',
                     aflier_survey.choice_answer_path(answer, choice: 'yes', questionnaire_id: questionnaire.id),
                     class: "btn",
                     remote: true %>
