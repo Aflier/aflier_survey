@@ -102,25 +102,50 @@
           <% end %>
         <% end %>
 
-        <div class="autosave">
-          <div class="more-info" style="margin-top:10px; margin-bottom: 10px">
-            <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
-              <%= f.input :some_text, label: question.comment_text_hint %>
-              <%= f.hidden_field :questionnaire_id, value: questionnaire.id %>
 
-            <% end if answer.other? and answer.question.text_on_other? %>
+        <% if answer.other? and answer.question.text_on_other? %>
+
+          <div class="autosave">
+            <%= render 'stimulus/edit_in_place/general_input',
+                       field_type: :textarea,
+                       klass: answer,
+                       attribute: :some_text,
+                       options: { url: aflier_survey.answer_path(answer),
+                                  value: answer.some_text} %>
           </div>
-        </div>
+
+        <% end %>
 
       <% elsif question.question_type == AflierSurvey::Question::SELECT_MANY %>
         <% question.options.order(:position).each do |option| %>
           <p>
             <% if answer.user_chose(option, answer) %>
-              <%= link_to raw('<i class="far fa-check-square"></i>'), aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+              <%= link_to icons__checked_box, aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
             <% else %>
-              <%= link_to raw('<i class="far fa-square"></i>'), aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
+              <%= link_to icons__square, aflier_survey.option_choice_answer_path(answer, option_id: option.id, questionnaire_id: questionnaire.id), remote: true %> <%= option.name %>
             <% end %>
           </p>
+        <% end %>
+
+        <% if question.text_on_other %>
+          <% if answer.other %>
+            <%= link_to icons__radio_on, aflier_survey.other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
+          <% else %>
+            <%= link_to icons__radio_off, aflier_survey.other_answer_path(answer, questionnaire_id: questionnaire.id), remote: true, id: 'other-option' %> Other
+          <% end %>
+        <% end %>
+
+        <% if answer.other? and answer.question.text_on_other? %>
+
+          <div class="autosave">
+            <%= render 'stimulus/edit_in_place/general_input',
+                       field_type: :textarea,
+                       klass: answer,
+                       attribute: :some_text,
+                       options: { url: aflier_survey.answer_path(answer),
+                                  value: answer.some_text} %>
+          </div>
+
         <% end %>
       <% elsif question.question_type == AflierSurvey::Question::OUT_OF %>
         <% (question.minimum .. question.maximum).each do |choice| %>

@@ -4,7 +4,7 @@ module AflierSurvey
   class QuestionsController < ApplicationController
     before_action :set_question, only: [:show, :edit, :update, :destroy, :up, :down, :toggle_other, :type,
                                         :following,
-                                        :calc, :clone, :feed, :result_type, :result, :grouping]
+                                        :calc, :clone, :feed, :result_type, :result, :grouping, :toggle_input]
 
     # GET /questions
     # GET /questions.json
@@ -155,6 +155,13 @@ module AflierSurvey
       @question.update_attribute(:result_grouping_id, params[:result_grouping_id])
 
       redirect_back fallback_location: root_path
+    end
+
+    def toggle_input
+      value     = params[:value]
+      attribute = params[:attribute].to_s
+
+      @question.update_attribute(attribute, value)
     end
 
     private

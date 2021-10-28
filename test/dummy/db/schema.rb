@@ -50,9 +50,6 @@ ActiveRecord::Schema.define(version: 2021_10_12_144841) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-# Could not dump table "aflier_survey_answers" because of following StandardError
-#   Unknown type 'string' for column 'unique_ident'
-
   create_table "aflier_survey_belonging_sections", force: :cascade do |t|
     t.integer "questionnaire_id"
     t.integer "question_section_id"

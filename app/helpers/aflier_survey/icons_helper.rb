@@ -1,6 +1,16 @@
 module AflierSurvey
   module IconsHelper
 
+    def icons__checked_box
+      return '[X]' if AflierSurvey.configuration.use_words
+      raw '<i class="far fa-check-square fa-fw"></i>'
+    end
+
+    def icons__square
+      return '[ ]' if AflierSurvey.configuration.use_words
+      raw '<i class="far fa-square"></i>'
+    end
+
     def icons__radio(value, label)
       return raw "#{icons__radio_on} #{label}" if value
       raw "#{icons__radio_off} #{label}"
@@ -15,6 +25,8 @@ module AflierSurvey
       return '( )' if AflierSurvey.configuration.use_words
       raw '<i class="far fa-circle"></i>'
     end
+
+
 
     def icons__trash
       return 'destroy' if AflierSurvey.configuration.use_words

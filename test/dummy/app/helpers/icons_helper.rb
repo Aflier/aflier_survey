@@ -24,6 +24,17 @@ module IconsHelper
     '(on)'
   end
 
+  def icons__checked_box
+    return '[X]' if AflierSurvey.configuration.use_words
+    raw '<i class="far fa-check-square fa-fw"></i>'
+  end
+
+  def icons__square
+    return '[ ]' if AflierSurvey.configuration.use_words
+    raw '<i class="far fa-square"></i>'
+  end
+
+
   def icons__trash
     return 'destroy' if AflierSurvey.configuration.use_words
     raw '<i class="fal fa-trash-alt"></i>'

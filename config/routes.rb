@@ -52,6 +52,7 @@ AflierSurvey::Engine.routes.draw do
       get :clone
       get :feed
       get :grouping
+      get :toggle_input
     end
   end
 

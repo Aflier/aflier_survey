@@ -125,7 +125,7 @@ module AflierSurvey
         @answer.option_answers.destroy_all
         @answer.update(other: true)
       else
-        @answer.update(other: !@answer.option)
+        @answer.update(other: !@answer.other)
       end
 
       @questionnaire.updated_questionnaire(@unique_ident)

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    aflier_survey (0.10.14)
+    aflier_survey (0.10.15)
       devise
       rails (>= 5.2.2)
 
@@ -184,7 +184,7 @@ DEPENDENCIES
   devise
   jquery-rails (~> 4.3.1)
   sass-rails (>= 6)
-  simple_form (~> 5.0.1)
+  simple_form
   sqlite3 (= 1.4.0)
   webpacker (~> 5.0)
 

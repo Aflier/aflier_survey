@@ -17,4 +17,5 @@ gemspec
 gem 'sass-rails', '>= 6'
 gem 'devise'
 gem 'webpacker', '~> 5.0'
+gem 'simple_form'
 # gem 'sqlite3'
