@@ -1,28 +1,33 @@
-<div class="row" id="main-panel">
-	<div class="col-md-12">
-    <h2><%= questionnaire.name %></h2>
-    <%= raw questionnaire.description %>
+<div data-controller="questionnaire">
 
-    <div id="question-section">
+  <div class="row" id="main-panel">
+    <div class="col-md-12">
+      <h2><%= questionnaire.name %></h2>
+      <%= raw questionnaire.description %>
 
-      <div id="x-accordion" role="tablist">
-        <% questionnaire.belonging_sections.order(:position).each do |belonging_section| %>
-          <%= render belonging_section.question_section,
-                     questionnaire: questionnaire,
-                     unique_ident: unique_ident,
-                     admin: admin %>
-        <% end %>
+      <div id="question-section">
+
+        <div id="x-accordion" role="tablist">
+          <% questionnaire.belonging_sections.order(:position).each do |belonging_section| %>
+            <%= render belonging_section.question_section,
+                       questionnaire: questionnaire,
+                       unique_ident: unique_ident,
+                       show_required: false,
+                       locked: questionnaire.is_locked?(unique_ident, false),
+                       admin: admin %>
+          <% end %>
+        </div>
       </div>
+
+      <%= render 'aflier_survey/questionnaires/submission_bar',
+                 questionnaire: questionnaire,
+                 unique_ident: unique_ident, submitted: questionnaire.is_submitted?(unique_ident) %>
+
+      <br><br>
+
     </div>
-
-    <%= render 'aflier_survey/questionnaires/submission_bar', questionnaire: questionnaire, unique_ident: unique_ident %>
-
-    <br><br>
-
   </div>
-</div>
 
-<% if @show_required %>
   <div class="modal fade" id="answer-required" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog " role="document">
       <div class="modal-content">
@@ -33,7 +38,7 @@
           </button>
         </div>
         <div class="modal-body">
-          Thank you for submitting you answers however their are questions that require answers. Please answer
+          Thank you for submitting your answers, however there are questions that require answers. Please answer
           the questions highlighted.
         </div>
         <div class="modal-footer">
@@ -43,4 +48,5 @@
     </div>
   </div>
 
-<% end %>
+
+</div>

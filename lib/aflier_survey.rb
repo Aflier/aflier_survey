@@ -23,6 +23,8 @@ module AflierSurvey
   class Configuration
     attr_accessor :calculations
     attr_accessor :use_words
+    attr_accessor :save_button_text
+    attr_accessor :submit_button_text
 
     def initialize
       @option = 'default_option'

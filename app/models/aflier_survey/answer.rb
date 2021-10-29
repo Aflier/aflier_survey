@@ -67,8 +67,13 @@ module AflierSurvey
     end
 
     def is_complete?
-
       self.complete = false
+
+      # If we cannot see the question_section then count as complete
+      unless self.question.question_section.can_view?(self.unique_ident)
+        self.complete = true
+      end
+
 
       self.complete = true if self.question.allow_not_sure? and self.not_sure?
       self.complete = true if self.question.question_type == Question::YES_OR_NO and not self.a_boolean.nil?
@@ -78,8 +83,40 @@ module AflierSurvey
       self.complete = true if self.question.question_type == Question::DECIMAL and not self.a_decimal.nil?
       self.complete = true if self.question.question_type == Question::OUT_OF and not self.an_integer.nil?
       self.complete = true if self.question.question_type == Question::WHOLE_NUMBER and not self.an_integer.nil?
-      self.complete = true if self.question.question_type == Question::SELECT_MANY and not self.option_answers.empty?
-      self.complete = true if self.question.question_type == Question::SELECT_ONE and not self.option_answers.empty?
+
+      if self.question.question_type == Question::TEXT_ON_YES
+        if self.a_boolean
+          if self.some_text.blank?
+            self.complete = false
+          else
+            self.complete = true
+          end
+        elsif self.a_boolean == false
+          self.complete = true
+        else
+          self.complete = false
+        end
+      end
+
+      if self.question.question_type == Question::SELECT_MANY || self.question.question_type == Question::SELECT_ONE
+        if other and self.some_text.blank?
+          # leaver complete as false
+        elsif other and (not self.some_text.blank?)
+          self.complete = true
+        else
+          self.complete = true unless self.option_answers.empty?
+        end
+      end
+
+      # Check for completeness on any dependent sections
+      self.question.question_sections.each do |question_section|
+        question_section.questions.each do |question|
+          question.answers.where(unique_ident: unique_ident).each do |answer|
+            answer.is_complete?
+            answer.save!
+          end
+        end
+      end
 
       self.complete
     end

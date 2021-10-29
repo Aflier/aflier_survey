@@ -1,6 +1,6 @@
-<div class="text-center mt-5" id="submissions-bar">
+<div class="text-center mt-5" id="submissions-bar" data-quesionnaire-target="submitBar">
 
-  <% if questionnaire.is_submitted?(unique_ident) %>
+  <% if submitted %>
     <div class="btn btn-success btn-lg disabled" style="margin-bottom: 2em;">
       Submitted!
     </div>
@@ -9,7 +9,7 @@
     <span class="btn btn-outline-primary btn-lg disabled">Saved!</span>
     <% if questionnaire.include_submit %>
       <span data-questionnaire-target="submit" data-action="click->questionnaire#submit">
-      <%= link_to "Save and Submit",
+      <%= link_to AflierSurvey.configuration.submit_button_text ? AflierSurvey.configuration.submit_button_text : "Save and Submit",
                   aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident),
                   id: "save-and-submit",
                   class: "btn btn-primary btn-lg",
@@ -17,10 +17,10 @@
       </span>
     <% end %>
   <% else %>
-    <%= link_to "Save", aflier_survey.save_questionnaire_path(questionnaire, unique_ident: unique_ident), class: "btn btn-primary btn-lg", remote: true %>
+    <%= link_to AflierSurvey.configuration.save_button_text ? AflierSurvey.configuration.save_button_text : 'Save', aflier_survey.save_questionnaire_path(questionnaire, unique_ident: unique_ident), class: "btn btn-primary btn-lg", remote: true %>
     <% if questionnaire.include_submit %>
       <span data-questionnaire-target="submit" data-action="click->questionnaire#submit">
-      <%= link_to "Save and Submit",
+      <%= link_to AflierSurvey.configuration.submit_button_text ? AflierSurvey.configuration.submit_button_text : "Save and Submit",
                   aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident),
                   id: "save-and-submit",
                   class: "btn btn-primary btn-lg",
@@ -28,11 +28,5 @@
       </span>
     <% end %>
   <% end %>
-
-  <script>
-      $( "#save-and-submit" ).click(function() {
-          $('#waiting').modal('show');
-      });
-  </script>
 
 </div>

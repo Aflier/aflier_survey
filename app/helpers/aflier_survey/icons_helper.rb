@@ -26,20 +26,22 @@ module AflierSurvey
       raw '<i class="far fa-circle"></i>'
     end
 
-
-
     def icons__trash
       return 'destroy' if AflierSurvey.configuration.use_words
       raw '<i class="fal fa-trash-alt"></i>'
     end
 
+
     def icons__toggle_off
-      '(off)'
+      return '(off)' if AflierSurvey.configuration.use_words
+      raw '<i class="fal fa-toggle-off"></i>'
     end
 
     def icons__toggle_on
-      '(on)'
+      return '(on)' if AflierSurvey.configuration.use_words
+      raw '<i class="fal fa-toggle-on"></i>'
     end
+
 
     def icons__up
       return 'up' if AflierSurvey.configuration.use_words

@@ -90,7 +90,7 @@ module AflierSurvey
     def option_choice
       @admin = false # TODO - Will be taken from call
 
-      @questionnaire  = Questionnaire.find(params[:questionnaire_id])
+      # @questionnaire  = Questionnaire.find(params[:questionnaire_id])
       @unique_ident   = @answer.unique_ident
       @repeat_section = @answer.repeat_section if @answer.question.question_section.many?
 
@@ -111,11 +111,11 @@ module AflierSurvey
       @answer.update(not_sure: false)
 
       @required_warning = @question.is_required?(@unique_ident)
-      @questionnaire.updated_questionnaire(@unique_ident)
+      # @questionnaire.updated_questionnaire(@unique_ident)
     end
 
     def other
-      @questionnaire    = Questionnaire.find(params[:questionnaire_id])
+      #      @questionnaire    = Questionnaire.find(params[:questionnaire_id])
       @unique_ident     = @answer.unique_ident
       @question         = @answer.question
       @repeat_section   = @answer.repeat_section
@@ -128,7 +128,7 @@ module AflierSurvey
         @answer.update(other: !@answer.other)
       end
 
-      @questionnaire.updated_questionnaire(@unique_ident)
+      # @questionnaire.updated_questionnaire(@unique_ident)
     end
 
     private

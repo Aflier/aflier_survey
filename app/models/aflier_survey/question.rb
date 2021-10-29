@@ -8,6 +8,7 @@ module AflierSurvey
 
     has_many :answers, dependent: :destroy
     has_many :options, dependent: :destroy
+    has_many :question_sections
 
     # has_many :mappings, dependent: :destroy TODO - needs adding back in
     # has_many :table_mappings, dependent: :destroy TODO - needs adding back in
@@ -132,9 +133,10 @@ module AflierSurvey
         return "Hello!"
 
       elsif question_type == SELECT_ONE
-        option = Option.joins(:option_answers).find_by(option_answers: { user_id: user.id, option_id: options.pluck(:id) })
+        option = Option.joins(:option_answers).find_by(option_answers: { unique_ident: unique_ident, option_id: options.pluck(:id) })
         return "Please provide answer for: #{self.name}" if option.nil?
-        return option.a_decimal
+        return option.a_decimal unless option.a_decimal.nil?
+        return option.name
       else
         latest_answer = relevant_answer(repeat_section, unique_ident)
 

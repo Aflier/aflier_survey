@@ -15,9 +15,21 @@ module AflierSurvey
     # GET /question_sections/1
     # GET /question_sections/1.json
     def show
-      @questionnaire = Questionnaire.where(name: 'MVL').first
-      @questionnaire = Questionnaire.all.first if @questionnaire.nil?
       @unique_ident = params[:unique_ident]
+      show_required = params[:show_required] == 'true'
+
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: { html: render_to_string(@question_section,
+                                                formats: :html,
+                                                locals: { unique_ident: @unique_ident,
+                                                          show_required: show_required,
+                                                          admin: false,
+                                                          locked: false }) }
+        end
+      end
+
     end
 
     # GET /question_sections/new
@@ -102,7 +114,8 @@ module AflierSurvey
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_section_params
       params.require(:question_section).permit(:name, :description, :section_description, :position, :many,
-                                               :default_open, :restrict_controls, :repeat_has_date, :unique_ident)
+                                               :default_open, :restrict_controls, :repeat_has_date, :unique_ident,
+                                               :question_id, :option_id)
     end
   end
 end

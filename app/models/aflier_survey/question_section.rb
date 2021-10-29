@@ -1,5 +1,8 @@
 module AflierSurvey
   class QuestionSection < ApplicationRecord
+    belongs_to :question, optional: true
+    belongs_to :option, optional: true
+
     has_many :questions, dependent: :destroy
     has_many :repeat_sections
     has_many :belonging_sections, dependent: :destroy
@@ -7,6 +10,23 @@ module AflierSurvey
     has_many :section_progresses, dependent: :destroy
 
     has_rich_text :section_description
+
+    def can_view?(unique_ident)
+      return true if self.question.nil?
+
+      if self.question
+        answer         = self.question.get_answer(unique_ident, nil)
+        answer__wanted = self.option.name
+
+        if answer == answer__wanted
+          return true
+        else
+          return false
+        end
+      end
+
+      true
+    end
 
     def is_complete?(unique_ident)
       return true if section_progresses.find_or_create_by!(unique_ident: unique_ident).status == SectionProgress::COMPLETE

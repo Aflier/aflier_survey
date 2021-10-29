@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_12_144841) do
+ActiveRecord::Schema.define(version: 2021_10_29_090815) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 2021_10_12_144841) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+# Could not dump table "aflier_survey_answers" because of following StandardError
+#   Unknown type 'string' for column 'unique_ident'
+
   create_table "aflier_survey_belonging_sections", force: :cascade do |t|
     t.integer "questionnaire_id"
     t.integer "question_section_id"
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_144841) do
   create_table "aflier_survey_option_answers", force: :cascade do |t|
     t.integer "answer_id"
     t.integer "option_id"
-    t.integer "unique_ident"
+    t.string "unique_ident"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -112,6 +115,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_144841) do
     t.boolean "repeat_has_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "question_id"
+    t.integer "option_id"
   end
 
   create_table "aflier_survey_questionnaire_submissions", force: :cascade do |t|

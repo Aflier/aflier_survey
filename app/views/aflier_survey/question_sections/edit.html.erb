@@ -73,6 +73,32 @@
         <%= render 'edit_form', question_section: @question_section %>
       </div>
     </div>
+
+    <div class="card shadow mb-3">
+      <div class="card-header">Gating</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label>Conditional Question</label>
+          <%= render 'stimulus/edit_in_place/collection_select_input',
+                     path: question_section_path(@question_section),
+                     klass: @question_section,
+                     attribute: :question_id,
+                     collection: AflierSurvey::Question.all.where(question_type: AflierSurvey::Question::SELECT_ONE) %>
+        </div>
+        <div class="mb-3">
+          <% if @question_section.question %>
+            <label>Option to Show</label>
+
+            <%= render 'stimulus/edit_in_place/collection_select_input',
+                       path: question_section_path(@question_section),
+                       klass: @question_section,
+                       attribute: :option_id,
+                       collection: @question_section.question.options %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 

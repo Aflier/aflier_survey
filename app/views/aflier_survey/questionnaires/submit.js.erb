@@ -1,8 +1,10 @@
+<% if false %>
 <% if @show_required %>
-  $('#main-panel').replaceWith('<%= j render 'aflier_survey/questionnaires/questionnaire', questionnaire: @questionnaire, unique_ident: @unique_ident, admin: false %>');
-  $('#answer-required').modal('show');
+$('#main-panel').replaceWith('<%= j render 'aflier_survey/questionnaires/questionnaire', questionnaire: @questionnaire, unique_ident: @unique_ident, admin: false %>');
+$('#answer-required').modal('show');
 <% else %>
-  $('#submissions-bar').replaceWith('<%= j render 'aflier_survey/questionnaires/submission_bar', questionnaire: @questionnaire, unique_ident: @unique_ident, user: @user %>');
+$('#submissions-bar').replaceWith('<%= j render 'aflier_survey/questionnaires/submission_bar', questionnaire: @questionnaire, unique_ident: @unique_ident, user: @user %>');
+<% end %>
 <% end %>
 
 <% if @scroll_to_top %>

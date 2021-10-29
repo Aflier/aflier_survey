@@ -1,3 +1,5 @@
+<% if false %>
+
 <% if questionnaire.complete_on_sections %>
 
   <div class="card-footer text-right" id="card-footer-<%= question_section.id %>">
@@ -7,5 +9,7 @@
       <%= link_to 'Complete', complete_question_section_path(question_section, user_id: user.id), class: "btn btn-sm btn-outline-primary", remote: true %>
     <% end %>
   </div>
+
+<% end %>
 
 <% end %>

@@ -1,10 +1,13 @@
 <% if @repeat_section %>
   $('#question-<%= @repeat_section.id %>-<%= @question.id %>').replaceWith('<%= j render 'repeat_sections/question', repeat_section: @repeat_section, question: @question, answer: @answer %>');
 <% else %>
-  $('#question-<%= @question.id %>').replaceWith('<%= j render 'aflier_survey/questions/question', unique_ident: @unique_ident, questionnaire: @questionnaire, question: @question, answer: @answer %>');
+  $('#question-<%= @question.id %>').replaceWith('<%= j render 'aflier_survey/questions/question', unique_ident: @unique_ident, questionnaire: @questionnaire, question: @question, answer: @answer, locked: false, show_required: false %>');
 <% end %>
 
+<% if false %>
 $('#submissions-bar').replaceWith('<%= j render 'aflier_survey/questionnaires/submission_bar', questionnaire: @questionnaire, unique_ident: @unique_ident %>');
+<% end %>
+
 $('#complete-<%= @question_section.id %>').fadeOut('500');
 $('#card-footer-<%= @question_section.id %>').replaceWith('<%= j render 'aflier_survey/question_sections/card_footer', questionnaire: @questionnaire, question_section: @question_section, user: @user %>');
 

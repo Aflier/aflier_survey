@@ -1,0 +1,32 @@
+<!-- ONLY EDIT IN 'STIMULUS-BASE' V0.1.0 -->
+
+<% options = {} if local_assigns[:options].nil? %>
+
+<div data-controller="edit-in-place"
+     data-edit-in-place-attribute="<%= attribute.to_s %>"
+     data-edit-in-place-url-value="<%= path %>">
+  <div class="form-group">
+    <div class="input-group">
+      <%= form_with(model: klass, local: true) do |f| %>
+        <%= f.collection_select attribute,
+                                collection, :id, :name,
+                                { include_blank: "#{attribute.to_s.humanize}?" },
+                                {
+                                  class: "form-select #{ 'border-warning' if klass.attributes[attribute.to_s].blank? }",
+                                  data: {
+                                    target: 'edit-in-place.value',
+                                    action: 'edit-in-place#saveChange'
+                                  },
+                                  disabled: options[:hide_edit]
+                                } %>
+      <% end %>
+
+      <div class="input-group-text"
+           data-action="click->locking#unlock"
+           data-target="string.state locking.lock">
+        <i class="fal fa-save text-success"></i>
+      </div>
+    </div>
+  </div>
+  <div data-edit-in-place-target="result"></div>
+</div>
