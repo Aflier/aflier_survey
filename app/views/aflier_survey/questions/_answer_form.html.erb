@@ -63,8 +63,10 @@
                     remote: true %>
         <br><br>
       <% elsif question.question_type == AflierSurvey::Question::SECTION_ON_YES or question.question_type == AflierSurvey::Question::SECTION_ON_NO %>
-        <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-        <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no'), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+        <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'),
+                    class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+        <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no'),
+                    class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
         <br><br>
       <% elsif question.question_type == AflierSurvey::Question::TEXT_ON_YES %>
         <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
@@ -82,6 +84,7 @@
           </div>
         <% end %>
       <% elsif question.question_type == AflierSurvey::Question::SELECT_ONE %>
+        <span data-questionnaire-target="submit" data-action="click->aflier-survey#refresh">
         <% question.options.order(:position).each do |option| %>
           <p>
             <% if answer.user_chose(option, answer) %>
@@ -91,6 +94,7 @@
             <% end %>
           </p>
         <% end %>
+        </span>
         <% if question.text_on_other %>
           <% if answer.other %>
             <%= link_to icons__radio_on, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
@@ -114,6 +118,8 @@
         <% end %>
 
       <% elsif question.question_type == AflierSurvey::Question::SELECT_MANY %>
+        <span data-questionnaire-target="submit" data-action="click->aflier-survey#refresh">
+
         <% question.options.order(:position).each do |option| %>
           <p>
             <% if answer.user_chose(option, answer) %>
@@ -124,7 +130,7 @@
           </p>
         <% end %>
 
-        <% if question.text_on_other %>
+          <% if question.text_on_other %>
           <% if answer.other %>
             <%= link_to icons__radio_on, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
           <% else %>
@@ -132,7 +138,7 @@
           <% end %>
         <% end %>
 
-        <% if answer.other? and answer.question.text_on_other? %>
+          <% if answer.other? and answer.question.text_on_other? %>
 
           <div class="autosave">
             <%= render 'stimulus/edit_in_place/general_input',
@@ -144,6 +150,7 @@
           </div>
 
         <% end %>
+        </span>
       <% elsif question.question_type == AflierSurvey::Question::OUT_OF %>
         <% (question.minimum .. question.maximum).each do |choice| %>
 

@@ -15,10 +15,7 @@ module AflierSurvey
       return true if self.question.nil?
 
       if self.question
-        answer         = self.question.get_answer(unique_ident, nil)
-        answer__wanted = self.option.name
-
-        if answer == answer__wanted
+        if question.is_option_chosen?(unique_ident, option)
           return true
         else
           return false

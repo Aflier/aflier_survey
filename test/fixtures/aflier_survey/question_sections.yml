@@ -15,3 +15,9 @@ two:
   default_open: false
   restrict_controls: false
   data_date: 2019-03-27
+
+select_many_can_see:
+  name: 'SELECT-MANY-CAN-SEE'
+  question: select_many_can_see
+  option: select_many_can_see
+

@@ -11,3 +11,11 @@ two:
   position: 1
   question: two
   a_decimal: 9.99
+
+select_many_can_see:
+  name: 'SELECT-MANY-CAN-SEE'
+  question: select_many_can_see
+
+select_many_cant_see:
+  name: 'SELECT-MANY-CANT-SEE'
+  question: select_many_cant_see

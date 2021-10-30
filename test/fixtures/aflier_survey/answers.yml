@@ -29,3 +29,6 @@ two:
   file: MyString
   other: false
   complete: false
+
+select_many_can_see:
+  question: select_many_can_see

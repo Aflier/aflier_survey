@@ -122,6 +122,11 @@ module AflierSurvey
       return answers
     end
 
+    def is_option_chosen?(unique_ident, option)
+      option__found = Option.joins(:option_answers).find_by(option_answers: { unique_ident: unique_ident, option_id: option.id })
+      option__found
+    end
+
     # If this is a question in a repeated section it will give the latest.
     def get_answer(unique_ident, repeat_section)
       if question_type == CALCULATION and repeat_section.nil?

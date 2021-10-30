@@ -9,3 +9,6 @@ two:
   answer_id: 1
   option_id: 1
   unique_ident: 1
+
+select_many_can_see:
+  answer: select_many_can_see

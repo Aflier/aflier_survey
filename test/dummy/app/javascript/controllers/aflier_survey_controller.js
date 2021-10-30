@@ -7,11 +7,11 @@ export default class extends Controller {
   static values = { submitUrl: String }
 
   connect() {
-    console.log('Questionnaire#connect')
+    console.log('AflierSurvey#connect')
   }
 
   submit(event) {
-    console.log('Questionnaire#submit')
+    console.log('AflierSurvey#submit')
 
     let that = this
 
@@ -24,23 +24,27 @@ export default class extends Controller {
 
     // Redraw all sections
 
+    this.refresh();
+
+  }
+
+  refresh() {
     this.questionSectionTargets.forEach(function (element, index) {
-      console.log(`Questionnaire#submit - question section path: ${element.dataset.path}`)
+      console.log(`AflierSurvey#submit - question section path: ${element.dataset.path}`)
 
       Rails.ajax({
         type: 'GET',
         url: element.dataset.path,
         dataType: 'json',
         success: function (response) {
-          console.log('Questionnaire#submit - redraw section')
+          console.log('AflierSurvey#submit - redraw section')
           element.outerHTML = response.html
-          console.log('Questionnaire#submit - redraw section')
+          console.log('AflierSurvey#submit - redraw section')
         },
         error: function (response) {
           console.log('Setting could not be saved.')
         }
       })
     });
-
   }
 }

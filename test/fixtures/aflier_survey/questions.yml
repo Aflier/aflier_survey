@@ -25,3 +25,8 @@ two:
   required: false
   text_hint: MyText
   calc: two
+
+select_many_can_see:
+  name: 'SELECT_MANY_CAN_SEE'
+  question_type: <%= AflierSurvey::Question::SELECT_MANY %>
+  question_section: one
