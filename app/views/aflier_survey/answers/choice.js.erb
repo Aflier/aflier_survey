@@ -1,10 +1,13 @@
 <% if @repeat_section %>
-  $('#question-<%= @repeat_section.id %>-<%= @question.id %>').replaceWith('<%= j render 'repeat_sections/question', questionnaire: @questionnaire, repeat_section: @repeat_section, question: @question, answer: @answer %>');
+  $('#question-<%= @repeat_section.id %>-<%= @question.id %>').replaceWith('<%= j render 'repeat_sections/question', repeat_section: @repeat_section, question: @question, answer: @answer %>');
 <% else %>
-  $('#question-<%= @question.id %>').replaceWith('<%= j render 'aflier_survey/questions/question', questionnaire: @questionnaire, question: @question, answer: @answer, unique_ident: @unique_ident, admin: @admin %>');
-  $('#following-section-<%= @question.question_section.id %>').replaceWith('<%= j render 'aflier_survey/question_sections/following_section', questionnaire: @questionnaire, question_section: @question.question_section, unique_ident: @unique_ident, admin: @admin %>');
+ $('#question-<%= @question.id %>').replaceWith('<%= j render 'aflier_survey/questions/question', question: @question, answer: @answer, unique_ident: @unique_ident, admin: @admin, locked: false, show_required: true %>');
+  $('#following-section-<%= @question.question_section.id %>').replaceWith('<%= j render 'aflier_survey/question_sections/following_section', questionnaire: @questionnaire, unique_ident: @unique_ident, admin: @admin %>');
 <% end %>
 
-$('#submissions-bar').replaceWith('<%= j render 'aflier_survey/questionnaires/submission_bar', questionnaire: @questionnaire, unique_ident: @unique_ident %>');
+<% if false %>
+$('#submissions-bar').replaceWith('<%= j render 'aflier_survey/questionnaires/submission_bar', unique_ident: @unique_ident %>');
+<% end %>
+
 $('#complete-<%= @question_section.id %>').fadeOut('500');
 $('#card-footer-<%= @question_section.id %>').replaceWith('<%= j render 'aflier_survey/question_sections/card_footer', question_section: @question_section, unique_ident: @unique_ident, questionnaire: @questionnaire %>');

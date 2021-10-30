@@ -12,7 +12,7 @@ module AflierSurvey
     end
 
     test "creating a Question input" do
-      visit question_inputs_url
+      visit aflier_survey.question_inputs_url
       click_on "New Question Input"
 
       fill_in "Calc", with: @question_input.calc_id

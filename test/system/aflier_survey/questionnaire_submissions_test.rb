@@ -12,7 +12,7 @@ module AflierSurvey
     end
 
     test "creating a Questionnaire submission" do
-      visit questionnaire_submissions_url
+      visit aflier_survey.questionnaire_submissions_url
       click_on "New Questionnaire Submission"
 
       fill_in "Questionnaire", with: @questionnaire_submission.questionnaire_id

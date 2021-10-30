@@ -7,7 +7,7 @@ module AflierSurvey
     end
 
     test "visiting the index" do
-      visit belonging_sections_url
+      visit aflier_survey.belonging_sections_url
       assert_selector "h1", text: "Belonging Sections"
     end
 

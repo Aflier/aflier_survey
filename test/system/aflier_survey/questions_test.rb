@@ -54,7 +54,7 @@ module AflierSurvey
     end
 
     test "destroying a Question" do
-      visit questions_url
+      visit aflier_survey.questions_url
       page.accept_confirm do
         click_on "Destroy", match: :first
       end

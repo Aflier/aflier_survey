@@ -118,6 +118,8 @@ module AflierSurvey
         end
       end
 
+      is_it_complete = self.complete
+
       self.complete
     end
 

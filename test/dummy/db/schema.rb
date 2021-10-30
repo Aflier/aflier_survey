@@ -50,8 +50,24 @@ ActiveRecord::Schema.define(version: 2021_10_29_090815) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-# Could not dump table "aflier_survey_answers" because of following StandardError
-#   Unknown type 'string' for column 'unique_ident'
+  create_table "aflier_survey_answers", force: :cascade do |t|
+    t.integer "question_id"
+    t.string "unique_ident"
+    t.string "a_string"
+    t.decimal "a_decimal"
+    t.integer "an_integer"
+    t.date "a_date"
+    t.time "a_time"
+    t.integer "repeat_section_id"
+    t.boolean "a_boolean"
+    t.boolean "not_sure"
+    t.string "file"
+    t.boolean "other"
+    t.boolean "complete"
+    t.text "some_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "aflier_survey_belonging_sections", force: :cascade do |t|
     t.integer "questionnaire_id"
@@ -151,6 +167,7 @@ ActiveRecord::Schema.define(version: 2021_10_29_090815) do
     t.boolean "text_on_other"
     t.integer "following_section_id"
     t.boolean "required"
+    t.text "general_store"
     t.text "text_hint"
     t.integer "question_y_id"
     t.string "bounds_x"
@@ -158,11 +175,10 @@ ActiveRecord::Schema.define(version: 2021_10_29_090815) do
     t.integer "calc_id"
     t.integer "question_id"
     t.integer "question_section_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.decimal "value_true"
     t.decimal "value_false"
-    t.text "general_store"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "unique_key"
   end
 

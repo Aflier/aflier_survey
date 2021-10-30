@@ -74,7 +74,7 @@ module AflierSurvey
     def choice
       @admin = false # TODO - Will be taken from call
 
-      @questionnaire    = Questionnaire.find(params[:questionnaire_id])
+      # @questionnaire    = Questionnaire.find(params[:questionnaire_id])
       @question         = @answer.question
       @unique_ident     = @answer.unique_ident
       @repeat_section   = @answer.repeat_section

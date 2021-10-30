@@ -26,7 +26,7 @@ module AflierSurvey
     end
 
     test "updating a Option" do
-      visit options_url
+      visit aflier_survey.options_url
       click_on "Edit", match: :first
 
       fill_in "A decimal", with: @option.a_decimal

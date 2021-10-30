@@ -12,7 +12,7 @@ module AflierSurvey
     end
 
     test "creating a Option answer" do
-      visit option_answers_url
+      visit aflier_surbey.option_answers_url
       click_on "New Option Answer"
 
       fill_in "Answer", with: @option_answer.answer_id
@@ -38,7 +38,7 @@ module AflierSurvey
     end
 
     test "destroying a Option answer" do
-      visit option_answers_url
+      visit aflier_survey.option_answers_url
       page.accept_confirm do
         click_on "Destroy", match: :first
       end
