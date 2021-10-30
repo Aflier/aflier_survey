@@ -26,11 +26,12 @@
 
     <div>
       <% if question.question_type == AflierSurvey::Question::DATE %>
-        <div class="autosave">
-          <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
-            <%= f.input :a_date, start_year: Date.today.year - 110, label: false, :order => [:day, :month, :year] %>
-          <% end %>
-        </div>
+        <%= render 'stimulus/edit_in_place/date_input', attribute: :a_date,
+                   klass: answer,
+                   attribute: :a_date,
+                   options: { url: aflier_survey.answer_path(answer),
+                              value: answer.a_date&.to_s(:db)} %>
+
       <% elsif question.question_type == AflierSurvey::Question::TEXT %>
         <div class="autosave">
           <%= render 'stimulus/edit_in_place/general_input',

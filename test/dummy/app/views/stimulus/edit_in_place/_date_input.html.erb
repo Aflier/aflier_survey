@@ -1,5 +1,7 @@
 <!-- ONLY EDIT IN 'STIMULUS-BASE' V0.2.0 -->
 
+<% options = {} if local_assigns[:options].nil? %>
+
 <% if options[:hide_edit] %>
   <% access = options[:hide_edit] %>
   <%= options[:hide_edit] %>
@@ -15,7 +17,7 @@
         <input class="form-control"
                type="date"
                value="<%= options[:value] %>"
-               name="reporting_party[<%= attribute %>]"
+               name="<%= klass.class.name.to_s.split('::').last.downcase %>[<%= attribute %>]"
                data-target="edit-in-place.value"
                data-action="change->edit-in-place#saveChange keyup->edit-in-place#changing" value="<%= options[:value] %>">
       <% else %>
