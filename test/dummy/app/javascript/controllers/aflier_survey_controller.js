@@ -28,30 +28,31 @@ export default class extends Controller {
   }
 
   refresh() {
+    let that = this
 
-    this.questionSectionTargets.forEach(function (element, index) {
-      console.log(`AflierSurvey#submit - question section path: ${element.dataset.path + ` refresh ${element.dataset.refresh}`}`)
+    setTimeout(function(){
 
-      if (element.dataset.refresh === 'yes') {
+      that.questionSectionTargets.forEach(function (element, index) {
+        console.log(`AflierSurvey#submit - question section path: ${element.dataset.path + ` refresh ${element.dataset.refresh}`}`)
 
-        Rails.ajax({
-          type: 'GET',
-          url: element.dataset.path,
-          dataType: 'json',
-          success: function (response) {
+        if (element.dataset.refresh === 'yes') {
 
-            setTimeout(function(){
+          Rails.ajax({
+            type: 'GET',
+            url: element.dataset.path,
+            dataType: 'json',
+            success: function (response) {
               console.log('AflierSurvey#submit - redraw section')
               element.outerHTML = response.html
               console.log('AflierSurvey#submit - redraw section finished')
-            }, 1000);
-          },
-          error: function (response) {
-            console.log('Setting could not be saved.')
-          }
-        })
+            },
+            error: function (response) {
+              console.log('Setting could not be saved.')
+            }
+          })
 
-      }
-    });
+        }
+      });
+    }, 500);
   }
 }
