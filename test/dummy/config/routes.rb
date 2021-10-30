@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'bootstrap/index'
   devise_for :users
   resources :users
 

@@ -15,12 +15,19 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
+import "../stylesheets/application.scss"
 
-import Rails from "@rails/ujs"
-import "controllers"
+require("@rails/ujs").start()
+require("turbolinks").start()
+// require("channels")
+require("stimulus")
 
-Rails.start()
+import $ from 'jquery'
+import 'bootstrap'
 
-require("trix")
-require("@rails/actiontext")
+document.addEventListener("turbolinks:load", function() {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
+})
+
+import 'controllers'

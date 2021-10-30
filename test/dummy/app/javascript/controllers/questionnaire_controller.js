@@ -1,5 +1,6 @@
 import { Controller } from "stimulus"
 import Rails from "@rails/ujs";
+import * as bootstrap from 'bootstrap'
 
 export default class extends Controller {
   static targets = [ "content", "questionSection", "submitBar" ]
@@ -13,7 +14,12 @@ export default class extends Controller {
     console.log('Questionnaire#submit')
 
     let that = this
-    let myModal = bootstrap.Modal.getInstance(document.getElementById('answer-required'))
+
+
+    var myModal = new bootstrap.Modal(document.getElementById('answer-required'), {
+      keyboard: false
+    })
+
     myModal.show()
 
     // Redraw all sections
