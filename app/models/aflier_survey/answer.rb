@@ -9,8 +9,15 @@ module AflierSurvey
 
     NOT_SURE = 'not sure'.freeze
 
-    before_validation :is_complete?
+    before_validation :is_complete_check?
     after_commit :update_audit
+
+    def is_complete?
+      complete = is_complete_check?
+      self.save
+
+      complete
+    end
 
     def update_audit
       return if unique_ident.nil?
@@ -66,62 +73,6 @@ module AflierSurvey
       self.save!
     end
 
-    def is_complete?
-      self.complete = false
-
-      # If we cannot see the question_section then count as complete
-      unless self.question.question_section.can_view?(self.unique_ident)
-        self.complete = true
-      end
-
-
-      self.complete = true if self.question.allow_not_sure? and self.not_sure?
-      self.complete = true if self.question.question_type == Question::YES_OR_NO and not self.a_boolean.nil?
-      self.complete = true if self.question.question_type == Question::STRING and not self.a_string.blank?
-      self.complete = true if self.question.question_type == Question::TEXT and not self.some_text.nil?
-      self.complete = true if self.question.question_type == Question::DATE and not self.a_date.nil?
-      self.complete = true if self.question.question_type == Question::DECIMAL and not self.a_decimal.nil?
-      self.complete = true if self.question.question_type == Question::OUT_OF and not self.an_integer.nil?
-      self.complete = true if self.question.question_type == Question::WHOLE_NUMBER and not self.an_integer.nil?
-
-      if self.question.question_type == Question::TEXT_ON_YES
-        if self.a_boolean
-          if self.some_text.blank?
-            self.complete = false
-          else
-            self.complete = true
-          end
-        elsif self.a_boolean == false
-          self.complete = true
-        else
-          self.complete = false
-        end
-      end
-
-      if self.question.question_type == Question::SELECT_MANY || self.question.question_type == Question::SELECT_ONE
-        if other and self.some_text.blank?
-          # leaver complete as false
-        elsif other and (not self.some_text.blank?)
-          self.complete = true
-        else
-          self.complete = true unless self.option_answers.empty?
-        end
-      end
-
-      # Check for completeness on any dependent sections
-      self.question.question_sections.each do |question_section|
-        question_section.questions.each do |question|
-          question.answers.where(unique_ident: unique_ident).each do |answer|
-            answer.is_complete?
-            answer.save!
-          end
-        end
-      end
-
-      is_it_complete = self.complete
-
-      self.complete
-    end
 
     def linear_assessment_colour(result_grouping, repeat_section)
       linear_assessment = nil
@@ -219,6 +170,64 @@ module AflierSurvey
     end
 
     private
+
+    def is_complete_check?
+      self.complete = false
+
+      # If we cannot see the question_section then count as complete
+      unless self.question.question_section.can_view?(self.unique_ident)
+        self.complete = true
+      end
+
+
+      self.complete = true if self.question.allow_not_sure? and self.not_sure?
+      self.complete = true if self.question.question_type == Question::YES_OR_NO and not self.a_boolean.nil?
+      self.complete = true if self.question.question_type == Question::STRING and not self.a_string.blank?
+      self.complete = true if self.question.question_type == Question::TEXT and not self.some_text.nil?
+      self.complete = true if self.question.question_type == Question::DATE and not self.a_date.nil?
+      self.complete = true if self.question.question_type == Question::DECIMAL and not self.a_decimal.nil?
+      self.complete = true if self.question.question_type == Question::OUT_OF and not self.an_integer.nil?
+      self.complete = true if self.question.question_type == Question::WHOLE_NUMBER and not self.an_integer.nil?
+
+      if self.question.question_type == Question::TEXT_ON_YES
+        if self.a_boolean
+          if self.some_text.blank?
+            self.complete = false
+          else
+            self.complete = true
+          end
+        elsif self.a_boolean == false
+          self.complete = true
+        else
+          self.complete = false
+        end
+      end
+
+      if self.question.question_type == Question::SELECT_MANY || self.question.question_type == Question::SELECT_ONE
+        if other and self.some_text.blank?
+          # leaver complete as false
+        elsif other and (not self.some_text.blank?)
+          self.complete = true
+        else
+          self.complete = true unless self.option_answers.empty?
+        end
+      end
+
+      # Check for completeness on any dependent sections
+      self.question.question_sections.each do |question_section|
+        question_section.questions.each do |question|
+          question.answers.where(unique_ident: unique_ident).each do |answer|
+            answer.is_complete?
+            answer.save!
+          end
+        end
+      end
+
+      is_it_complete = self.complete
+
+      self.complete
+    end
+
 
     def question_condition_met(linear_assessment)
       if get_value.nil?

@@ -1,4 +1,5 @@
 <div class="card shadow mb-3" id="question-section-<%= question_section.id %>"
+     data-refresh="<%= 'yes' if question_section.question %>"
      data-path="<%= aflier_survey.question_section_path(question_section, unique_ident: unique_ident, show_required: true) %>"
      data-aflier-survey-target="questionSection"
      <%= 'hidden' unless question_section.can_view?(unique_ident) %>>

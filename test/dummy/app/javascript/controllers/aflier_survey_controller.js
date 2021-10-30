@@ -15,7 +15,6 @@ export default class extends Controller {
 
     let that = this
 
-
     var myModal = new bootstrap.Modal(document.getElementById('answer-required'), {
       keyboard: false
     })
@@ -29,22 +28,30 @@ export default class extends Controller {
   }
 
   refresh() {
-    this.questionSectionTargets.forEach(function (element, index) {
-      console.log(`AflierSurvey#submit - question section path: ${element.dataset.path}`)
 
-      Rails.ajax({
-        type: 'GET',
-        url: element.dataset.path,
-        dataType: 'json',
-        success: function (response) {
-          console.log('AflierSurvey#submit - redraw section')
-          element.outerHTML = response.html
-          console.log('AflierSurvey#submit - redraw section')
-        },
-        error: function (response) {
-          console.log('Setting could not be saved.')
-        }
-      })
+    this.questionSectionTargets.forEach(function (element, index) {
+      console.log(`AflierSurvey#submit - question section path: ${element.dataset.path + ` refresh ${element.dataset.refresh}`}`)
+
+      if (element.dataset.refresh === 'yes') {
+
+        Rails.ajax({
+          type: 'GET',
+          url: element.dataset.path,
+          dataType: 'json',
+          success: function (response) {
+
+            setTimeout(function(){
+              console.log('AflierSurvey#submit - redraw section')
+              element.outerHTML = response.html
+              console.log('AflierSurvey#submit - redraw section finished')
+            }, 1000);
+          },
+          error: function (response) {
+            console.log('Setting could not be saved.')
+          }
+        })
+
+      }
     });
   }
 }

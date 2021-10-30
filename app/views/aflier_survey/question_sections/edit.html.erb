@@ -83,7 +83,9 @@
                      path: question_section_path(@question_section),
                      klass: @question_section,
                      attribute: :question_id,
-                     collection: AflierSurvey::Question.all.where(question_type: AflierSurvey::Question::SELECT_ONE) %>
+                     collection: AflierSurvey::Question.all
+                       .where(question_type: [AflierSurvey::Question::SELECT_ONE,
+                                              AflierSurvey::Question::SELECT_MANY]) %>
         </div>
         <div class="mb-3">
           <% if @question_section.question %>
