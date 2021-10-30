@@ -81,19 +81,36 @@ module AflierSurvey
 
       if @questionnaire.is_complete?(@unique_ident)
         @questionnaire_submission.update_attribute(:status, QuestionnaireSubmission::SUBMITTED)
-#        User.where(notify_submission: true).each do |user|
-#          QuestionnaireMailer.submission(user, @unique_ident).deliver_now
-#        end
+        #        User.where(notify_submission: true).each do |user|
+        #          QuestionnaireMailer.submission(user, @unique_ident).deliver_now
+        #        end
       else
-        @show_required = true
+        show_required = true
         @scroll_to_top = true
       end
+
+      render json: { show_required: show_required,
+                     html: render_to_string(partial: 'aflier_survey/questionnaires/submission_bar',
+                                            locals: {
+                                              questionnaire: @questionnaire,
+                                              unique_ident: @unique_ident,
+                                              submitted: @questionnaire.is_submitted?(@unique_ident) })
+      }
+
     end
 
     def save
       @unique_ident             = params[:unique_ident]
       @questionnaire_submission = @questionnaire.questionnaire_submissions.find_or_create_by!(unique_ident: @unique_ident)
       @questionnaire_submission.update_attribute(:status, QuestionnaireSubmission::SAVED)
+
+      render json: { show_required: false,
+                     html: render_to_string(partial: 'aflier_survey/questionnaires/submission_bar',
+                                            locals: {
+                                              questionnaire: @questionnaire,
+                                              unique_ident: @unique_ident,
+                                              submitted: @questionnaire.is_submitted?(@unique_ident) })
+      }
     end
 
     def assign

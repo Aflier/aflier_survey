@@ -8,24 +8,25 @@
   <% elsif questionnaire.is_saved?(unique_ident) %>
     <span class="btn btn-outline-primary btn-lg disabled">Saved!</span>
     <% if questionnaire.include_submit %>
-      <span data-questionnaire-target="submit" data-action="click->aflier-survey#submit">
-      <%= link_to AflierSurvey.configuration.submit_button_text ? AflierSurvey.configuration.submit_button_text : "Save and Submit",
-                  aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident),
-                  id: "save-and-submit",
-                  class: "btn btn-primary btn-lg",
-                  remote: true %>
-      </span>
+      <button data-questionnaire-target="submit" data-action="click->aflier-survey#submit"
+              name="<%= aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident) %>"
+              class="btn btn-primary btn-lg">
+        <%= AflierSurvey.configuration.submit_button_text ? AflierSurvey.configuration.submit_button_text : "Save and Submit" %>
+      </button>
     <% end %>
   <% else %>
-    <%= link_to AflierSurvey.configuration.save_button_text ? AflierSurvey.configuration.save_button_text : 'Save', aflier_survey.save_questionnaire_path(questionnaire, unique_ident: unique_ident), class: "btn btn-primary btn-lg", remote: true %>
+    <button data-questionnaire-target="submit" data-action="click->aflier-survey#submit"
+            name="<%= aflier_survey.save_questionnaire_path(questionnaire, unique_ident: unique_ident) %>"
+            class="btn btn-primary btn-lg">
+      <%= AflierSurvey.configuration.save_button_text ? AflierSurvey.configuration.save_button_text : 'Save' %>
+    </button>
+
     <% if questionnaire.include_submit %>
-      <span data-questionnaire-target="submit" data-action="click->aflier-survey#submit">
-      <%= link_to AflierSurvey.configuration.submit_button_text ? AflierSurvey.configuration.submit_button_text : "Save and Submit",
-                  aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident),
-                  id: "save-and-submit",
-                  class: "btn btn-primary btn-lg",
-                  remote: true %>
-      </span>
+      <button data-questionnaire-target="submit" data-action="click->aflier-survey#submit"
+              name="<%= aflier_survey.submit_questionnaire_path(questionnaire, unique_ident: unique_ident) %>"
+              class="btn btn-primary btn-lg">
+        <%= AflierSurvey.configuration.submit_button_text ? AflierSurvey.configuration.submit_button_text : "Save and Submit" %>
+      </button>
     <% end %>
   <% end %>
 
