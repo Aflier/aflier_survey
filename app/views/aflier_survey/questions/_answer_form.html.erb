@@ -4,6 +4,7 @@
       <i class="far fa-save float-right mt-3 save-state" style="color: #4db197f7"></i>
       <i class="far fa-save float-right mt-3 unsave-state" style="color: #F04124; display: none"></i>
     <% end %>
+
     <label><%= '*' if question.required %> <%= question.name %></label>
 
     <% unless question.text_hint.blank? %>
@@ -26,25 +27,34 @@
 
     <div>
       <% if question.question_type == AflierSurvey::Question::DATE %>
-        <%= render 'stimulus/edit_in_place/date_input', attribute: :a_date,
-                   klass: answer,
-                   attribute: :a_date,
-                   options: { url: aflier_survey.answer_path(answer),
-                              value: answer.a_date&.to_s(:db)} %>
+        <% if locked %>
+          <div class="form-control bg-secondary"><%= answer.get_value %></div>
+        <% else %>
+          <%= render 'stimulus/edit_in_place/date_input', attribute: :a_date,
+                     klass: answer,
+                     attribute: :a_date,
+                     options: { url: aflier_survey.answer_path(answer),
+                                value: answer.a_date&.to_s(:db)} %>
+        <% end %>
 
       <% elsif question.question_type == AflierSurvey::Question::TEXT %>
-        <div class="autosave">
-          <%= render 'stimulus/edit_in_place/general_input',
+        <% if locked %>
+          <div class="form-control bg-secondary"><%= answer.get_value %></div>
+        <% else %>          <%= render 'stimulus/edit_in_place/general_input',
                      field_type: :textarea,
                      klass: answer,
                      attribute: :some_text,
                      options: { url: aflier_survey.answer_path(answer),
                                 value: answer.some_text} %>
-        </div>
+        <% end %>
       <% elsif question.question_type == AflierSurvey::Question::DECIMAL %>
         <div class="autosave">
-          <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
-            <%= f.input :a_decimal, label: false %>
+          <% if locked %>
+            <div class="form-control bg-secondary"><%= answer.get_value %></div>
+          <% else %>
+            <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
+              <%= f.input :a_decimal, label: false %>
+            <% end %>
           <% end %>
         </div>
       <% elsif question.question_type == AflierSurvey::Question::WHOLE_NUMBER %>
@@ -54,24 +64,24 @@
           <% end %>
         </div>
       <% elsif question.question_type == AflierSurvey::Question::YES_OR_NO %>
-        <%= link_to (answer.a_boolean ? icons__radio_on : icons__radio_off ) + ' Yes',
-                    aflier_survey.choice_answer_path(answer, choice: 'yes'),
-                    class: "btn",
-                    remote: true %>
-        <%= link_to (answer.a_boolean == false ? icons__radio_on : icons__radio_off) + ' No',
-                    aflier_survey.choice_answer_path(answer, choice: 'no'),
-                    class: "btn",
-                    remote: true %>
+        <%= link_to_if !locked, (answer.a_boolean ? icons__radio_on : icons__radio_off ) + ' Yes',
+                       aflier_survey.choice_answer_path(answer, choice: 'yes'),
+                       class: "btn",
+                       remote: true %>
+        <%= link_to_if !locked, (answer.a_boolean == false ? icons__radio_on : icons__radio_off) + ' No',
+                       aflier_survey.choice_answer_path(answer, choice: 'no'),
+                       class: "btn",
+                       remote: true %>
         <br><br>
       <% elsif question.question_type == AflierSurvey::Question::SECTION_ON_YES or question.question_type == AflierSurvey::Question::SECTION_ON_NO %>
-        <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'),
+        <%= link_to_if !locked, 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'),
                     class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-        <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no'),
+        <%= link_to_if !locked, 'No', aflier_survey.choice_answer_path(answer, choice: 'no'),
                     class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
         <br><br>
       <% elsif question.question_type == AflierSurvey::Question::TEXT_ON_YES %>
-        <%= link_to 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-        <%= link_to 'No', aflier_survey.choice_answer_path(answer, choice: 'no'), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
+        <%= link_to_if !locked, 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
+        <%= link_to_if !locked, 'No', aflier_survey.choice_answer_path(answer, choice: 'no'), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
 
         <% if answer.a_boolean? %>
           <div>
@@ -85,22 +95,22 @@
           </div>
         <% end %>
       <% elsif question.question_type == AflierSurvey::Question::SELECT_ONE %>
-        <span data-questionnaire-target="submit" data-action="click->aflier-survey#refresh">
+        <span data-questionnaire-target="submit" data-action="<%= 'click->aflier-survey#refresh' unless locked %>">
         <% question.options.order(:position).each do |option| %>
           <p>
             <% if answer.user_chose(option, answer) %>
-              <%= link_to icons__radio_on, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
+              <%= link_to_if !locked, icons__radio_on, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
             <% else %>
-              <%= link_to icons__radio_off, aflier_survey.option_choice_answer_path(answer, option_id: option.id), id: "option-#{option.id}", remote: true %> <%= option.name %>
+              <%= link_to_if !locked, icons__radio_off, aflier_survey.option_choice_answer_path(answer, option_id: option.id), id: "option-#{option.id}", remote: true %> <%= option.name %>
             <% end %>
           </p>
         <% end %>
         </span>
         <% if question.text_on_other %>
           <% if answer.other %>
-            <%= link_to icons__radio_on, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
+            <%= link_to_if !locked, icons__radio_on, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
           <% else %>
-            <%= link_to icons__radio_off, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
+            <%= link_to_if !locked, icons__radio_off, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
           <% end %>
         <% end %>
 
@@ -119,23 +129,24 @@
         <% end %>
 
       <% elsif question.question_type == AflierSurvey::Question::SELECT_MANY %>
-        <span data-questionnaire-target="submit" data-action="click->aflier-survey#refresh">
+        <span data-questionnaire-target="submit"
+              data-action="<%= 'click->aflier-survey#refresh' unless locked %>">
 
         <% question.options.order(:position).each do |option| %>
           <p>
             <% if answer.user_chose(option, answer) %>
-              <%= link_to icons__checked_box, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
+              <%= link_to_if !locked, icons__checked_box, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
             <% else %>
-              <%= link_to icons__square, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
+              <%= link_to_if !locked, icons__square, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
             <% end %>
           </p>
         <% end %>
 
           <% if question.text_on_other %>
           <% if answer.other %>
-            <%= link_to icons__radio_on, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
+            <%= link_to_if !locked, icons__radio_on, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
           <% else %>
-            <%= link_to icons__radio_off, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
+            <%= link_to_if !locked, icons__radio_off, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %> Other
           <% end %>
         <% end %>
 
@@ -209,15 +220,16 @@
           </div>
         <% end %>
       <% else %>
-        <div class="autosave">
-          <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
+        <% if locked %>
+          <div class="form-control bg-secondary"><%= answer.get_value %></div>
+        <% else %>          <%= simple_form_for [aflier_survey, answer], remote: true do |f| %>
             <%= render 'stimulus/edit_in_place/string_input',
                        klass: answer,
                        attribute: :a_string,
                        options: { url: aflier_survey.answer_path(answer),
                                   value: answer.a_string} %>
           <% end %>
-        </div>
+        <% end %>
       <% end %>
 
       <% if question.allow_not_sure? %>

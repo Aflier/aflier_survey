@@ -3,16 +3,21 @@ require "application_system_test_case"
 module AflierSurvey
   class QuestionsTest < ApplicationSystemTestCase
     setup do
-      @question = aflier_survey_questions(:one)
+      @user__one             = users(:one)
+      @question_section__one = aflier_survey_question_sections(:one)
+      @question              = aflier_survey_questions(:one)
     end
 
     test "visiting the index" do
-      visit questions_url
+      visit aflier_survey.questions_url
       assert_selector "h1", text: "Questions"
     end
 
     test "creating a Question" do
-      visit questions_url
+      visit aflier_survey.question_section_path(@question_section__one)
+
+      sign_in(@user__one)
+
       click_on "New Question"
 
       fill_in "Aflier survey calc", with: @question.aflier_survey_calc_id
@@ -33,7 +38,7 @@ module AflierSurvey
     end
 
     test "updating a Question" do
-      visit questions_url
+      visit aflier_survey.questions_url
       click_on "Edit", match: :first
 
       fill_in "Aflier survey calc", with: @question.aflier_survey_calc_id

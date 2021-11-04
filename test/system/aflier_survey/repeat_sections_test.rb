@@ -7,25 +7,12 @@ module AflierSurvey
     end
 
     test "visiting the index" do
-      visit repeat_sections_url
+      visit aflier_survey.repeat_sections_url
       assert_selector "h1", text: "Repeat Sections"
     end
 
-    test "creating a Repeat section" do
-      visit repeat_sections_url
-      click_on "New Repeat Section"
-
-      fill_in "Data date", with: @repeat_section.data_date
-      fill_in "Question section", with: @repeat_section.question_section_id
-      fill_in "Unique ident", with: @repeat_section.unique_ident
-      click_on "Create Repeat section"
-
-      assert_text "Repeat section was successfully created"
-      click_on "Back"
-    end
-
     test "updating a Repeat section" do
-      visit repeat_sections_url
+      visit aflier_survey.repeat_sections_url
       click_on "Edit", match: :first
 
       fill_in "Data date", with: @repeat_section.data_date
@@ -38,7 +25,7 @@ module AflierSurvey
     end
 
     test "destroying a Repeat section" do
-      visit repeat_sections_url
+      visit aflier_survey.repeat_sections_url
       page.accept_confirm do
         click_on "Destroy", match: :first
       end

@@ -6,7 +6,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def sign_in(user)
     fill_in "Email", with: user.email
     fill_in 'Password', with: '123greetings'
-    click_button 'Sign in'
+    click_button 'Log in'
   end
 
 end

@@ -93,10 +93,11 @@ module AflierSurvey
     end
 
     # Ignore repeated section for now.
-    def option_name(user)
+    def option_name(unique_ident)
 
-      option = Option.joins(:option_answers).find_by(option_answers: { user_id: user.id, option_id: options.pluck(:id) })
-
+      option = Option.joins(:option_answers)
+                     .find_by(option_answers: { unique_ident: unique_ident,
+                                                option_id: options.pluck(:id) })
 
       if question_type == SELECT_ONE
         return "Please provide answer for: #{self.name}" if option.nil?

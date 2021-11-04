@@ -3,16 +3,17 @@ require "application_system_test_case"
 module AflierSurvey
   class CalcsTest < ApplicationSystemTestCase
     setup do
-      @calc = aflier_survey_calcs(:one)
+      @sign_in = users(:one)
+      @calc    = aflier_survey_calcs(:one)
     end
 
     test "visiting the index" do
-      visit calcs_url
+      visit aflier_survey.calcs_url
       assert_selector "h1", text: "Calcs"
     end
 
     test "creating a Calc" do
-      visit calcs_url
+      visit aflier_survey.calcs_url
       click_on "New Calc"
 
       fill_in "A decimal", with: @calc.a_decimal
@@ -29,7 +30,10 @@ module AflierSurvey
     end
 
     test "updating a Calc" do
-      visit calcs_url
+      visit aflier_survey.calcs_url
+
+      sign_in(@user__one)
+
       click_on "Edit", match: :first
 
       fill_in "A decimal", with: @calc.a_decimal
@@ -46,7 +50,7 @@ module AflierSurvey
     end
 
     test "destroying a Calc" do
-      visit calcs_url
+      visit aflier_survey.calcs_url
       page.accept_confirm do
         click_on "Destroy", match: :first
       end

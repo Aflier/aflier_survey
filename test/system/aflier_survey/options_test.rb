@@ -3,16 +3,21 @@ require "application_system_test_case"
 module AflierSurvey
   class OptionsTest < ApplicationSystemTestCase
     setup do
-      @option = aflier_survey_options(:one)
+      @user__one = users(:one)
+      @option    = aflier_survey_options(:one)
     end
 
     test "visiting the index" do
-      visit options_url
+      visit aflier_survey.options_url
+      sign_in(@user__one)
       assert_selector "h1", text: "Options"
     end
 
     test "creating a Option" do
-      visit options_url
+      visit aflier_survey.options_url
+
+      sign_in(@user__one)
+
       click_on "New Option"
 
       fill_in "A decimal", with: @option.a_decimal
@@ -27,6 +32,7 @@ module AflierSurvey
 
     test "updating a Option" do
       visit aflier_survey.options_url
+      sign_in(@user__one)
       click_on "Edit", match: :first
 
       fill_in "A decimal", with: @option.a_decimal
@@ -40,7 +46,8 @@ module AflierSurvey
     end
 
     test "destroying a Option" do
-      visit options_url
+      visit aflier_survey.options_url
+      sign_in(@user__one)
       page.accept_confirm do
         click_on "Destroy", match: :first
       end

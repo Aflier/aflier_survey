@@ -3,16 +3,12 @@ require "application_system_test_case"
 module AflierSurvey
   class AnswersTest < ApplicationSystemTestCase
     setup do
-      @answer = aflier_survey_answers(:one)
-    end
-
-    test "visiting the index" do
-      visit answers_url
-      assert_selector "h1", text: "Answers"
+      @user__one = users(:one)
+      @answer      = aflier_survey_answers(:one)
     end
 
     test "creating a Answer" do
-      visit answers_url
+      visit aflier_survey.answers_url
       click_on "New Answer"
 
       fill_in "A boolean", with: @answer.a_boolean
@@ -35,7 +31,7 @@ module AflierSurvey
     end
 
     test "updating a Answer" do
-      visit answers_url
+      visit aflier_survey.answers_url
       click_on "Edit", match: :first
 
       fill_in "A boolean", with: @answer.a_boolean
@@ -58,7 +54,10 @@ module AflierSurvey
     end
 
     test "destroying a Answer" do
-      visit answers_url
+      visit aflier_survey.answers_url
+
+      sign_in(@user__admin)
+
       page.accept_confirm do
         click_on "Destroy", match: :first
       end

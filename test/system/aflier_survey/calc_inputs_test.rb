@@ -3,16 +3,21 @@ require "application_system_test_case"
 module AflierSurvey
   class CalcInputsTest < ApplicationSystemTestCase
     setup do
+      @user__one = users(:one)
       @calc_input = aflier_survey_calc_inputs(:one)
     end
 
     test "visiting the index" do
-      visit calc_inputs_url
+      visit aflier_survey.calc_inputs_url
+      sign_in(@user__one)
       assert_selector "h1", text: "Calc Inputs"
     end
 
     test "creating a Calc input" do
-      visit calc_inputs_url
+      visit aflier_survey.calc_inputs_url
+
+      sign_in(@user__one)
+
       click_on "New Calc Input"
 
       fill_in "Calc", with: @calc_input.calc_id
@@ -24,7 +29,8 @@ module AflierSurvey
     end
 
     test "updating a Calc input" do
-      visit calc_inputs_url
+      visit aflier_survey.calc_inputs_url
+      sign_in(@user__one)
       click_on "Edit", match: :first
 
       fill_in "Calc", with: @calc_input.calc_id
@@ -36,7 +42,8 @@ module AflierSurvey
     end
 
     test "destroying a Calc input" do
-      visit calc_inputs_url
+      visit aflier_survey.calc_inputs_url
+      sign_in(@user__one)
       page.accept_confirm do
         click_on "Destroy", match: :first
       end

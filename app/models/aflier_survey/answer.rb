@@ -162,6 +162,8 @@ module AflierSurvey
         an_integer
       elsif question.question_type == Question::STRING
         a_string
+      elsif question.question_type == Question::DATE
+        a_date&.to_s(:db)
       elsif question.question_type == Question::TEXT
         some_text
       else

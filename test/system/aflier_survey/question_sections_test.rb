@@ -3,16 +3,17 @@ require "application_system_test_case"
 module AflierSurvey
   class QuestionSectionsTest < ApplicationSystemTestCase
     setup do
+      @user__one        = users(:one)
       @question_section = aflier_survey_question_sections(:one)
     end
 
     test "visiting the index" do
-      visit question_sections_url
+      visit aflier_survey.question_sections_url
       assert_selector "h1", text: "Question Sections"
     end
 
     test "creating a Question section" do
-      visit question_sections_url
+      visit aflier_survey.question_sections_url
       click_on "New Question Section"
 
       fill_in "Data date", with: @question_section.data_date
@@ -28,7 +29,7 @@ module AflierSurvey
     end
 
     test "updating a Question section" do
-      visit question_sections_url
+      visit aflier_survey.question_sections_url
       click_on "Edit", match: :first
 
       fill_in "Data date", with: @question_section.data_date
@@ -44,7 +45,10 @@ module AflierSurvey
     end
 
     test "destroying a Question section" do
-      visit question_sections_url
+      visit aflier_survey.question_sections_url
+
+      sign_in(@user__one)
+
       page.accept_confirm do
         click_on "Destroy", match: :first
       end

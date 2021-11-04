@@ -3,16 +3,19 @@ require "application_system_test_case"
 module AflierSurvey
   class QuestionnairesTest < ApplicationSystemTestCase
     setup do
+      @user__one     = users(:one)
       @questionnaire = aflier_survey_questionnaires(:one)
     end
 
     test "visiting the index" do
-      visit questionnaires_url
+      visit aflier_survey.questionnaires_url
+      sign_in(@user__one)
       assert_selector "h1", text: "Questionnaires"
     end
 
     test "creating a Questionnaire" do
-      visit questionnaires_url
+      visit aflier_survey.questionnaires_url
+      sign_in(@user__one)
       click_on "New Questionnaire"
 
       fill_in "Complete on sections", with: @questionnaire.complete_on_sections
@@ -26,7 +29,10 @@ module AflierSurvey
     end
 
     test "updating a Questionnaire" do
-      visit questionnaires_url
+      visit aflier_survey.questionnaires_url
+
+      sign_in(@user__one)
+
       click_on "Edit", match: :first
 
       fill_in "Complete on sections", with: @questionnaire.complete_on_sections
@@ -40,7 +46,8 @@ module AflierSurvey
     end
 
     test "destroying a Questionnaire" do
-      visit questionnaires_url
+      visit aflier_survey.questionnaires_url
+      sign_in(@user__one)
       page.accept_confirm do
         click_on "Destroy", match: :first
       end
