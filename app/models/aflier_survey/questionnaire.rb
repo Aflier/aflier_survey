@@ -12,7 +12,7 @@ module AflierSurvey
       Question.all.where.not(unique_key: nil).select(:unique_key).map { |q| q.unique_key }
     end
 
-    def find_answer_by_key(unique_ident, key)
+    def self.find_answer_by_key(unique_ident, key)
       key_question = Question.find_by(unique_key: key)
       if key_question
         return key_question.get_answer(unique_ident, nil)
