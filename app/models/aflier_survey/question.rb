@@ -146,7 +146,7 @@ module AflierSurvey
       elsif question_type == SELECT_MANY
         option = Option.joins(:option_answers).where(option_answers: { unique_ident: unique_ident, option_id: options.pluck(:id) })
         return "Please provide answer for: #{self.name}" if option.empty?
-        return option.select(:name).join(', ')
+        return option.pluck(:name).join(', ')
       else
         latest_answer = relevant_answer(repeat_section, unique_ident)
 
