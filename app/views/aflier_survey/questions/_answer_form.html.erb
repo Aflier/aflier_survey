@@ -8,7 +8,7 @@
     <label><%= '*' if question.required %> <%= question.name %></label>
 
     <% unless question.text_hint.blank? %>
-      <p><%= question.text_hint %></p>
+      <p><%= question.text_hint_with_answer(unique_ident) %></p>
     <% end  %>
 
     <% unless question.help.blank? %>

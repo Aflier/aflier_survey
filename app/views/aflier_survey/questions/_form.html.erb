@@ -11,7 +11,7 @@
       <div class="modal-body">
         <%= f.input :name %>
         <%= f.input :question_type, collection: AflierSurvey::Question::QUESTION_TYPES, include_blank: false %>
-        <%= f.input :text_hint, hint: "Extra hint text to be placed before a comment box in 'Text on Yes'" %>
+        <%= f.input :text_hint, hint: "Extra hint text to be placed after the question name" %>
         <%= f.input :allow_not_sure %>
         <%= f.input :help %>
       </div>

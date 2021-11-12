@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>Extracted from Questionnaire: <%= AflierSurvey::Questionnaire.all.first.find_answer_by_key("user-#{@user.id}", 'KEY-ONE') %></p>
+<p>Extracted from Questionnaire: <%= AflierSurvey::Questionnaire.find_answer_by_key("user-#{@user.id}", 'KEY-ONE') %></p>
 <p>Keys from Questionnaire: <%= AflierSurvey::Questionnaire.all_keys.join(', ') %></p>
 
 

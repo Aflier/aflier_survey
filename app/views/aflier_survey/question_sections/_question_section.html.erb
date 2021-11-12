@@ -42,7 +42,7 @@
       <% else %>
           <% question_section.questions.includes(:question_y).order(:position).each do |question| %>
               <%= render question, unique_ident: unique_ident, admin: admin, locked: locked,
-                         show_required: show_required %>
+                         show_required: show_required, questionnaire: questionnaire %>
           <% end %>
       <% end %>
     </div>

@@ -67,6 +67,24 @@ module AflierSurvey
 
     store :general_store, accessors: [ :minimum, :maximum ], coder: JSON
 
+
+    def text_hint_with_answer(unique_ident)
+      all_keys = self.text_hint.split('{{')
+      all_keys.each_with_index do |key, index|
+        all_keys[index] = key.split('}}')[0]
+      end
+
+      hint_with_text = text_hint
+
+      all_keys.shift
+      all_keys.each do |key|
+        match = "{{#{key}}}"
+        hint_with_text = hint_with_text.gsub(match, Questionnaire.find_answer_by_key(unique_ident, key))
+      end
+
+      hint_with_text
+    end
+
     def minimum
       return 1 if super.blank?
       super
