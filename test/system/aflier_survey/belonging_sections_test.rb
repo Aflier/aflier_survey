@@ -15,21 +15,6 @@ module AflierSurvey
       assert_selector "h1", text: "Belonging Sections"
     end
 
-    test "creating a Belonging section" do
-      visit aflier_survey.belonging_sections_url
-
-      sign_in(@user__one)
-
-      click_on "New Belonging Section"
-
-      fill_in "Question section", with: @belonging_section.question_section_id
-      fill_in "Questionnaire", with: @belonging_section.questionnaire_id
-      click_on "Create Belonging section"
-
-      assert_text "Belonging section was successfully created"
-      click_on "Back"
-    end
-
     test "updating a Belonging section" do
       visit aflier_survey.belonging_sections_url
 

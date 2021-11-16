@@ -4,11 +4,12 @@ module AflierSurvey
   class AnswersTest < ApplicationSystemTestCase
     setup do
       @user__one = users(:one)
-      @answer      = aflier_survey_answers(:one)
+      @answer    = aflier_survey_answers(:one)
     end
 
     test "creating a Answer" do
       visit aflier_survey.answers_url
+      sign_in(@user__one)
       click_on "New Answer"
 
       fill_in "A boolean", with: @answer.a_boolean
@@ -32,6 +33,7 @@ module AflierSurvey
 
     test "updating a Answer" do
       visit aflier_survey.answers_url
+      sign_in(@user__one)
       click_on "Edit", match: :first
 
       fill_in "A boolean", with: @answer.a_boolean

@@ -15,7 +15,6 @@ module AflierSurvey
 
     test "creating a Option" do
       visit aflier_survey.options_url
-
       sign_in(@user__one)
 
       click_on "New Option"

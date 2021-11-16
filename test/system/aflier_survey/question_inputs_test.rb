@@ -8,7 +8,7 @@ module AflierSurvey
     end
 
     test "visiting the index" do
-      visit question_inputs_url
+      visit aflier_survey.question_inputs_url
       sign_in(@user__one)
       assert_selector "h1", text: "Question Inputs"
     end

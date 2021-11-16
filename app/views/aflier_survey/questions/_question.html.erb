@@ -1,6 +1,5 @@
 <div id="question-<%= question.id %>">
   <%= render 'aflier_survey/questions/answer_form',
-             questionnaire: questionnaire,
              question: question,
              answer: question.make_answer(unique_ident),
              locked: locked,
