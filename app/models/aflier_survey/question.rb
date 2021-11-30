@@ -170,6 +170,8 @@ module AflierSurvey
         latest_answer = relevant_answer(repeat_section, unique_ident)
 
         return "No answer: #{name}" if latest_answer.nil?
+
+        return latest_answer.a_boolean if question_type == YES_OR_NO
         return latest_answer.a_string if self.question_type == STRING
         return latest_answer.some_text if self.question_type == TEXT
 
