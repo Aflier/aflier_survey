@@ -26,7 +26,7 @@
     <div class="card-body">
       <%= render 'aflier_survey/alerts/alert__info' do %>
         <%= question_section.section_description %>
-      <% end unless question_section.section_description.blank? %>
+      <% end unless question_section.section_description.blank? or only_answers%>
 
       <% if question_section.many %>
           <div id="repeat-question-section-<%= question_section.id %>">

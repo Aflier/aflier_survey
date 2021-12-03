@@ -1,3 +1,5 @@
+<% only_answers = false unless local_assigns[:only_answers] %>
+
 <div data-controller="aflier-survey">
 
   <div class="row" id="main-panel">
@@ -13,7 +15,8 @@
                        questionnaire: questionnaire,
                        unique_ident: unique_ident,
                        show_required: false,
-                       locked: questionnaire.is_locked?(unique_ident, false),
+                       only_answers: only_answers,
+                       locked: questionnaire.is_locked?(unique_ident, false) || only_answers,
                        admin: admin %>
           <% end %>
         </div>
@@ -21,7 +24,7 @@
 
       <%= render 'aflier_survey/questionnaires/submission_bar',
                  questionnaire: questionnaire,
-                 unique_ident: unique_ident, submitted: questionnaire.is_submitted?(unique_ident) %>
+                 unique_ident: unique_ident, submitted: questionnaire.is_submitted?(unique_ident) unless only_answers %>
 
       <br><br>
 

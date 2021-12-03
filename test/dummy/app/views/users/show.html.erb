@@ -22,6 +22,6 @@
   <div class="col-md-10">
     <%= render 'aflier_survey/questionnaires/questionnaire',
                questionnaire: AflierSurvey::Questionnaire.all.first,
-               unique_ident: "user-#{@user.id}", admin: false %>
+               unique_ident: "user-#{@user.id}", admin: false, only_answers: true %>
   </div>
 </div>
