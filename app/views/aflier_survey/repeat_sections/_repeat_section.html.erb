@@ -12,7 +12,10 @@
     <%= render 'aflier_survey/repeat_sections/data_date', repeat_section: repeat_section, admin: false %>
 
     <% repeat_section.question_section.questions.order(:position).each do |question| %>
-      <%= render 'aflier_survey/repeat_sections/question', questionnaire: questionnaire, repeat_section: repeat_section, question: question, unique_ident: unique_ident, admin: admin %>
+      <%= render 'aflier_survey/repeat_sections/question', questionnaire: questionnaire,
+                 repeat_section: repeat_section, question: question, unique_ident: unique_ident,
+                 show_required: show_required,
+                 admin: admin %>
     <% end %>
     <br>
     <div class="text-right">

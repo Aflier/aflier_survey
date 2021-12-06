@@ -7,5 +7,7 @@
 
 $('#repeat-question-section-<%= @repeat_section.question_section.id %>')
     .append('<%= j render 'aflier_survey/repeat_sections/repeat_section',
-    questionnaire: @questionnaire, unique_ident: @repeat_section.unique_ident, repeat_section: @repeat_section, repeat_section_counter: @old_repeats.size - 1, last_count: @old_repeats.size - 1,
+    questionnaire: @questionnaire, unique_ident: @repeat_section.unique_ident,
+    repeat_section: @repeat_section, repeat_section_counter: @old_repeats.size - 1, last_count: @old_repeats.size - 1,
+    show_required: false,
     admin: false %>');

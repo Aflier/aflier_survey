@@ -15,7 +15,7 @@
       </button>
     <% end %>
   <% else %>
-    <button data-questionnaire-target="submit" data-action="click->aflier-survey#submit"
+    <button data-questionnaire-target="submit" data-action="click->aflier-survey#save"
             name="<%= aflier_survey.save_questionnaire_path(questionnaire, unique_ident: unique_ident) %>"
             class="btn btn-primary btn-lg">
       <%= AflierSurvey.configuration.save_button_text ? AflierSurvey.configuration.save_button_text : 'Save' %>

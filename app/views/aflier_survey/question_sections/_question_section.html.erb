@@ -33,6 +33,7 @@
             <%= render question_section.repeated_sections(unique_ident),
                        questionnaire: questionnaire,
                        unique_ident: unique_ident,
+                       show_required: show_required,
                        last_count: question_section.repeated_sections(unique_ident).size - 1, admin: false %>
           </div>
 

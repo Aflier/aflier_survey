@@ -1,6 +1,11 @@
 <div id="question-<%= repeat_section.id %>-<%= question.id %>">
-  <%= render 'aflier_survey/questions/answer_form', questionnaire: questionnaire, question: question, answer: question.make_repeat_answer(unique_ident, repeat_section),
-             locked: questionnaire.is_locked?(unique_ident, admin), unique_ident: unique_ident %>
+  <%= render 'aflier_survey/questions/answer_form', questionnaire: questionnaire,
+             question: question,
+             answer: question.make_repeat_answer(unique_ident, repeat_section),
+             locked: questionnaire.is_locked?(unique_ident, admin),
+             show_required: show_required,
+             required_warning: @required_warning,
+             unique_ident: unique_ident %>
 </div>
 
 <script>
