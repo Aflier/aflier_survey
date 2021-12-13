@@ -80,7 +80,11 @@ module AflierSurvey
       all_keys.each do |key|
         match = "{{#{key}}}"
         replace_with = Questionnaire.find_answer_by_key(unique_ident, key)
-        hint_with_text = hint_with_text.gsub(match, replace_with) unless replace_with.blank?
+        if replace_with.blank?
+          hint_with_text = hint_with_text.gsub(match, 'None Given')
+        else
+          hint_with_text = hint_with_text.gsub(match, replace_with)
+        end
       end unless hint_with_text.blank?
 
       hint_with_text
