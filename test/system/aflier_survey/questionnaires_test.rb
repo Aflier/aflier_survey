@@ -18,6 +18,9 @@ module AflierSurvey
       sign_in(@user__one)
       click_on "New Questionnaire"
 
+      sleep 1
+      sleep 1
+
       fill_in "Complete on sections", with: @questionnaire.complete_on_sections
       fill_in "Description", with: @questionnaire.description
       fill_in "Name", with: @questionnaire.name

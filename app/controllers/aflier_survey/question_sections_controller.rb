@@ -25,6 +25,7 @@ module AflierSurvey
                                                 formats: :html,
                                                 locals: { unique_ident: @unique_ident,
                                                           show_required: show_required,
+                                                          only_answers: false,
                                                           admin: false,
                                                           locked: false }) }
         end

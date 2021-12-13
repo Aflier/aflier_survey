@@ -9,6 +9,9 @@ module AflierSurvey
 
     test "visiting the index" do
       visit aflier_survey.question_sections_url
+
+      sign_in(@user__one)
+
       assert_selector "h1", text: "Question Sections"
     end
 

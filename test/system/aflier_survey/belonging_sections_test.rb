@@ -7,14 +7,6 @@ module AflierSurvey
       @belonging_section = aflier_survey_belonging_sections(:one)
     end
 
-    test "visiting the index" do
-      visit aflier_survey.belonging_sections_url
-
-      sign_in(@user__one)
-
-      assert_selector "h1", text: "Belonging Sections"
-    end
-
     test "updating a Belonging section" do
       visit aflier_survey.belonging_sections_url
 

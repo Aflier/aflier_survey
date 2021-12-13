@@ -24,18 +24,5 @@ module AflierSurvey
       click_on "Back"
     end
 
-    test "updating a Section progress" do
-      visit aflier_survey.section_progresses_url
-      click_on "Edit", match: :first
-
-      fill_in "Question section", with: @section_progress.question_section_id
-      fill_in "Status", with: @section_progress.status
-      fill_in "User", with: @section_progress.user_id
-      click_on "Update Section progress"
-
-      assert_text "Section progress was successfully updated"
-      click_on "Back"
-    end
-
   end
 end

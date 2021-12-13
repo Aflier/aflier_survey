@@ -24,6 +24,9 @@ module AflierSurvey
       fill_in "Question", with: @question_input.question_id
       click_on "Create Question input"
 
+      sleep 1
+      sleep 1
+
       assert_text "Question input was successfully created"
       click_on "Back"
     end
