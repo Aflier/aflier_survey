@@ -32,3 +32,23 @@ two:
 
 select_many_can_see:
   question: select_many_can_see
+
+time_incomplete:
+  question: time
+  unique_ident: 'TIME--INCOMPLETE'
+  an_integer: 100
+
+time_complete:
+  question: time
+  unique_ident: 'TIME--INCOMPLETE'
+  a_time: 2019-03-29 17:20:56
+
+whole_number_incomplete:
+  question: whole_number
+  unique_ident: 'TIME--INCOMPLETE'
+
+whole_number_complete:
+  question: whole_number
+  unique_ident: 'TIME--INCOMPLETE'
+  a_time: 2019-03-29 17:20:56
+  an_integer: 100

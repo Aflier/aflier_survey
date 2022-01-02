@@ -30,3 +30,14 @@ select_many_can_see:
   name: 'SELECT_MANY_CAN_SEE'
   question_type: <%= AflierSurvey::Question::SELECT_MANY %>
   question_section: one
+
+time:
+  name: 'QUESTION--TIME'
+  question_type: <%= AflierSurvey::Question::TIME %>
+  question_section: one
+
+whole_number:
+  name: 'QUESTION--WHOLE--NUMBER'
+  question_type: <%= AflierSurvey::Question::WHOLE_NUMBER %>
+  question_section: one
+
