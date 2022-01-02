@@ -25,7 +25,7 @@
       </div>
     <% end %>
 
-    <div>
+    <div style="padding-left: 20px">
       <% if question.question_type == AflierSurvey::Question::DATE %>
         <% if locked %>
           <div class="form-control bg-secondary"><%= answer.get_value %></div>
@@ -80,20 +80,7 @@
                        class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
         <br><br>
       <% elsif question.question_type == AflierSurvey::Question::TEXT_ON_YES %>
-        <%= link_to_if !locked, 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'), class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>
-        <%= link_to_if !locked, 'No', aflier_survey.choice_answer_path(answer, choice: 'no'), class: "btn btn-" + (answer.a_boolean == false ? 'success' : 'outline-primary').to_s, remote: true %>
-
-        <% if answer.a_boolean? %>
-          <div>
-            <%= question.comment_text_hint %>
-            <%= render 'stimulus/edit_in_place/general_input',
-                       field_type: :textarea,
-                       klass: answer,
-                       attribute: :some_text,
-                       options: { url: aflier_survey.answer_path(answer),
-                                  value: answer.some_text } %>
-          </div>
-        <% end %>
+        <%= render 'aflier_survey/questions/text_on_yes', locked: locked, question: question, answer: answer %>
       <% elsif question.question_type == AflierSurvey::Question::SELECT_ONE %>
         <%= render 'aflier_survey/questions/select_one', locked: locked, question: question, answer: answer %>
       <% elsif question.question_type == AflierSurvey::Question::SELECT_MANY %>

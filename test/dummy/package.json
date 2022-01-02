@@ -14,7 +14,6 @@
     "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
-    "aflier_survey": "../../gems/aflier_survey",
     "webpack-dev-server": "^3.11.2"
   }
 }
