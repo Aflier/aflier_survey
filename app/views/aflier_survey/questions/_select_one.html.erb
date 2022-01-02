@@ -1,0 +1,41 @@
+<div data-controller="select-one"
+     data-select-one-target="self"
+     data-questionnaire-target="submit" data-action="<%= 'click->aflier-survey#refresh' unless locked %>">
+
+  <% question.options.order(:position).each do |option| %>
+    <p>
+      <% if answer.user_chose(option, answer) %>
+              <span data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.option_choice_answer_path(answer, option_id: option.id) if !locked %>">
+                <%= icons__radio_on %> <%= option.name %>
+              </span>
+      <% else %>
+              <span data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.option_choice_answer_path(answer, option_id: option.id) if !locked %>">
+                <%= icons__radio_off %> <%= option.name %>
+              </span>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if question.text_on_other %>
+    <% if answer.other %>
+      <div data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.other_answer_path(answer) unless locked %>">
+         <%= icons__radio_on %> Other
+      </div>
+    <% else %>
+      <div data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.other_answer_path(answer) unless locked %>">
+        <%= icons__radio_off %> Other
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if answer.other? and answer.question.text_on_other? %>
+    <div class="autosave">
+      <%= render 'stimulus/edit_in_place/general_input',
+                 field_type: :textarea,
+                 klass: answer,
+                 attribute: :some_text,
+                 options: { url: aflier_survey.answer_path(answer),
+                            value: answer.some_text } %>
+    </div>
+  <% end %>
+</div>

@@ -18,7 +18,7 @@
 import "../stylesheets/application.scss"
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// require("turbolinks").start()
 // require("channels")
 require("stimulus")
 

@@ -112,6 +112,17 @@ module AflierSurvey
 
       @required_warning = @question.is_required?(@unique_ident)
       # @questionnaire.updated_questionnaire(@unique_ident)
+
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: {
+            html: render_to_string( partial: 'aflier_survey/questions/select_one',
+                                    formats: :html,
+                                    locals: { locked: false, question: @question, answer: @answer })
+          }
+        end
+      end
     end
 
     def other
@@ -126,6 +137,17 @@ module AflierSurvey
         @answer.update(other: true)
       else
         @answer.update(other: !@answer.other)
+      end
+
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: {
+            html: render_to_string( partial: 'aflier_survey/questions/select_one',
+                                    formats: :html,
+                                    locals: { locked: false, question: @question, answer: @answer })
+          }
+        end
       end
 
       # @questionnaire.updated_questionnaire(@unique_ident)
