@@ -85,6 +85,17 @@ module AflierSurvey
       @answer.update_on_button_press(new_answer)
 
       @required_warning = @question.is_required?(@unique_ident)
+
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: {
+            html: render_to_string( partial: 'aflier_survey/questions/text_on_yes',
+                                    formats: :html,
+                                    locals: { locked: false, question: @question, answer: @answer })
+          }
+        end
+      end
     end
 
     def option_choice
