@@ -1,0 +1,33 @@
+<div data-controller="select-one"
+     data-select-one-target="self"
+     data-questionnaire-target="submit"
+     data-action="<%= 'click->aflier-survey#refresh' unless locked %>">
+
+  <% (question.minimum..question.maximum).each do |choice| %>
+
+    <% if locked %>
+      <div class="<%= "btn btn-#{(answer.score_given?(choice) ? 'success' : 'outline-secondary disabled')}" %>"><%= choice.to_s %></div>
+    <% else %>
+
+      <% if answer.score_given?(choice) %>
+              <span data-action="click->select-one#choice"
+                    class="btn btn-success"
+                    data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: choice) if !locked %>">
+                <%= choice.to_s %>
+              </span>
+      <% else %>
+              <span data-action="click->select-one#choice"
+                    class="btn btn-outline-primary"
+                    data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: choice) if !locked %>">
+                <%= choice.to_s %>
+              </span>
+      <% end %>
+
+      <%= link_to choice.to_s,
+                  aflier_survey.choice_answer_path(answer, choice: choice),
+                  class: "btn btn-" + (answer.score_given?(choice) ? 'success' : 'outline-primary').to_s,
+                  remote: true if false %>
+    <% end %>
+  <% end %>
+
+</div>

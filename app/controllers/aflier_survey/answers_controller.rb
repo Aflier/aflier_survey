@@ -55,7 +55,7 @@ module AflierSurvey
       respond_to do |format|
         # format.html { redirect_to question_section_path(@answer.question.question_section, unique_ident: unique_ident), notice: 'Option was successfully updated.' }
 
-#        format.html { render 'update.js.erb'}
+        #        format.html { render 'update.js.erb'}
         format.js
         format.json
       end
@@ -75,9 +75,9 @@ module AflierSurvey
       @admin = false # TODO - Will be taken from call
 
       # @questionnaire    = Questionnaire.find(params[:questionnaire_id])
-      @question         = @answer.question
-      @unique_ident     = @answer.unique_ident
-      @repeat_section   = @answer.repeat_section
+      @question = @answer.question
+      @unique_ident = @answer.unique_ident
+      @repeat_section = @answer.repeat_section
       @question_section = @question.question_section
 
       new_answer = params[:choice]
@@ -89,10 +89,18 @@ module AflierSurvey
       respond_to do |format|
         format.html
         format.json do
+          partial = ''
+
+          if @question.question_type == Question::TEXT_ON_YES
+            partial = 'aflier_survey/questions/text_on_yes'
+          elsif @question.question_type == Question::OUT_OF
+            partial = 'aflier_survey/questions/out_of'
+          end
+
           render json: {
-            html: render_to_string( partial: 'aflier_survey/questions/text_on_yes',
-                                    formats: :html,
-                                    locals: { locked: false, question: @question, answer: @answer })
+            html: render_to_string(partial: partial,
+                                   formats: :html,
+                                   locals: { locked: false, question: @question, answer: @answer })
           }
         end
       end
@@ -102,7 +110,7 @@ module AflierSurvey
       @admin = false # TODO - Will be taken from call
 
       # @questionnaire  = Questionnaire.find(params[:questionnaire_id])
-      @unique_ident   = @answer.unique_ident
+      @unique_ident = @answer.unique_ident
       @repeat_section = @answer.repeat_section if @answer.question.question_section.many?
 
       if @answer.question.question_type == Question::SELECT_ONE
@@ -128,9 +136,9 @@ module AflierSurvey
         format.html
         format.json do
           render json: {
-            html: render_to_string( partial: 'aflier_survey/questions/select_one',
-                                    formats: :html,
-                                    locals: { locked: false, question: @question, answer: @answer })
+            html: render_to_string(partial: 'aflier_survey/questions/select_one',
+                                   formats: :html,
+                                   locals: { locked: false, question: @question, answer: @answer })
           }
         end
       end
@@ -138,9 +146,9 @@ module AflierSurvey
 
     def other
       #      @questionnaire    = Questionnaire.find(params[:questionnaire_id])
-      @unique_ident     = @answer.unique_ident
-      @question         = @answer.question
-      @repeat_section   = @answer.repeat_section
+      @unique_ident = @answer.unique_ident
+      @question = @answer.question
+      @repeat_section = @answer.repeat_section
       @question_section = @question.question_section
 
       if @answer.question.question_type == Question::SELECT_ONE
@@ -154,9 +162,9 @@ module AflierSurvey
         format.html
         format.json do
           render json: {
-            html: render_to_string( partial: 'aflier_survey/questions/select_one',
-                                    formats: :html,
-                                    locals: { locked: false, question: @question, answer: @answer })
+            html: render_to_string(partial: 'aflier_survey/questions/select_one',
+                                   formats: :html,
+                                   locals: { locked: false, question: @question, answer: @answer })
           }
         end
       end
@@ -165,6 +173,7 @@ module AflierSurvey
     end
 
     private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
       @answer = Answer.find(params[:id])
