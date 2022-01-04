@@ -8,7 +8,7 @@ module AflierSurvey
     # GET /questionnaires
     # GET /questionnaires.json
     def index
-      @questionnaires = Questionnaire.all
+      @questionnaires = Questionnaire.all.order(:name)
       @questionnaire = Questionnaire.new
     end
 
