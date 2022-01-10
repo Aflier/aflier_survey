@@ -5,26 +5,30 @@
   <% question.options.order(:position).each do |option| %>
     <p>
       <% if answer.user_chose(option, answer) %>
-              <span data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.option_choice_answer_path(answer, option_id: option.id) if !locked %>">
+              <button data-action="click->select-one#choice"
+                      class="btn btn-sm"
+                    data-select-one-path-param="<%= aflier_survey.option_choice_answer_path(answer, option_id: option.id) if !locked %>">
                 <%= icons__radio_on %> <%= option.name %>
-              </span>
+              </button>
       <% else %>
-              <span data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.option_choice_answer_path(answer, option_id: option.id) if !locked %>">
+              <button data-action="click->select-one#choice"
+                    class="btn btn-sm" data-select-one-path-param="<%= aflier_survey.option_choice_answer_path(answer, option_id: option.id) if !locked %>">
                 <%= icons__radio_off %> <%= option.name %>
-              </span>
+              </button>
       <% end %>
     </p>
   <% end %>
 
   <% if question.text_on_other %>
     <% if answer.other %>
-      <div data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.other_answer_path(answer) unless locked %>">
+      <button class="btn btn-sm"
+              data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.other_answer_path(answer) unless locked %>">
          <%= icons__radio_on %> Other
-      </div>
+      </button>
     <% else %>
-      <div data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.other_answer_path(answer) unless locked %>">
+      <button class="btn btn-sm" data-action="click->select-one#choice" data-select-one-path-param="<%= aflier_survey.other_answer_path(answer) unless locked %>">
         <%= icons__radio_off %> Other
-      </div>
+      </button>
     <% end %>
   <% end %>
 
