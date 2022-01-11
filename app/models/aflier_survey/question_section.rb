@@ -38,6 +38,10 @@ module AflierSurvey
     end
 
     def tag_as_updated(unique_ident)
+      return
+
+      # TODO - Before removing the return about make sure OK on MedicCare (admin should not change questionnaire from submitted)
+
       section_progresses.find_or_create_by!(unique_ident: unique_ident).update_attribute(:status, SectionProgress::UPDATED)
       questionnaires.each do |questionnaire|
         questionnaire.updated_questionnaire(unique_ident)
