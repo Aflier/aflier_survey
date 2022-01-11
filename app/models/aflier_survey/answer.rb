@@ -28,10 +28,9 @@ module AflierSurvey
       if questionnaire_submission.nil?
         # Nothing
       else
-        questionnaire_submission.update_attribute(:status, QuestionnaireSubmission::UPDATED)
-
         if not(complete) and question.required?
           question.question_section.tag_as_required(unique_ident)
+          questionnaire_submission.update_attribute(:status, QuestionnaireSubmission::UPDATED)
         else
           question.question_section.tag_as_updated(unique_ident)
         end

@@ -1,14 +1,12 @@
 <% only_answers = false unless local_assigns[:only_answers] %>
 
 <div data-controller="aflier-survey">
-
   <div class="row" id="main-panel">
     <div class="col-md-12">
       <h2><%= questionnaire.name %></h2>
       <%= raw questionnaire.description %>
 
       <div id="question-section">
-
         <div id="x-accordion" role="tablist">
           <% questionnaire.belonging_sections.order(:position).each do |belonging_section| %>
             <%= render belonging_section.question_section,
