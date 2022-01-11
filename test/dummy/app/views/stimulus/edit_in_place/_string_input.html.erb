@@ -1,4 +1,4 @@
-<!-- ONLY EDIT IN 'STIMULUS-BASE' V0.3.1 -->
+<!-- ONLY EDIT IN 'STIMULUS-BASE' V0.4.2 -->
 
 <% options = {} if local_assigns[:options].nil? %>
 
@@ -13,10 +13,10 @@
       <% end %>
 
       <% if options[:url] %>
-        <input value="<%= options[:value] %>" data-target="edit-in-place.value"
+        <input id="<%= options[:ident] %>" value="<%= options[:value] %>" data-target="edit-in-place.value"
                name="<%= klass.class.name.to_s.split('::').last.downcase %>[<%= attribute %>]"
                data-action="change->edit-in-place#saveChange keyup->edit-in-place#changing"
-               class="form-control">
+               class="form-control"> <!-- BACK TO BASE -->
       <% else %>
         <%= f.text_field attribute, data: { target: "edit-in-place.value",
                                             action: "change->edit-in-place#saveChange keyup->edit-in-place#changing" },

@@ -177,7 +177,7 @@
                        klass: answer,
                        attribute: :a_string,
                        options: { url: aflier_survey.answer_path(answer),
-                                  value: answer.a_string } %>
+                                  value: answer.a_string, ident: "question-#{question.id}-answer" } %>
           <% end %>
         <% end %>
       <% end %>
