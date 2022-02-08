@@ -30,6 +30,14 @@ module AflierSurvey
       false
     end
 
+    def when_submitted?(unique_ident)
+      questionnaire_submissions = self.questionnaire_submissions.where(unique_ident: unique_ident).order(:updated_at)
+
+      return 'Not Yet' if questionnaire_submissions.empty?
+      return questionnaire_submissions.last.updated_at.to_date if questionnaire_submissions.last.status == QuestionnaireSubmission::SUBMITTED
+      'Not Yet'
+    end
+
     def is_locked?(unique_ident, admin)
       return true if self.is_result
       return false if admin
