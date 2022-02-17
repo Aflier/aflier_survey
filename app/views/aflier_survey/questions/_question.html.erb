@@ -2,7 +2,7 @@
   <%= render 'aflier_survey/questions/answer_form',
              question: question,
              answer: question.make_answer(unique_ident),
-             locked: locked,
+             locked: admin ? false : locked,
              show_required: show_required,
              required_warning: @required_warning,
              unique_ident: unique_ident %>

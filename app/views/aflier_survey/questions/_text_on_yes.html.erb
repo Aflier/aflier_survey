@@ -2,26 +2,47 @@
      data-select-one-target="self"
      data-questionnaire-target="submit" data-action="<%= 'click->aflier-survey#refresh' unless locked %>">
 
-  <div data-action="click->select-one#choice"
-       data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: 'yes') if !locked %>">
-    <%= answer.a_boolean? ? icons__radio_on : icons__radio_off %> Yes
-  </div>
-
-  <div data-action="click->select-one#choice"
-       data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: 'no') if !locked %>">
-    <%= answer.a_boolean == false ? icons__radio_on : icons__radio_off %> No
-  </div>
-
-  <% if answer.a_boolean? %>
-    <div>
-      <%= question.comment_text_hint %>
-      <%= render 'stimulus/edit_in_place/general_input',
-                 field_type: :textarea,
-                 klass: answer,
-                 attribute: :some_text,
-                 options: { url: aflier_survey.answer_path(answer),
-                            value: answer.some_text } %>
+  <% if locked %>
+    <div data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: 'yes') if !locked %>">
+      <%= answer.a_boolean? ? icons__radio_on : icons__radio_off %> Yes
     </div>
+
+    <div data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: 'no') if !locked %>">
+      <%= answer.a_boolean == false ? icons__radio_on : icons__radio_off %> No
+    </div>
+
+    <% if answer.a_boolean? %>
+      <div>
+        <%= question.comment_text_hint %>
+        <br>
+        <%= answer.some_text %>
+      </div>
+    <% end %>
+
+  <% else %>
+
+    <div data-action="click->select-one#choice"
+         data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: 'yes') if !locked %>">
+      <%= answer.a_boolean? ? icons__radio_on : icons__radio_off %> Yes
+    </div>
+
+    <div data-action="click->select-one#choice"
+         data-select-one-path-param="<%= aflier_survey.choice_answer_path(answer, choice: 'no') if !locked %>">
+      <%= answer.a_boolean == false ? icons__radio_on : icons__radio_off %> No
+    </div>
+
+    <% if answer.a_boolean? %>
+      <div>
+        <%= question.comment_text_hint %>
+        <%= render 'stimulus/edit_in_place/general_input',
+                   field_type: :textarea,
+                   klass: answer,
+                   attribute: :some_text,
+                   options: { url: aflier_survey.answer_path(answer),
+                              value: answer.some_text } %>
+      </div>
+    <% end %>
+
   <% end %>
 
 </div>
