@@ -84,42 +84,7 @@
       <% elsif question.question_type == AflierSurvey::Question::SELECT_ONE %>
         <%= render 'aflier_survey/questions/select_one', locked: locked, question: question, answer: answer %>
       <% elsif question.question_type == AflierSurvey::Question::SELECT_MANY %>
-        <span data-questionnaire-target="submit"
-              data-action="<%= 'click->aflier-survey#refresh' unless locked %>">
-
-        <% question.options.order(:position).each do |option| %>
-          <p>
-            <% if answer.user_chose(option, answer) %>
-              <%= link_to_if !locked, icons__checked_box, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
-            <% else %>
-              <%= link_to_if !locked, icons__square, aflier_survey.option_choice_answer_path(answer, option_id: option.id), remote: true %> <%= option.name %>
-            <% end %>
-          </p>
-        <% end %>
-
-          <% if question.text_on_other %>
-          <% if answer.other %>
-            <%= link_to_if !locked, icons__radio_on, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %>
-              Other
-          <% else %>
-            <%= link_to_if !locked, icons__radio_off, aflier_survey.other_answer_path(answer), remote: true, id: 'other-option' %>
-              Other
-          <% end %>
-        <% end %>
-
-          <% if answer.other? and answer.question.text_on_other? %>
-
-          <div class="autosave">
-            <%= render 'stimulus/edit_in_place/general_input',
-                       field_type: :textarea,
-                       klass: answer,
-                       attribute: :some_text,
-                       options: { url: aflier_survey.answer_path(answer),
-                                  value: answer.some_text } %>
-          </div>
-
-        <% end %>
-        </span>
+        <%= render 'aflier_survey/questions/select_many', locked: locked, question: question, answer: answer %>
       <% elsif question.question_type == AflierSurvey::Question::OUT_OF %>
         <%= render 'aflier_survey/questions/out_of', question: question, answer: answer, locked: locked %>
       <% elsif question.question_type == AflierSurvey::Question::FILE_UPLOAD %>

@@ -161,11 +161,17 @@ module AflierSurvey
       respond_to do |format|
         format.html
         format.json do
-          render json: {
-            html: render_to_string(partial: 'aflier_survey/questions/select_one',
-                                   formats: :html,
-                                   locals: { locked: false, question: @question, answer: @answer })
-          }
+
+          if @answer.question.question_type == Question::SELECT_ONE
+            render json: { html: render_to_string(partial: 'aflier_survey/questions/select_one',
+                                                  formats: :html,
+                                                  locals: { locked: false, question: @question, answer: @answer }) }
+          else
+            render json: { html: render_to_string(partial: 'aflier_survey/questions/select_many',
+                                                  formats: :html,
+                                                  locals: { locked: false, question: @question, answer: @answer }) }
+          end
+
         end
       end
 
