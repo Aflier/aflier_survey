@@ -64,15 +64,7 @@
           <% end %>
         </div>
       <% elsif question.question_type == AflierSurvey::Question::YES_OR_NO %>
-        <%= link_to_if !locked, (answer.a_boolean ? icons__radio_on : icons__radio_off) + ' Yes',
-                       aflier_survey.choice_answer_path(answer, choice: 'yes'),
-                       class: "btn",
-                       remote: true %>
-        <%= link_to_if !locked, (answer.a_boolean == false ? icons__radio_on : icons__radio_off) + ' No',
-                       aflier_survey.choice_answer_path(answer, choice: 'no'),
-                       class: "btn",
-                       remote: true %>
-        <br><br>
+        <%= render 'aflier_survey/questions/yes_or_no', locked: locked, question: question, answer: answer %>
       <% elsif question.question_type == AflierSurvey::Question::SECTION_ON_YES or question.question_type == AflierSurvey::Question::SECTION_ON_NO %>
         <%= link_to_if !locked, 'Yes', aflier_survey.choice_answer_path(answer, choice: 'yes'),
                        class: "btn btn-" + (answer.a_boolean? ? 'success' : 'outline-primary').to_s, remote: true %>

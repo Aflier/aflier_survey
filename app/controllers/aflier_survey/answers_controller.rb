@@ -93,6 +93,8 @@ module AflierSurvey
 
           if @question.question_type == Question::TEXT_ON_YES
             partial = 'aflier_survey/questions/text_on_yes'
+          elsif @question.question_type == Question::YES_OR_NO
+            partial = 'aflier_survey/questions/yes_or_no'
           elsif @question.question_type == Question::OUT_OF
             partial = 'aflier_survey/questions/out_of'
           end
