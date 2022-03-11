@@ -30,7 +30,7 @@ module AflierSurvey
     end
 
     def unlock(unique_ident)
-      self.questionnaire_submissions.find_by(unique_ident: unique_ident).order(:updated_at).destroy
+      self.questionnaire_submissions.find_by(unique_ident: unique_ident).destroy
     end
 
     def when_submitted?(unique_ident)
