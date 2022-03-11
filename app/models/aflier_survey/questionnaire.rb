@@ -29,6 +29,10 @@ module AflierSurvey
       false
     end
 
+    def unlock(unique_ident)
+      self.questionnaire_submissions.find_by(unique_ident: unique_ident).order(:updated_at).destroy
+    end
+
     def when_submitted?(unique_ident)
       questionnaire_submissions = self.questionnaire_submissions.where(unique_ident: unique_ident).order(:updated_at)
 

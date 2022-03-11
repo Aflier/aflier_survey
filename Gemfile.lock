@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    aflier_survey (0.21.5)
+    aflier_survey (0.21.6)
       devise
       rails (>= 5.2.2)
 
