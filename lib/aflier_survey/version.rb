@@ -1,3 +1,3 @@
 module AflierSurvey
-   VERSION = '0.23.10'
+   VERSION = '0.24.0'
 end

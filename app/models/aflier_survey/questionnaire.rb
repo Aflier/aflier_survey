@@ -20,6 +20,18 @@ module AflierSurvey
       labels
     end
 
+    def all_question_values(unique_ident)
+      labels = []
+
+      self.belonging_sections.each do |belonging_section|
+        belonging_section.question_section.questions.each do |question|
+          labels << question.get_answer(unique_ident, nil)
+        end
+      end
+
+      labels
+    end
+
     def self.all_keys
       Question.all.where.not(unique_key: nil).select(:unique_key).map { |q| q.unique_key }
     end
