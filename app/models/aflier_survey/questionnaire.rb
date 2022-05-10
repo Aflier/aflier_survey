@@ -1,12 +1,24 @@
 module AflierSurvey
   class Questionnaire < ApplicationRecord
-    has_many :belonging_sections
+    has_many :belonging_sections, -> { order(position: :asc) }
     has_many :question_sections, through: :belonging_sections
 
     has_many :questionnaire_submissions
 
     has_rich_text :purpose
     has_rich_text :on_completion
+
+    def all_question_titles
+      labels = []
+
+      self.beloging_sections.each do |belonging_section|
+        belonging_section.question_section.each do |question|
+          labels << question.name
+        end
+      end
+
+      labels
+    end
 
     def self.all_keys
       Question.all.where.not(unique_key: nil).select(:unique_key).map { |q| q.unique_key }
