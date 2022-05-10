@@ -12,7 +12,7 @@ module AflierSurvey
       labels = []
 
       self.belonging_sections.each do |belonging_section|
-        belonging_section.question_section.quesrtions.each do |question|
+        belonging_section.question_section.questions.each do |question|
           labels << question.name
         end
       end
