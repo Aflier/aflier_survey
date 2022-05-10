@@ -11,7 +11,7 @@ module AflierSurvey
     def all_question_titles
       labels = []
 
-      self.beloging_sections.each do |belonging_section|
+      self.belonging_sections.each do |belonging_section|
         belonging_section.question_section.each do |question|
           labels << question.name
         end
