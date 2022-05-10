@@ -1,6 +1,6 @@
 module AflierSurvey
   class QuestionSection < ApplicationRecord
-    belongs_to :question, optional: true
+    belongs_to :question, -> { order(position: :asc) }, optional: true
     belongs_to :option, optional: true
 
     has_many :questions, dependent: :destroy
