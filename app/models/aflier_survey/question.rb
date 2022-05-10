@@ -43,15 +43,14 @@ module AflierSurvey
     RESULT = "Result"
 
     # What to display results as
-    RADAR    = 'radar'.freeze
-    BAR      = 'bar'.freeze
-    LINE     = 'line'.freeze
-    POLAR    = 'polar'.freeze
-    MATCH    = 'match'.freeze
-    TABLE    = 'table'.freeze
+    RADAR = 'radar'.freeze
+    BAR = 'bar'.freeze
+    LINE = 'line'.freeze
+    POLAR = 'polar'.freeze
+    MATCH = 'match'.freeze
+    TABLE = 'table'.freeze
     GROUPING = 'result grouping'
-    AS_AGE   = 'date as age'
-
+    AS_AGE = 'date as age'
 
     QUESTION_TYPES = [STRING, TEXT, YES_OR_NO, TEXT_ON_YES, TEXT_ON_NO, SECTION_ON_YES, SECTION_ON_NO, SELECT_ONE, SELECT_MANY,
                       OUT_OF, DECIMAL, WHOLE_NUMBER, MONEY, DATE, TIME, FILE_UPLOAD, CALCULATION,
@@ -65,8 +64,7 @@ module AflierSurvey
     # Used for linear assessments of values
     ASSESSMENT = ['Green', 'Amber', 'Red', 'Info'].freeze
 
-    store :general_store, accessors: [ :minimum, :maximum ], coder: JSON
-
+    store :general_store, accessors: [:minimum, :maximum], coder: JSON
 
     def text_hint_with_answer(unique_ident)
       all_keys = self.text_hint.split('{{')
@@ -99,7 +97,6 @@ module AflierSurvey
       return 10 if super.blank?
       super
     end
-
 
     def previous
       return nil if self.position == 0
@@ -134,7 +131,6 @@ module AflierSurvey
 
       return "Question type as feed not yet supported: #{self.question_type}"
     end
-
 
     def get_repeat_answers(unique_ident)
       answers = self.answers.where(unique_ident: unique_ident)
@@ -185,7 +181,10 @@ module AflierSurvey
         end
 
         return latest_answer.a_decimal if self.question_type == DECIMAL
-        return latest_answer.an_integer if self.question_type == WHOLE_NUMBER
+
+        if self.question_type == WHOLE_NUMBER or question_type == OUT_OF
+          return latest_answer.an_integer
+        end
       end
 
       false
@@ -239,8 +238,6 @@ module AflierSurvey
       option.name
       # return option.a_decimal # TODO - where do I use this!
     end
-
-
 
     def make_repeat_answer(unique_ident, repeat_section)
       # First check we don't have an answer over from before repeat
@@ -381,7 +378,6 @@ module AflierSurvey
         result = question.get_answer(user, repeat_section) if question
       end
 
-
       return "No result for: #{name}" if result.nil?
 
       mapping = matching_mapping(result, user, repeat_section)
@@ -391,11 +387,10 @@ module AflierSurvey
       mapping.linear_assessment
     end
 
-
     def weighting_on_value_given
       return true if question_type == YES_OR_NO or
-          question_type == DATE or
-          question_type == DECIMAL or question_type == WHOLE_NUMBER
+        question_type == DATE or
+        question_type == DECIMAL or question_type == WHOLE_NUMBER
     end
 
     # I think this is where we know that the question is actually showing a result so lets go to where we are getting the result from.
@@ -411,7 +406,7 @@ module AflierSurvey
 
         return ((Date.today - dob) / 365).floor
       elsif question_type == SELECT_ONE
-        option_answer = OptionAnswer.joins(:option).find_by(unique_ident: unique_ident, options: {question_id: self.id} )
+        option_answer = OptionAnswer.joins(:option).find_by(unique_ident: unique_ident, options: { question_id: self.id })
         return "Provide answer for: #{name}" if option_answer.nil?
         return option_answer.option.a_decimal
       end
@@ -482,11 +477,10 @@ module AflierSurvey
       table_mapping(bound, category).linear_assessment.downcase
     end
 
-
     def matching_table_mapping(unique_ident, repeat_section)
       return "No X question as input in #{name}" if question.nil?
       return "No Y question as input in #{name}" if question_y.nil?
-      return "No X bounds" if bounds_x.blank? and not(question.question_type == SELECT_ONE)
+      return "No X bounds" if bounds_x.blank? and not (question.question_type == SELECT_ONE)
       return "No Y bounds" if bounds_y.blank?
 
       answer_x = question.match_option(unique_ident, repeat_section) if question.question_type == SELECT_ONE
@@ -505,7 +499,7 @@ module AflierSurvey
           return "Found invalid table element!" if table_mapping.limit_two.nil?
 
           if meets_bounds_x(table_mapping, answer_x) and
-              answer_y >= table_mapping.limit_one
+            answer_y >= table_mapping.limit_one
             return table_mapping
           end unless answer_y.nil? or answer_y.is_a? String
         end
