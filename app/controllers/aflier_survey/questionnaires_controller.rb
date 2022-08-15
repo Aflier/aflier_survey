@@ -102,7 +102,7 @@ module AflierSurvey
     def save
       @unique_ident             = params[:unique_ident]
       @questionnaire_submission = @questionnaire.questionnaire_submissions.find_or_create_by!(unique_ident: @unique_ident)
-      @questionnaire_submission.update_attribute(:status, QuestionnaireSubmission::SAVED)
+      @questionnaire_submission.update(status: QuestionnaireSubmission::SAVED, saved_at: DateTime.now)
 
       render json: { show_required: false,
                      html: render_to_string(partial: 'aflier_survey/questionnaires/submission_bar',
