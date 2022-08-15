@@ -65,6 +65,21 @@ module AflierSurvey
       'Not Yet'
     end
 
+    def when_saved?(unique_ident)
+      questionnaire_submissions = self.questionnaire_submissions.where(unique_ident: unique_ident).order(:updated_at)
+
+      return 'Not Yet' if questionnaire_submissions.empty?
+
+      last_state = questionnaire_submissions.last.status
+
+      if last_state == QuestionnaireSubmission::SAVED or
+        last_state == QuestionnaireSubmission::SUBMITTED
+
+        return questionnaire_submissions.last.saved_at
+      end
+      'Not Yet'
+    end
+
     def is_locked?(unique_ident, admin)
       return true if self.is_result
       return false if admin
@@ -103,9 +118,9 @@ module AflierSurvey
 
     def is_complete?(unique_ident)
       answers = Answer.joins(question: { question_section: :belonging_sections })
-                    .where(complete: [nil, false], aflier_survey_questions: { required: true })
-                    .where(aflier_survey_belonging_sections: { questionnaire_id: self.id })
-                    .where(unique_ident: unique_ident)
+                      .where(complete: [nil, false], aflier_survey_questions: { required: true })
+                      .where(aflier_survey_belonging_sections: { questionnaire_id: self.id })
+                      .where(unique_ident: unique_ident)
 
       return true if answers.empty?
 
@@ -117,9 +132,9 @@ module AflierSurvey
     end
 
     def incomplete_answers(unique_ident)
-      Answer.where(unique_ident: unique_ident).joins(question: {question_section: :belonging_sections})
-          .where(complete: [nil, false], questions: {required: true})
-          .where(belonging_sections: {questionnaire_id: self.id})
+      Answer.where(unique_ident: unique_ident).joins(question: { question_section: :belonging_sections })
+            .where(complete: [nil, false], questions: { required: true })
+            .where(belonging_sections: { questionnaire_id: self.id })
     end
   end
 end
