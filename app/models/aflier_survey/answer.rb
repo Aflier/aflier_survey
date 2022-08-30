@@ -162,7 +162,7 @@ module AflierSurvey
       elsif question.question_type == Question::STRING
         a_string
       elsif question.question_type == Question::DATE
-        a_date&.to_s(:db)
+        a_date&.to_s(:default)
       elsif question.question_type == Question::TEXT
         some_text
       else
